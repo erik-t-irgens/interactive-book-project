@@ -88,6 +88,11 @@ export class AudioEngine {
 
     if (this.current) this._fadeOut(this.current, fade);
     this.current = { id, source, gain };
+    this._emitNow(id);
+  }
+
+  _emitNow(id) {
+    document.dispatchEvent(new CustomEvent('audio:now', { detail: { id } }));
   }
 
   _fadeOut(voice, fade) {
@@ -102,5 +107,6 @@ export class AudioEngine {
     if (!this.current) return;
     this._fadeOut(this.current, fade);
     this.current = null;
+    this._emitNow(null);
   }
 }

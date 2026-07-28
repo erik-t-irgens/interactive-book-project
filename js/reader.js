@@ -54,6 +54,15 @@ export class Reader {
     let next = null;
     for (let i = idx + 1; i < this.book.chapters.length; i++) if (readable(this.book.chapters[i])) { next = this.book.chapters[i]; break; }
 
+    // Crossing into a new part goes by way of its title page.
+    let nextHref = next ? `#/read/${next.id}` : '#/';
+    let nextLabel = next ? `${next.title} →` : 'Finis — return to contents';
+    const partAhead = next && this.book.parts?.find(p => p.before === next.id);
+    if (partAhead) {
+      nextHref = `#/part/${partAhead.id}`;
+      nextLabel = `${partAhead.title} — ${partAhead.subtitle} →`;
+    }
+
     container.innerHTML = `
       <div class="reader">
         <article class="reader-column">
@@ -62,11 +71,11 @@ export class Reader {
           ${entry?.status === 'partial' ? '<div class="draft-note">This entry is a draft — parts may still change.</div>' : ''}
           <div id="para-flow"></div>
           <div class="reveal-ctl" id="reveal-ctl" hidden>
-            <button class="btn-reveal" id="btn-reveal" title="Continue reading" aria-label="Reveal next paragraph"><span class="glyph">⌄</span></button>
+            <button class="btn-reveal" id="btn-reveal" title="Continue reading" aria-label="Reveal next paragraph"><span class="glyph"></span></button>
           </div>
           <nav class="chapter-nav" id="chapter-nav" hidden>
             <span>${prev ? `<a href="#/read/${prev.id}">← ${prev.title}</a>` : ''}</span>
-            <span>${next ? `<a href="#/read/${next.id}">${next.title} →</a>` : '<a href="#/">Finis — return to contents</a>'}</span>
+            <span><a href="${nextHref}">${nextLabel}</a></span>
           </nav>
         </article>
         <aside class="reader-sidebar">

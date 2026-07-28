@@ -3,6 +3,26 @@
   "subtitle": "The Chronicle of Fundament",
   "author": "Erik Irgens",
   "description": "Seven strangers wake on the road to a northern town with their memories missing and their pockets full of other people's grief. What begins as a season of small mysteries in Triboar — a sickness in the wood, a masked festival, a presence under the graveyard — becomes the chronicle of a war between two women over what may be done with memory itself. A campaign record, a ledger of doors, and a book of secrets: read it slowly, and keep what it gives you.",
+  "parts": [
+    {
+      "id": "part1",
+      "title": "Part One",
+      "subtitle": "Triboar",
+      "before": "ch01"
+    },
+    {
+      "id": "part2",
+      "title": "Part Two",
+      "subtitle": "The Doors",
+      "before": "front02"
+    },
+    {
+      "id": "part3",
+      "title": "Part Three",
+      "subtitle": "Fundament",
+      "before": "ch30"
+    }
+  ],
   "chapters": [
     {
       "id": "front01",

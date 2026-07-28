@@ -1,0 +1,308 @@
+{
+  "title": "Anamnesis",
+  "subtitle": "The Chronicle of Fundament",
+  "author": "Erik Irgens",
+  "description": "Seven strangers wake on the road to a northern town with their memories missing and their pockets full of other people's grief. What begins as a season of small mysteries in Triboar — a sickness in the wood, a masked festival, a presence under the graveyard — becomes the chronicle of a war between two women over what may be done with memory itself. A campaign record, a ledger of doors, and a book of secrets: read it slowly, and keep what it gives you.",
+  "chapters": [
+    {
+      "id": "front01",
+      "title": "Foreword",
+      "file": "content/chapters/front01.md"
+    },
+    {
+      "id": "ch00",
+      "title": "Prologue",
+      "file": "content/chapters/ch00.md"
+    },
+    {
+      "id": "ch01",
+      "title": "I. Shadows Beneath Triboar",
+      "file": "content/chapters/ch01.md"
+    },
+    {
+      "id": "ch02",
+      "title": "II. Bloodrot",
+      "file": "content/chapters/ch02.md"
+    },
+    {
+      "id": "ch03",
+      "title": "III. Time & Tide",
+      "file": "content/chapters/ch03.md"
+    },
+    {
+      "id": "ch04",
+      "title": "IV. The Stag, the Cave, and the Cultist",
+      "file": "content/chapters/ch04.md"
+    },
+    {
+      "id": "ch05",
+      "title": "V. Into the Mirror",
+      "file": "content/chapters/ch05.md"
+    },
+    {
+      "id": "ch06",
+      "title": "VI. Between Moorings & Masks",
+      "file": "content/chapters/ch06.md"
+    },
+    {
+      "id": "ch07",
+      "title": "VII. Old Friends & Gilded Promises",
+      "file": "content/chapters/ch07.md"
+    },
+    {
+      "id": "ch08",
+      "title": "VIII. Unmasked",
+      "file": "content/chapters/ch08.md"
+    },
+    {
+      "id": "ch09",
+      "title": "IX. The Geas",
+      "file": "content/chapters/ch09.md"
+    },
+    {
+      "id": "int01",
+      "title": "Interlude — Before the Harvest",
+      "file": "content/chapters/int01.md"
+    },
+    {
+      "id": "ch10",
+      "title": "X. Harvest",
+      "file": "content/chapters/ch10.md"
+    },
+    {
+      "id": "front02",
+      "title": "On the Doors",
+      "file": "content/chapters/front02.md"
+    },
+    {
+      "id": "ch11",
+      "title": "XI. Moongleam",
+      "file": "content/chapters/ch11.md"
+    },
+    {
+      "id": "ch12",
+      "title": "XII. The Flickering Bridge",
+      "file": "content/chapters/ch12.md"
+    },
+    {
+      "id": "ch13",
+      "title": "XIII. The Heartsilver Evening",
+      "file": "content/chapters/ch13.md"
+    },
+    {
+      "id": "ch14",
+      "title": "XIV. Seven Days",
+      "file": "content/chapters/ch14.md"
+    },
+    {
+      "id": "ch15",
+      "title": "XV. The Two Watchers",
+      "file": "content/chapters/ch15.md"
+    },
+    {
+      "id": "ch16",
+      "title": "XVI. The Grave Door — Unchosen",
+      "file": "content/chapters/ch16.md"
+    },
+    {
+      "id": "ch17",
+      "title": "XVII. The Sick Wood",
+      "file": "content/chapters/ch17.md"
+    },
+    {
+      "id": "ch18",
+      "title": "XVIII. The Rot Door — The Trial Under the Boughs",
+      "file": "content/chapters/ch18.md"
+    },
+    {
+      "id": "ch19",
+      "title": "XIX. The Thin Place",
+      "file": "content/chapters/ch19.md"
+    },
+    {
+      "id": "ch20",
+      "title": "XX. The Long Dusk",
+      "file": "content/chapters/ch20.md"
+    },
+    {
+      "id": "ch21",
+      "title": "XXI. Silver Fire",
+      "file": "content/chapters/ch21.md"
+    },
+    {
+      "id": "ch22",
+      "title": "XXII. The Owned North",
+      "file": "content/chapters/ch22.md"
+    },
+    {
+      "id": "ch23",
+      "title": "XXIII. The Winter Door — The White Forest",
+      "file": "content/chapters/ch23.md"
+    },
+    {
+      "id": "ch24",
+      "title": "XXIV. Through the Socket",
+      "file": "content/chapters/ch24.md"
+    },
+    {
+      "id": "ch25",
+      "title": "XXV. The Stone Door — The Bought Glade",
+      "file": "content/chapters/ch25.md"
+    },
+    {
+      "id": "ch26",
+      "title": "XXVI. The Seam of Winter",
+      "file": "content/chapters/ch26.md"
+    },
+    {
+      "id": "ch27",
+      "title": "XXVII. The Ember Door — The Barrow",
+      "file": "content/chapters/ch27.md"
+    },
+    {
+      "id": "ch28",
+      "title": "XXVIII. Nesmé",
+      "file": "content/chapters/ch28.md"
+    },
+    {
+      "id": "ch29",
+      "title": "XXIX. The Cord Door — The Feast of the Moon",
+      "file": "content/chapters/ch29.md"
+    },
+    {
+      "id": "ch30",
+      "title": "XXX. The Second Hand",
+      "file": "content/chapters/ch30.md"
+    },
+    {
+      "id": "ch31",
+      "title": "XXXI. Remember Everything, Feel Nothing",
+      "file": "content/chapters/ch31.md"
+    },
+    {
+      "id": "ch32",
+      "title": "XXXII. The Gray Country",
+      "file": "content/chapters/ch32.md"
+    },
+    {
+      "id": "ch33",
+      "title": "XXXIII. The Hollow Sovereign",
+      "file": "content/chapters/ch33.md"
+    },
+    {
+      "id": "ch34",
+      "title": "XXXIV. Compliments of the Gentleman",
+      "file": "content/chapters/ch34.md"
+    },
+    {
+      "id": "ch35",
+      "title": "XXXV. The Very Particular Fire",
+      "file": "content/chapters/ch35.md"
+    },
+    {
+      "id": "ch36",
+      "title": "XXXVI. Fundament",
+      "file": "content/chapters/ch36.md"
+    },
+    {
+      "id": "ch37",
+      "title": "XXXVII. The Session",
+      "file": "content/chapters/ch37.md"
+    },
+    {
+      "id": "ch38",
+      "title": "XXXVIII. Ascore",
+      "file": "content/chapters/ch38.md"
+    },
+    {
+      "id": "ch39",
+      "title": "XXXIX. Happy, Not Truly",
+      "file": "content/chapters/ch39.md"
+    },
+    {
+      "id": "ch40",
+      "title": "XL. The Deliverance",
+      "file": "content/chapters/ch40.md"
+    },
+    {
+      "id": "ch41",
+      "title": "XLI. The Depths",
+      "file": "content/chapters/ch41.md"
+    },
+    {
+      "id": "ch42",
+      "title": "XLII. Tide & Time",
+      "file": "content/chapters/ch42.md",
+      "status": "todo"
+    },
+    {
+      "id": "int02",
+      "title": "Interlude",
+      "file": "content/chapters/int02.md",
+      "status": "todo"
+    },
+    {
+      "id": "door07",
+      "title": "The Spring Door — There at the Beginning",
+      "file": "content/chapters/door07.md",
+      "status": "partial"
+    },
+    {
+      "id": "ch43",
+      "title": "XLIII. Ascension",
+      "file": "content/chapters/ch43.md",
+      "status": "todo"
+    },
+    {
+      "id": "ch44",
+      "title": "XLIV. The Kept Gate",
+      "file": "content/chapters/ch44.md",
+      "status": "todo"
+    },
+    {
+      "id": "ch45",
+      "title": "XLV. The Vault of Glass",
+      "file": "content/chapters/ch45.md",
+      "status": "todo"
+    },
+    {
+      "id": "ch99",
+      "title": "Epilogue — What You Would Have Decided",
+      "file": "content/chapters/ch99.md",
+      "status": "todo"
+    }
+  ],
+  "codex": "content/codex.json",
+  "tracks": {
+    "triboar-hearth": "audio/placeholder-warm.wav",
+    "nesme-lantern": "audio/placeholder-warm.wav",
+    "mooring-kind": "audio/placeholder-warm.wav",
+    "heartsilver-eve": "audio/placeholder-warm.wav",
+    "epilogue-morning": "audio/placeholder-warm.wav",
+    "particular-fire": "audio/placeholder-warm.wav",
+    "moongleam-arch": "audio/placeholder-warm.wav",
+    "undergrave-drone": "audio/placeholder-dark.wav",
+    "the-depths": "audio/placeholder-dark.wav",
+    "ascore-hush": "audio/placeholder-dark.wav",
+    "gray-country": "audio/placeholder-dark.wav",
+    "owned-north": "audio/placeholder-dark.wav",
+    "gray-dream": "audio/placeholder-gray.wav",
+    "mirror-glass": "audio/placeholder-gray.wav",
+    "door-threshold": "audio/placeholder-gray.wav",
+    "remembrance-silent": "audio/placeholder-hush.wav",
+    "bright-country": "audio/placeholder-bright.wav",
+    "seam-of-winter": "audio/placeholder-bright.wav",
+    "silver-fire": "audio/placeholder-bright.wav",
+    "tide-and-time": "audio/placeholder-bright.wav",
+    "bloodrot-wood": "audio/placeholder-tense.wav",
+    "before-the-harvest": "audio/placeholder-tense.wav",
+    "glass-rise": "audio/placeholder-tense.wav",
+    "vault-of-glass": "audio/placeholder-tense.wav",
+    "ascension-night": "audio/placeholder-tense.wav",
+    "deliverance-bells": "audio/placeholder-tense.wav",
+    "masquerade-gilt": "audio/placeholder-gilt.wav",
+    "gentlemans-table": "audio/placeholder-gilt.wav",
+    "session-chamber": "audio/placeholder-gilt.wav",
+    "fundament-doubled": "audio/placeholder-gilt.wav"
+  }
+}

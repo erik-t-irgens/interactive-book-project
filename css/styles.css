@@ -172,7 +172,7 @@ a { color: var(--accent); text-decoration: none; }
   display: grid;
   grid-template-columns: 1fr min(var(--max-text), 100%) var(--sidebar-w) 1fr;
   gap: 2.5rem;
-  padding: 3rem 1.5rem 40vh;
+  padding: 3rem 1.5rem 24vh;
 }
 .reader-column { grid-column: 2; min-width: 0; }
 .reader-sidebar { grid-column: 3; }
@@ -229,6 +229,43 @@ a { color: var(--accent); text-decoration: none; }
   border-top: 1px solid var(--rule);
   font-family: var(--sans);
   font-size: 0.85rem;
+}
+.chapter-nav[hidden], .reveal-ctl[hidden] { display: none; }
+
+/* Progressive-reveal frontier */
+.reveal-ctl {
+  display: flex;
+  justify-content: center;
+  padding: 1.6rem 0 2.5rem;
+}
+.btn-reveal {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--accent-dim);
+  background: var(--bg-raised);
+  color: var(--accent);
+  font-size: 1.35rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.btn-reveal .glyph {
+  display: inline-block;
+  animation: reveal-beckon 2.6s ease-in-out infinite;
+}
+.btn-reveal:hover { border-color: var(--accent); transform: scale(1.08); }
+.btn-reveal:hover .glyph { animation-play-state: paused; }
+@keyframes reveal-beckon {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+.para.newly, .section-heading.newly {
+  animation: para-in 0.55s ease both;
+}
+@keyframes para-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
 }
 
 /* ============ Sidebar (the Anamnesis) ============ */

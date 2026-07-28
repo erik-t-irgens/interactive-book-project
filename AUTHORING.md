@@ -46,9 +46,12 @@ links to the part's title page instead of directly to that chapter.
 Opening any chapter silently brings the codex up to date with everything
 before it (first-mention discoveries and `@unlock` directives from all prior
 readable chapters), so a reader who jumps to a later chapter has a codex
-consistent with their position. A reader with no progress at all who opens a
-later chapter gets a confirmation first, since that catch-up can reveal
-things. Reading progress itself is never marked by the catch-up — only the
+consistent with their position. Opening a chapter that skips *any* unread
+pages — a whole book for a fresh reader, or a single accidentally-skipped
+chapter for a veteran — shows a confirmation first, naming what would be
+skipped, with a "return to where I left off" escape hatch. Confirmed skips
+are remembered, so a deliberate jump isn't re-questioned on every following
+chapter. Reading progress itself is never marked by the catch-up — only the
 codex.
 
 ## Chapter format

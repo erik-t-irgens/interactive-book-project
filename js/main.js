@@ -1,4 +1,4 @@
-import { state, save, chapterProgress, unlock, unlockedTier, resetAll } from './state.js';
+import { state, save, unlock, resetAll } from './state.js';
 import { parseChapter } from './parser.js';
 import { AudioEngine } from './audio.js';
 import { loadCodex, renderCodexPage, entity } from './codex.js';
@@ -131,20 +131,20 @@ function catchUpBefore(chapterId) {
   }
 }
 
-// Would catching up to this chapter actually reveal anything new?
-function wouldUnlockAhead(chapterId) {
+// Chapters before this one that still hold unread pages (and haven't already
+// been knowingly skipped). Any hit means opening this chapter skips story.
+function pendingSkips(chapterId) {
   const idx = book.chapters.findIndex(c => c.id === chapterId);
+  const skipped = [];
   for (let i = 0; i < idx; i++) {
     const c = book.chapters[i];
-    if (c.status === 'todo') continue;
+    if (c.status === 'todo' || state.skipAck[c.id]) continue;
     const parsed = chapters.get(c.id);
     if (!parsed) continue;
-    for (const p of parsed.paragraphs) {
-      for (const id of p.entities) if (entity(id) && unlockedTier(id) < 1) return true;
-      for (const u of p.unlocks) if (entity(u.entity) && unlockedTier(u.entity) < u.tier) return true;
-    }
+    const prog = state.progress[c.id];
+    if (!prog || prog.furthest < parsed.paragraphs.length - 1) skipped.push(c);
   }
-  return false;
+  return skipped;
 }
 
 function firstReadableChapter() {
@@ -167,7 +167,7 @@ function route() {
     if (entry?.status === 'todo') {
       audio.setTrack(null, 2);
       renderForthcoming(entry);
-    } else if (entry && !hasAnyProgress() && wouldUnlockAhead(entry.id)) {
+    } else if (entry && pendingSkips(entry.id).length > 0) {
       renderSkipConfirm(entry);
     } else {
       openChapter(readMatch[1]);
@@ -192,18 +192,27 @@ function openChapter(chapterId) {
 }
 
 function renderSkipConfirm(entry) {
-  const first = firstReadableChapter();
+  const skipped = pendingSkips(entry.id);
+  const fresh = !hasAnyProgress();
+  const backTo = skipped[0]; // earliest chapter with unread pages
+  const names = skipped.slice(0, 3).map(c => `<em>${c.title}</em>`).join(', ')
+    + (skipped.length > 3 ? ` and ${skipped.length - 3} more` : '');
   view.innerHTML = `
     <div class="home">
       <h1 class="forthcoming-title">Skip ahead?</h1>
-      <p class="description">You're about to open <em>${entry.title}</em> without having read what comes before it.
+      <p class="description">Opening <em>${entry.title}</em> skips unread pages in ${names}.
       The Anamnesis will quietly gather everything from the skipped pages — which may tell you more than you want to know yet.</p>
       <div class="confirm-actions">
-        <a class="resume-btn" href="#/read/${first.id}">Begin at the beginning</a>
+        <a class="resume-btn" href="#/read/${backTo.id}">${fresh ? 'Begin at the beginning' : 'Return to where I left off'}</a>
         <button class="icon-btn" id="skip-anyway">Skip ahead anyway</button>
       </div>
     </div>`;
-  document.getElementById('skip-anyway').addEventListener('click', () => openChapter(entry.id));
+  document.getElementById('skip-anyway').addEventListener('click', () => {
+    // Remember the choice so the reader isn't re-warned about these chapters.
+    for (const c of skipped) state.skipAck[c.id] = true;
+    save();
+    openChapter(entry.id);
+  });
 }
 
 function renderPartPage(part) {

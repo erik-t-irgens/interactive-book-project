@@ -12,9 +12,15 @@ GitHub Pages, with all reader state kept in the browser's localStorage.
 
 ## Features
 
-- **Reading progress** — the reader's position is tracked per paragraph as
-  they scroll, persisted locally, with per-chapter percentages, an overall
-  progress bar, and a "Continue reading" resume button. No login needed.
+- **Progressive reveal** — paragraphs render one at a time; the reader
+  advances with the ⌄ button, by scrolling at the frontier, or with
+  ↓/Space/PageDown (↑ steps back a paragraph). Nothing past the frontier
+  exists in the DOM, so unlocks and the sidebar can never run ahead of what
+  has actually been read. Already-read text stays on the page and scrolls
+  normally.
+- **Reading progress** — the reveal frontier is the reader's progress,
+  persisted locally, with per-chapter percentages, an overall progress bar,
+  and a "Continue reading" resume button. No login needed.
 - **Ambient scoring** — the author assigns music per paragraph with
   `@audio:` directives in the chapter text. As the reader scrolls, tracks
   crossfade (Web Audio API, per-transition fade durations). Audio is opt-in

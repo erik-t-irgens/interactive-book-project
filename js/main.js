@@ -106,7 +106,7 @@ function route() {
   const hash = location.hash || '#/';
   const readMatch = hash.match(/^#\/read\/([\w-]+)/);
 
-  window.scrollTo(0, 0);
+  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   if (readMatch) {
     const entry = book.chapters.find(c => c.id === readMatch[1]);
     if (entry?.status === 'todo') {

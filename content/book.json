@@ -1,0 +1,16 @@
+{
+  "title": "Anamnesis",
+  "subtitle": "The Chronicle of Fundament",
+  "author": "Erik Irgens",
+  "description": "An interactive reading experience. The chapters below are SAMPLE content demonstrating the engine — replace them with the real manuscript.",
+  "chapters": [
+    { "id": "ch01", "title": "The Bell Under the Hill", "file": "content/chapters/ch01.md" },
+    { "id": "ch02", "title": "What the Archive Kept", "file": "content/chapters/ch02.md" }
+  ],
+  "codex": "content/codex.json",
+  "tracks": {
+    "threshold": "audio/threshold.wav",
+    "undercroft": "audio/undercroft.wav",
+    "vigil": "audio/vigil.wav"
+  }
+}

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" data-theme="ink">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anamnesis — The Chronicle of Fundament</title>
+  <meta name="description" content="An interactive reading experience with ambient scoring and a living appendix.">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🔔</text></svg>">
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-inner">
+      <a class="brand" href="#/">Anamnesis</a>
+      <div class="header-controls">
+        <a class="icon-btn" href="#/codex" id="nav-codex" title="Open the Anamnesis (codex)">Codex</a>
+        <button class="icon-btn" id="btn-audio" title="Toggle ambient audio" aria-pressed="false">♪ Off</button>
+        <input type="range" id="vol" min="0" max="100" value="60" title="Volume" aria-label="Volume">
+        <button class="icon-btn" id="btn-theme" title="Toggle theme">☾</button>
+      </div>
+    </div>
+    <div class="progress-track" title="Reading progress"><div class="progress-fill" id="progress-fill"></div></div>
+  </header>
+
+  <main id="view" aria-live="polite"></main>
+
+  <div id="toast-root" aria-live="polite"></div>
+  <div id="overlay-root"></div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

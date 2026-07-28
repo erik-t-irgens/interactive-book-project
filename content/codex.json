@@ -1,0 +1,94 @@
+{
+  "entities": [
+    {
+      "id": "silda",
+      "type": "character",
+      "tiers": [
+        {
+          "tier": 1,
+          "name": "Silda",
+          "label": "As first met",
+          "text": "An archivist lately arrived in Harrow's Ferry on the last barge of autumn, bearing blank ledgers and a letter of appointment that no one in town remembers sending for. She asks quiet questions and writes down the answers."
+        },
+        {
+          "tier": 2,
+          "name": "Silda, Keeper of the Undercroft",
+          "label": "After the Warden's visit",
+          "text": "The letter of appointment was real — merely not written by anyone in Harrow's Ferry. Silda is the latest in a line of keepers summoned, one generation to the next, whenever the deep rooms begin to breathe faster. She is the first in living memory to arrive before being needed. Or so the Warden hopes."
+        }
+      ]
+    },
+    {
+      "id": "warden",
+      "type": "character",
+      "tiers": [
+        {
+          "tier": 1,
+          "name": "The Warden",
+          "label": "A rumor of office",
+          "text": "A ceremonial title of Harrow's Ferry, remembered only as a faded sash worn at festivals. Three families have held it longest — the same three families that will not walk the bell-hill path after dark."
+        },
+        {
+          "tier": 2,
+          "name": "The Warden of Harrow's Ferry",
+          "label": "After the knock at the door",
+          "text": "Not ceremonial at all. The Warden keeps the watch the town forgot it was keeping: counting the years between the deep rooms' breaths, and waiting for the keeper the letters promise. He has waited longer than any Warden before him, and he knows what the hill is a lid on."
+        }
+      ]
+    },
+    {
+      "id": "undercroft",
+      "type": "location",
+      "tiers": [
+        {
+          "tier": 1,
+          "name": "The Undercroft",
+          "label": "First descent",
+          "text": "A stair beneath the courthouse cellar, absent from every plan of the building, descending further than the bell-hill is tall. The air moves gently downward, as if the deep rooms are breathing in. Named by Silda, for lack of anything written on its lintel."
+        },
+        {
+          "tier": 2,
+          "name": "The Undercroft",
+          "label": "Below the sixty-second step",
+          "text": "Past the sixty-second step the courthouse brick gives way to seamless grey-black stone, faintly warm, worked beyond any craft the river towns know. Below lie thousands of shelves bearing palm-sized depressions — a library that has lent out every volume and waits for each to be returned."
+        }
+      ]
+    },
+    {
+      "id": "bell",
+      "type": "artifact",
+      "tiers": [
+        {
+          "tier": 1,
+          "name": "The Bound Bell",
+          "label": "Found on the first shelf",
+          "text": "A hand-bell of black metal, no larger than a teacup, its clapper bound in wax-stiffened cloth. Kept, with great care, from ringing — and with greater care, from being found. The dust of the Undercroft keeps a respectful distance from it."
+        },
+        {
+          "tier": 2,
+          "name": "The Bound Bell",
+          "label": "What the Warden says of it",
+          "text": "The bell is not the danger. The bell is the doorbell. Whoever bound its clapper was not trying to silence what lies below — only trying to stop visitors from announcing themselves to it."
+        }
+      ]
+    },
+    {
+      "id": "fundament",
+      "type": "concept",
+      "tiers": [
+        {
+          "tier": 1,
+          "name": "The Fundament",
+          "label": "A shape left in the air",
+          "text": "Something far beneath the Undercroft answered Silda's lantern with the memory of a ring — the shape a bell leaves in the air after it has stopped. Silda's first ledger closes on a single line: the hill is not a hill. It is a lid."
+        },
+        {
+          "tier": 2,
+          "name": "The Fundament",
+          "label": "The mirrored room",
+          "text": "A disc of black metal in the deep shelves reflects lantern-light as a different room entirely. Whatever the Fundament is, the deep library does not merely sit above it — it corresponds with it, absence by absence, one returned volume at a time."
+        }
+      ]
+    }
+  ]
+}

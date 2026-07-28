@@ -35,6 +35,18 @@ export function displayName(id) {
   return name;
 }
 
+// Portrait for the reader's current knowledge: the deepest unlocked tier's
+// image if any tier has one, else the entity-level image. Never shows a
+// locked tier's image.
+export function displayImage(id) {
+  const e = byId.get(id);
+  const level = unlockedTier(id);
+  if (!e) return null;
+  let img = e.image || null;
+  for (const t of e.tiers) if (t.tier <= level && t.image) img = t.image;
+  return img;
+}
+
 const TYPE_LABELS = {
   character: 'Character',
   location: 'Place',
@@ -54,10 +66,14 @@ export function cardHtml(id, { locked = false } = {}) {
   const tier = visibleTier(id);
   if (!e || !tier) return '';
   const badge = hasUnseenUpdate(id) ? '<span class="badge-new" title="Entry updated"></span>' : '';
+  const img = displayImage(id);
   return `<button class="entity-card" data-entity="${id}">
-    <div class="card-type">${TYPE_LABELS[e.type] || e.type} ${badge}</div>
-    <div class="card-name">${displayName(id)}</div>
-    <div class="card-teaser">${tier.label || ''}</div>
+    ${img ? `<img class="card-thumb" src="${img}" alt="" loading="lazy">` : ''}
+    <div class="card-body">
+      <div class="card-type">${TYPE_LABELS[e.type] || e.type} ${badge}</div>
+      <div class="card-name">${displayName(id)}</div>
+      <div class="card-teaser">${tier.label || ''}</div>
+    </div>
   </button>`;
 }
 
@@ -71,10 +87,12 @@ export function openEntityDetail(id) {
   const shown = e.tiers.filter(t => t.tier <= level);
   const remaining = e.tiers.length - shown.length;
 
+  const img = displayImage(id);
   root.innerHTML = `
     <div class="overlay-scrim" data-close></div>
     <aside class="entity-detail" role="dialog" aria-label="Codex entry">
       <button class="detail-close" data-close aria-label="Close">×</button>
+      ${img ? `<img class="detail-portrait" src="${img}" alt="${displayName(id)}">` : ''}
       <div class="detail-type">${TYPE_LABELS[e.type] || e.type}</div>
       <h2 class="detail-name">${displayName(id)}</h2>
       ${shown.map((t, i) => `

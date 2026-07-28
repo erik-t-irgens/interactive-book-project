@@ -146,13 +146,20 @@ a { color: var(--accent); text-decoration: none; }
   color: var(--text);
 }
 .chapter-link:hover .chapter-title { color: var(--accent); }
-.chapter-num {
+.chapter-title { flex: 1; transition: color 0.2s; }
+.chapter-link.is-forthcoming { cursor: default; }
+.chapter-link.is-forthcoming .chapter-title { color: var(--text-dim); font-style: italic; }
+.forthcoming-title { font-size: 1.8rem !important; }
+.draft-note {
   font-family: var(--sans);
   font-size: 0.75rem;
-  color: var(--text-dim);
-  min-width: 2.2rem;
+  color: var(--accent-dim);
+  border: 1px dashed var(--accent-dim);
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  margin-bottom: 2rem;
+  display: inline-block;
 }
-.chapter-title { flex: 1; transition: color 0.2s; }
 .chapter-pct {
   font-family: var(--sans);
   font-size: 0.75rem;
@@ -262,6 +269,15 @@ a { color: var(--accent); text-decoration: none; }
   to { opacity: 1; transform: none; }
 }
 .entity-card:hover { border-color: var(--accent-dim); }
+.entity-card { display: flex; align-items: center; gap: 0.7rem; }
+.card-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.card-body { min-width: 0; }
 .entity-card .card-type {
   font-family: var(--sans);
   font-size: 0.62rem;
@@ -367,6 +383,13 @@ a { color: var(--accent); text-decoration: none; }
   cursor: pointer;
 }
 .detail-close:hover { color: var(--accent); }
+.detail-portrait {
+  width: 100%;
+  max-height: 280px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 1.2rem;
+}
 .detail-type {
   font-family: var(--sans);
   font-size: 0.65rem;

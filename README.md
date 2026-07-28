@@ -4,8 +4,11 @@ An interactive web reading experience for the book *Anamnesis*. Pure static
 site — no build step, no server, no accounts — designed to be hosted free on
 GitHub Pages, with all reader state kept in the browser's localStorage.
 
-> The two chapters currently in `content/` are **sample/demo content** written
-> to exercise the engine. Replace them with the real manuscript.
+> `content/` holds the real manuscript export: 52 chapters (a few marked
+> `status: "todo"` — listed as *forthcoming*, never rendered), a 77-entity
+> codex, and `music_brief.md` describing the 30 intended cues. All track ids
+> currently point at generated mood placeholders in `audio/` until the real
+> score exists.
 
 ## Features
 

@@ -29,8 +29,12 @@ export class Reader {
     this._visibleEntities = null;
 
     const idx = this.book.chapters.findIndex(c => c.id === chapterId);
-    const prev = this.book.chapters[idx - 1];
-    const next = this.book.chapters[idx + 1];
+    const entry = this.book.chapters[idx];
+    const readable = c => c && c.status !== 'todo';
+    let prev = null;
+    for (let i = idx - 1; i >= 0; i--) if (readable(this.book.chapters[i])) { prev = this.book.chapters[i]; break; }
+    let next = null;
+    for (let i = idx + 1; i < this.book.chapters.length; i++) if (readable(this.book.chapters[i])) { next = this.book.chapters[i]; break; }
 
     const body = chapter.paragraphs.map(p => {
       const brk = p.breakBefore ? '<hr class="scene-break">' : '';
@@ -43,8 +47,9 @@ export class Reader {
     container.innerHTML = `
       <div class="reader">
         <article class="reader-column">
-          <div class="chapter-kicker">Chapter ${idx + 1} · ${this.book.title}</div>
+          <div class="chapter-kicker">${this.book.title} · ${this.book.subtitle}</div>
           <h1 class="chapter-heading">${chapter.title}</h1>
+          ${entry?.status === 'partial' ? '<div class="draft-note">This entry is a draft — parts may still change.</div>' : ''}
           ${body}
           <nav class="chapter-nav">
             <span>${prev ? `<a href="#/read/${prev.id}">← ${prev.title}</a>` : ''}</span>

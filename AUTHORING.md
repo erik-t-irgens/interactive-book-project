@@ -14,6 +14,19 @@ How to write chapters, wire up music, and build the living codex.
 The chapter order in `book.json` defines reading order and the prev/next
 links at the bottom of each chapter.
 
+A chapter entry can carry a `status` field:
+
+- `"status": "todo"` — listed in the contents as *forthcoming*, but not
+  readable. The file's contents are never rendered, so design notes in
+  placeholder chapters can't leak into the site. (The raw `.md` file is still
+  in the repo and fetchable by a determined reader — keep real spoilers out
+  of public repos, or accept that only the rendered site is spoiler-safe.)
+- `"status": "partial"` — readable, with a small "draft" notice at the top.
+- no status — a finished, readable chapter.
+
+Prev/next navigation and the overall progress bar skip `todo` chapters
+automatically.
+
 ## Chapter format
 
 Plain text with blank lines between paragraphs, plus a few directives. Every
@@ -62,6 +75,23 @@ Each entity has an `id` (referenced from chapters), a `type` — one of
   ]
 }
 ```
+
+Entities (and individual tiers) can carry an optional `image` field for
+portraits and item photography, added whenever the art exists:
+
+```json
+{ "id": "warden", "type": "character", "image": "images/warden.jpg",
+  "tiers": [
+    { "tier": 1, "name": "The Warden", "label": "...", "text": "..." },
+    { "tier": 3, "name": "...", "image": "images/warden-revealed.jpg", "label": "...", "text": "..." }
+  ] }
+```
+
+The sidebar cards show a thumbnail and the detail panel a full portrait.
+The image shown is the deepest *unlocked* tier's image, falling back to the
+entity-level one — so a tier-3 "true form" portrait stays hidden until tier 3
+unlocks, and entities with no image simply render text-only, as now. Put
+files in `images/` (jpg/png/webp; portraits look best at roughly 600×600+).
 
 Rules the engine enforces:
 

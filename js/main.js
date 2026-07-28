@@ -85,6 +85,7 @@ function overallProgress() {
   let total = 0;
   let read = 0;
   for (const c of book.chapters) {
+    if (c.status === 'todo') continue;
     const n = chapters.get(c.id)?.paragraphs.length || 0;
     total += n;
     read += Math.min(n, (state.progress[c.id]?.furthest ?? -1) + 1);
@@ -107,8 +108,14 @@ function route() {
 
   window.scrollTo(0, 0);
   if (readMatch) {
-    reader = new Reader({ book, chapters, audio, onProgress: paintProgress });
-    reader.render(view, readMatch[1]);
+    const entry = book.chapters.find(c => c.id === readMatch[1]);
+    if (entry?.status === 'todo') {
+      audio.setTrack(null, 2);
+      renderForthcoming(entry);
+    } else {
+      reader = new Reader({ book, chapters, audio, onProgress: paintProgress });
+      reader.render(view, readMatch[1]);
+    }
   } else if (hash.startsWith('#/codex')) {
     audio.setTrack(null, 2);
     renderCodexPage(view);
@@ -129,18 +136,33 @@ function renderHome() {
       <p class="description">${book.description}</p>
       ${resume ? `<a class="resume-btn" href="#/read/${state.lastChapter}">Continue reading</a>` : ''}
       <ul class="chapter-list">
-        ${book.chapters.map((c, i) => {
+        ${book.chapters.map(c => {
+          if (c.status === 'todo') {
+            return `<li><span class="chapter-link is-forthcoming">
+              <span class="chapter-title">${c.title}</span>
+              <span class="chapter-pct">forthcoming</span>
+            </span></li>`;
+          }
           const n = chapters.get(c.id)?.paragraphs.length || 1;
           const pct = Math.min(100, Math.round(((state.progress[c.id]?.furthest ?? -1) + 1) / n * 100));
           return `<li>
             <a class="chapter-link" href="#/read/${c.id}">
-              <span class="chapter-num">${String(i + 1).padStart(2, '0')}</span>
               <span class="chapter-title">${c.title}</span>
               <span class="chapter-pct ${pct >= 100 ? 'done' : ''}">${pct > 0 ? pct + '%' : ''}</span>
             </a>
           </li>`;
         }).join('')}
       </ul>
+    </div>`;
+}
+
+function renderForthcoming(entry) {
+  view.innerHTML = `
+    <div class="home">
+      <h1 class="forthcoming-title">${entry.title}</h1>
+      <p class="subtitle">— to be written —</p>
+      <p class="description">This part of the chronicle has not yet been set down. The story will continue here.</p>
+      <a class="resume-btn" href="#/">Return to contents</a>
     </div>`;
 }
 

@@ -81,6 +81,21 @@ a { color: var(--accent); text-decoration: none; }
 .icon-btn:hover { color: var(--accent); border-color: var(--accent-dim); }
 .icon-btn[aria-pressed="true"] { color: var(--accent); border-color: var(--accent); }
 #vol { width: 70px; accent-color: var(--accent); }
+.audio-ctl { position: relative; display: flex; }
+#now-playing {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 1.2s;
+  pointer-events: none;
+}
+#now-playing.on { opacity: 0.7; }
 .progress-track { height: 2px; background: transparent; }
 .progress-fill {
   height: 100%;
@@ -166,6 +181,110 @@ a { color: var(--accent); text-decoration: none; }
   color: var(--text-dim);
 }
 .chapter-pct.done { color: var(--accent); }
+.chapter-list li.part-sep span {
+  display: block;
+  text-align: center;
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-dim);
+  padding: 1.6rem 0 0.7rem;
+}
+.reset-link {
+  display: block;
+  margin: 3.5rem auto 0;
+  background: none;
+  border: none;
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  opacity: 0.65;
+  cursor: pointer;
+  transition: color 0.2s, opacity 0.2s;
+}
+.reset-link:hover { color: var(--accent); opacity: 1; }
+
+/* ============ Part title pages ============ */
+.part-page {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  animation: part-in 1.4s ease both;
+}
+@keyframes part-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+.part-kicker {
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--accent-dim);
+  margin-bottom: 1.2rem;
+}
+.part-title {
+  font-size: 3rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin: 0;
+}
+.part-rule {
+  border: none;
+  width: 70px;
+  border-top: 1px solid var(--accent-dim);
+  margin: 2.4rem 0;
+}
+.part-continue {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 0.6rem 1.9rem;
+  transition: color 0.25s, border-color 0.25s;
+}
+.part-continue:hover { color: var(--accent); border-color: var(--accent-dim); }
+
+/* ============ Confirm dialogs ============ */
+.confirm-actions {
+  display: flex;
+  gap: 0.9rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 1.6rem;
+}
+.confirm-actions .resume-btn { margin-bottom: 0; }
+.confirm-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 61;
+  background: var(--bg-overlay);
+  border: 1px solid var(--rule);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 1.8rem 2rem;
+  max-width: 26rem;
+  width: calc(100vw - 3rem);
+  text-align: center;
+  animation: fade-in 0.25s ease both;
+}
+.confirm-box h2 { font-size: 1.25rem; font-weight: 500; margin: 0 0 0.6rem; }
+.confirm-box p { font-size: 0.9rem; color: var(--text-dim); margin: 0; }
+.icon-btn.danger { color: #c96a5c; border-color: #c96a5c66; }
+.icon-btn.danger:hover { color: #e0776a; border-color: #e0776a; }
 
 /* ============ Reader layout ============ */
 .reader {
@@ -239,26 +358,28 @@ a { color: var(--accent); text-decoration: none; }
   padding: 1.6rem 0 2.5rem;
 }
 .btn-reveal {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: 1px solid var(--accent-dim);
-  background: var(--bg-raised);
-  color: var(--accent);
-  font-size: 1.35rem;
-  line-height: 1;
+  background: none;
+  border: none;
+  padding: 0.6rem 2rem;
   cursor: pointer;
-  transition: border-color 0.2s, transform 0.2s;
+  color: var(--text-dim);
+  opacity: 0.7;
+  transition: color 0.25s, opacity 0.25s;
 }
 .btn-reveal .glyph {
-  display: inline-block;
-  animation: reveal-beckon 2.6s ease-in-out infinite;
+  display: block;
+  width: 13px;
+  height: 13px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  animation: reveal-beckon 2.8s ease-in-out infinite;
 }
-.btn-reveal:hover { border-color: var(--accent); transform: scale(1.08); }
+.btn-reveal:hover { color: var(--accent); opacity: 1; }
 .btn-reveal:hover .glyph { animation-play-state: paused; }
 @keyframes reveal-beckon {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(5px); }
+  0%, 100% { transform: translateY(0) rotate(45deg); }
+  50% { transform: translateY(4px) rotate(45deg); }
 }
 .para.newly, .section-heading.newly {
   animation: para-in 0.55s ease both;

@@ -27,6 +27,30 @@ A chapter entry can carry a `status` field:
 Prev/next navigation and the overall progress bar skip `todo` chapters
 automatically.
 
+## Parts
+
+`book.json` can declare a `parts` array; each part gets a title page shown
+when the reader crosses into it, plus a separator in the contents list:
+
+```json
+"parts": [
+  { "id": "part1", "title": "Part One", "subtitle": "Triboar", "before": "ch01" }
+]
+```
+
+`before` names the first chapter of the part — the chapter *preceding* it
+links to the part's title page instead of directly to that chapter.
+
+## Skipping ahead
+
+Opening any chapter silently brings the codex up to date with everything
+before it (first-mention discoveries and `@unlock` directives from all prior
+readable chapters), so a reader who jumps to a later chapter has a codex
+consistent with their position. A reader with no progress at all who opens a
+later chapter gets a confirmation first, since that catch-up can reveal
+things. Reading progress itself is never marked by the catch-up — only the
+codex.
+
 ## Chapter format
 
 Plain text with blank lines between paragraphs, plus a few directives. Every

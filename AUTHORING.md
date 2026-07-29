@@ -67,6 +67,7 @@ directive sits on its own line and applies to the **next** paragraph.
 | `@audio: trackId fade=4` | From the next paragraph on, play `trackId`; crossfade over 4s |
 | `@audio: none fade=6` | Fade the music out over 6s |
 | `@unlock: entityId.2` | Reaching the next paragraph unlocks codex tier 2 for `entityId` |
+| `@image: images/file.jpg Alt text` | Inline artwork, revealed as its own paragraph in the flow (used for the door portraits and the Vault) |
 | `@[Display Text](entityId)` | Inline entity reference — drives the sidebar, opens the codex entry on click, and *discovers* the entity (tier 1) when first reached |
 | `*italic*`, `**bold**` | Minimal inline styling |
 

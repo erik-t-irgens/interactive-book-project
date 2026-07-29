@@ -147,6 +147,11 @@ export class Reader {
     if (p.kind === 'heading') {
       return `${brk}<h2 class="section-heading${cls}" data-index="${p.index}">${p.html}</h2>`;
     }
+    if (p.kind === 'image') {
+      return `${brk}<figure class="para-image${cls}" data-index="${p.index}">
+        <img src="${p.src}" alt="${p.alt}" loading="lazy">
+      </figure>`;
+    }
     return `${brk}<p class="para${cls}" data-index="${p.index}">${p.html}</p>`;
   }
 

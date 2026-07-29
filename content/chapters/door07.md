@@ -5,6 +5,8 @@
 
 ## Aelendir
 
+@image: images/aelendir.jpg Aelendir Springwhisper
+
 *―  to be written  ―*
 
 @unlock: the-doors.4

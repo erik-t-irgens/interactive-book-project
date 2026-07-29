@@ -28,7 +28,8 @@
      "label": "who says the names",
      "text": "He keeps the names of the taken the way other men keep coin — the cobbler's first among them — and says them at need, like a man saluting. In the receiving hall he claimed a boy from a city's paperwork with one sentence."
     }
-   ]
+   ],
+   "image": "images/amyl.jpg"
   },
   {
    "id": "tirig",
@@ -65,7 +66,8 @@
      "text": "In the receiving hall she heard a sentence shaped like one from the silent films, on the lips of a small gray-eyed woman, and a suspicion entered her that has not left.",
      "todo": "Higher tiers (what she truly carries; the keeper's ending) unlock in unwritten chapters XLIII+."
     }
-   ]
+   ],
+   "image": "images/tirig.jpg"
   },
   {
    "id": "corvyn",
@@ -95,7 +97,8 @@
      "label": "who read the butcher's diagram",
      "text": "In the workroom under Fundament he read the tune taken apart — every phrase inverted, every resolution refused — and named it for the company: somebody took the kindest thing he knows and arranged it to cut."
     }
-   ]
+   ],
+   "image": "images/corvyn.jpg"
   },
   {
    "id": "iratius",
@@ -144,7 +147,8 @@
      "text": "His strength was never his — the patron's grace, poured year over year into a man who knelt at every dawn and thought he knew who was listening. Revoked in a doorway with a snap, having cost its giver nothing to take. He said the oath anyway, all of it, slowly — to no one, and to whoever is actually there.",
      "todo": "The Tyr grant unlocks in unwritten chapter XLIII."
     }
-   ]
+   ],
+   "image": "images/iratius.jpg"
   },
   {
    "id": "saeron",
@@ -180,7 +184,8 @@
      "label": "who empties the column",
      "text": "He carries an iron key over his heart and a mason's name in his ledger — Bettany's husband, nine years in transit, recoverable pending capacity. He has stated his intention plainly: we are emptying that column."
     }
-   ]
+   ],
+   "image": "images/saeron.jpg"
   },
   {
    "id": "sov",
@@ -234,7 +239,8 @@
      "label": "the consideration clause",
      "text": "On a rampart of Fundament his father gave him the terms: his mother was Lenore of Ormath; the bargain that made him has a clause, and he is it. His father has kept a dead woman's bargain for thirty years and invites him to read the terms himself."
     }
-   ]
+   ],
+   "image": "images/sov.jpg"
   },
   {
    "id": "aelendir",
@@ -272,7 +278,8 @@
      "text": "He stood in the ring four centuries ago — hired to set a working down whole, and to play it. The fog took him before he could remember what he had helped to do; the sheet in the workroom is his own hand, and the fellowship it names is the one he has just rejoined.",
      "todo": "unlocks in a hidden chapter; live on release"
     }
-   ]
+   ],
+   "image": "images/aelendir.jpg"
   },
   {
    "id": "gregory",
@@ -1875,7 +1882,8 @@
      "label": "what holds by giving",
      "text": "The originals are emotion-crystals: they hold feeling, hold the planes riding apart, and have been drawing on their own reserves for ten thousand years — because everyone takes and nobody has ever put anything back in. Except once. What is given, they keep."
     }
-   ]
+   ],
+   "image": "images/mooring-stone.jpg"
   },
   {
    "id": "the-tune",
@@ -2062,7 +2070,8 @@
      "tier": 2,
      "name": "The Unmoored",
      "label": "what the deep made of her",
-     "text": "What came back into the light was a ruin of two things fused into one — the bear, and the woman, grown together by the working she had served. It was not entirely her anymore. It was not entirely anything anymore."
+     "text": "What came back into the light was a ruin of two things fused into one — the bear, and the woman, grown together by the working she had served. It was not entirely her anymore. It was not entirely anything anymore.",
+     "image": "images/unmoored.jpg"
     }
    ]
   },
@@ -2310,7 +2319,9 @@
      "label": "the keeping place",
      "text": "A made thing at the scale of geography in the gray's deep heart, ringed by a hush that is attention: aisles of standing panes each keeping a person mid-heartbeat, galleries keeping the world's fullest hours. Nothing guards it, because it does not keep what it is not given."
     }
-   ]
+   ],
+   "image": "images/vault.jpg",
+   "imageWide": true
   },
   {
    "id": "the-thaalud",

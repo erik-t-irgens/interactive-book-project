@@ -88,11 +88,12 @@ export function openEntityDetail(id) {
   const remaining = e.tiers.length - shown.length;
 
   const img = displayImage(id);
+  const wide = e.imageWide ? ' detail-portrait--wide' : '';
   root.innerHTML = `
     <div class="overlay-scrim" data-close></div>
-    <aside class="entity-detail" role="dialog" aria-label="Codex entry">
+    <aside class="entity-detail${e.imageWide ? ' entity-detail--wide' : ''}" role="dialog" aria-label="Codex entry">
       <button class="detail-close" data-close aria-label="Close">×</button>
-      ${img ? `<img class="detail-portrait" src="${img}" alt="${displayName(id)}">` : ''}
+      ${img ? `<img class="detail-portrait${wide}" src="${img}" alt="${displayName(id)}">` : ''}
       <div class="detail-type">${TYPE_LABELS[e.type] || e.type}</div>
       <h2 class="detail-name">${displayName(id)}</h2>
       ${shown.map((t, i) => `

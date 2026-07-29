@@ -548,6 +548,12 @@ a { color: var(--accent); text-decoration: none; }
   border-radius: 12px;
   margin-bottom: 1.2rem;
 }
+/* Wide/landscape artwork (e.g. locations): a broader panel, still bounded */
+.entity-detail--wide { width: min(560px, 100vw); }
+.detail-portrait--wide {
+  max-height: 300px;
+  object-fit: cover;
+}
 .detail-type {
   font-family: var(--sans);
   font-size: 0.65rem;

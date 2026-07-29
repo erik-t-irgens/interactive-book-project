@@ -9,7 +9,7 @@
 //   @[Display Text](entityId) — inline entity reference (drives the sidebar)
 //   *emphasis* / **strong**  — minimal inline styling
 
-const AUDIO_RE = /^@audio:\s*([\w-]+)(?:\s+fade=(\d+(?:\.\d+)?))?\s*$/;
+const AUDIO_RE = /^@audio:\s*([\w-]+)((?:\s+(?:fade=\d+(?:\.\d+)?|once))*)\s*$/;
 const UNLOCK_RE = /^@unlock:\s*([\w-]+)\.(\d+)\s*$/;
 const IMAGE_RE = /^@image:\s*(\S+)(?:\s+(.+))?$/;
 
@@ -66,9 +66,12 @@ export function parseChapter(text) {
     const audioMatch = trimmed.match(AUDIO_RE);
     if (audioMatch) {
       flush();
+      const opts = audioMatch[2] || '';
+      const fadeMatch = opts.match(/fade=(\d+(?:\.\d+)?)/);
       pendingAudio = {
         track: audioMatch[1] === 'none' ? null : audioMatch[1],
-        fade: audioMatch[2] ? parseFloat(audioMatch[2]) : 3,
+        fade: fadeMatch ? parseFloat(fadeMatch[1]) : 3,
+        once: /\bonce\b/.test(opts),
       };
       continue;
     }

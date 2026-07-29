@@ -9,10 +9,11 @@ export class AudioEngine {
     this.master = null;
     this.buffers = new Map();     // trackId -> AudioBuffer | Promise
     this.current = null;          // { id, source, gain }
-    this.desired = null;          // { id, fade } — remembered while disabled
+    this.desired = null;          // { id, fade, once } — remembered while disabled
     this.enabled = false;
     this.volume = 0.6;
     this.fadeToken = 0;
+    this.finishedOnce = null;     // a 'once' track that already played to its end
   }
 
   _ensureCtx() {
@@ -50,41 +51,56 @@ export class AudioEngine {
     this.enabled = on;
     if (on) {
       this._ensureCtx();
-      if (this.desired) await this._play(this.desired.id, 1.5);
+      if (this.desired) await this._play(this.desired.id, 1.5, this.desired.once);
     } else if (this.current) {
       this._fadeOutCurrent(0.8);
     }
   }
 
   // Called by the reader whenever the active paragraph's effective track changes.
-  async setTrack(id, fade = 3) {
-    this.desired = id ? { id, fade } : null;
+  async setTrack(id, fade = 3, once = false) {
+    this.desired = id ? { id, fade, once } : null;
     if (!this.enabled) return;
     this._ensureCtx();
     if (id === null) {
       if (this.current) this._fadeOutCurrent(fade);
       return;
     }
+    // A finished 'once' piece stays finished: silence holds until a different
+    // track plays. (Re-entering the scene after other music replays it.)
+    if (once && id === this.finishedOnce) return;
     if (this.current && this.current.id === id) return;
-    await this._play(id, fade);
+    await this._play(id, fade, once);
   }
 
-  async _play(id, fade) {
+  async _play(id, fade, once = false) {
     const token = ++this.fadeToken;
     const buf = await this._buffer(id);
     if (!buf || token !== this.fadeToken || !this.enabled) return;
     if (this.current && this.current.id === id) return;
 
+    if (id !== this.finishedOnce) this.finishedOnce = null;
     const now = this.ctx.currentTime;
     const gain = this.ctx.createGain();
     gain.gain.setValueAtTime(0.0001, now);
     gain.gain.linearRampToValueAtTime(1, now + fade);
     const source = this.ctx.createBufferSource();
     source.buffer = buf;
-    source.loop = true;
+    source.loop = !once;
     source.connect(gain);
     gain.connect(this.master);
     source.start(now);
+    if (once) {
+      source.onended = () => {
+        // Only the natural end of the still-current voice counts; a stop()
+        // during a crossfade also fires onended and must not mark finished.
+        if (this.current && this.current.source === source) {
+          this.finishedOnce = id;
+          this.current = null;
+          this._emitNow(null);
+        }
+      };
+    }
 
     if (this.current) this._fadeOut(this.current, fade);
     this.current = { id, source, gain };

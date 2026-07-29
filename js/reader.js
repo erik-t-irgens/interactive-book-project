@@ -199,7 +199,7 @@ export class Reader {
     this.onProgress?.();
 
     this.active = nextIndex;
-    if (p.audio) this.audio.setTrack(p.audio.track, p.audio.fade);
+    if (p.audio) this.audio.setTrack(p.audio.track, p.audio.fade, p.audio.once);
     this._syncFrontier();
 
     // A heading is not a reading beat on its own — bring its first paragraph
@@ -281,7 +281,7 @@ export class Reader {
       prog.last = best;
       save();
       const p = this.chapter.paragraphs[best];
-      if (p.audio) this.audio.setTrack(p.audio.track, p.audio.fade);
+      if (p.audio) this.audio.setTrack(p.audio.track, p.audio.fade, p.audio.once);
     }
   }
 

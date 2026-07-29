@@ -381,8 +381,19 @@ a { color: var(--accent); text-decoration: none; }
   0%, 100% { transform: translateY(0) rotate(45deg); }
   50% { transform: translateY(4px) rotate(45deg); }
 }
-.para.newly, .section-heading.newly {
+.para.newly, .section-heading.newly, .para-image.newly {
   animation: para-in 0.55s ease both;
+}
+.para-image {
+  margin: 1.8em 0 2.2em;
+  text-align: center;
+}
+.para-image img {
+  max-width: 100%;
+  max-height: 480px;
+  width: auto;
+  border-radius: 12px;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.35);
 }
 @keyframes para-in {
   from { opacity: 0; transform: translateY(12px); }

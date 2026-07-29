@@ -11,6 +11,7 @@
 
 const AUDIO_RE = /^@audio:\s*([\w-]+)(?:\s+fade=(\d+(?:\.\d+)?))?\s*$/;
 const UNLOCK_RE = /^@unlock:\s*([\w-]+)\.(\d+)\s*$/;
+const IMAGE_RE = /^@image:\s*(\S+)(?:\s+(.+))?$/;
 
 function escapeHtml(s) {
   return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -76,6 +77,27 @@ export function parseChapter(text) {
     if (unlockMatch) {
       flush();
       pendingUnlocks.push({ entity: unlockMatch[1], tier: parseInt(unlockMatch[2], 10) });
+      continue;
+    }
+
+    // Inline artwork: a block of its own, revealed like a paragraph.
+    const imageMatch = trimmed.match(IMAGE_RE);
+    if (imageMatch) {
+      flush();
+      if (pendingAudio) { currentAudio = pendingAudio; pendingAudio = null; }
+      paragraphs.push({
+        index: paragraphs.length,
+        kind: 'image',
+        src: imageMatch[1],
+        alt: imageMatch[2] || '',
+        html: '',
+        entities: [],
+        unlocks: pendingUnlocks,
+        audio: currentAudio,
+        breakBefore: pendingBreak,
+      });
+      pendingUnlocks = [];
+      pendingBreak = false;
       continue;
     }
 

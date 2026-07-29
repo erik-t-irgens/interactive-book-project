@@ -237,17 +237,20 @@
     {
       "id": "ch39",
       "title": "XXXIX. Happy, Not Truly",
-      "file": "content/chapters/ch39.md"
+      "file": "content/chapters/ch39.md",
+      "status": "todo"
     },
     {
       "id": "ch40",
       "title": "XL. The Deliverance",
-      "file": "content/chapters/ch40.md"
+      "file": "content/chapters/ch40.md",
+      "status": "todo"
     },
     {
       "id": "ch41",
       "title": "XLI. The Depths",
-      "file": "content/chapters/ch41.md"
+      "file": "content/chapters/ch41.md",
+      "status": "todo"
     },
     {
       "id": "ch42",
@@ -265,7 +268,7 @@
       "id": "door07",
       "title": "The Spring Door — There at the Beginning",
       "file": "content/chapters/door07.md",
-      "status": "partial"
+      "status": "todo"
     },
     {
       "id": "ch43",

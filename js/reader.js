@@ -38,7 +38,7 @@ export class Reader {
     };
   }
 
-  render(container, chapterId) {
+  render(container, chapterId, targetPara = null) {
     const chapter = this.chapters.get(chapterId);
     if (!chapter) { container.innerHTML = '<p class="sidebar-empty">Chapter not found.</p>'; return; }
     this.chapter = chapter;
@@ -127,8 +127,11 @@ export class Reader {
       this._reveal({ scroll: false });
     } else {
       this._syncFrontier();
-      // Resume where the reader left off.
-      const target = Math.min(prog.last ?? this.revealed, this.revealed);
+      // A codex source link targets a specific paragraph; otherwise resume
+      // where the reader left off. Deep links clamp to what's been revealed.
+      const target = targetPara != null
+        ? Math.max(0, Math.min(targetPara, this.revealed))
+        : Math.min(prog.last ?? this.revealed, this.revealed);
       if (target > 0 && this.paraEls[target]) {
         requestAnimationFrame(() => {
           this.paraEls[target].scrollIntoView({ block: 'center', behavior: 'instant' });

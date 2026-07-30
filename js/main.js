@@ -1,7 +1,7 @@
 import { state, save, unlock, resetAll } from './state.js';
 import { parseChapter } from './parser.js';
 import { AudioEngine } from './audio.js';
-import { loadCodex, renderCodexPage, entity } from './codex.js';
+import { loadCodex, renderCodexPage, entity, setSources } from './codex.js';
 import { Reader } from './reader.js';
 
 const view = document.getElementById('view');
@@ -25,6 +25,25 @@ async function boot() {
       chapters.set(c.id, parseChapter(text));
     }),
   ]);
+
+  // The codex cites its sources: first mention earns tier 1, @unlock
+  // directives earn the rest. Hidden chapters are excluded so links never
+  // lead to a forthcoming page.
+  const sources = {};
+  for (const c of book.chapters) {
+    if (c.status === 'todo') continue;
+    const parsed = chapters.get(c.id);
+    if (!parsed) continue;
+    for (const p of parsed.paragraphs) {
+      for (const id of p.entities) {
+        (sources[id] ??= {})[1] ??= { ch: c.id, index: p.index };
+      }
+      for (const u of p.unlocks) {
+        (sources[u.entity] ??= {})[u.tier] ??= { ch: c.id, index: p.index };
+      }
+    }
+  }
+  setSources(sources, id => book.chapters.find(c => c.id === id)?.title || '');
 
   audio = new AudioEngine(book.tracks);
   audio.volume = state.settings.volume;
@@ -178,7 +197,7 @@ function route() {
   reader = null;
   document.getElementById('overlay-root').innerHTML = '';
   const hash = location.hash || '#/';
-  const readMatch = hash.match(/^#\/read\/([\w-]+)/);
+  const readMatch = hash.match(/^#\/read\/([\w-]+)(?:\/(\d+))?/);
   const partMatch = hash.match(/^#\/part\/([\w-]+)/);
 
   window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
@@ -190,7 +209,7 @@ function route() {
     } else if (entry && pendingSkips(entry.id).length > 0) {
       renderSkipConfirm(entry);
     } else {
-      openChapter(readMatch[1]);
+      openChapter(readMatch[1], readMatch[2] != null ? parseInt(readMatch[2], 10) : null);
     }
   } else if (partMatch) {
     renderPartPage(book.parts?.find(p => p.id === partMatch[1]));
@@ -204,10 +223,10 @@ function route() {
   paintProgress();
 }
 
-function openChapter(chapterId) {
+function openChapter(chapterId, targetPara = null) {
   catchUpBefore(chapterId);
   reader = new Reader({ book, chapters, audio, onProgress: paintProgress });
-  reader.render(view, chapterId);
+  reader.render(view, chapterId, targetPara);
   paintProgress();
 }
 

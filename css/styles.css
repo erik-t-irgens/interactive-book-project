@@ -588,6 +588,15 @@ a { color: var(--accent); text-decoration: none; }
 }
 .detail-tier-text { font-size: 0.95rem; }
 .detail-tier.latest .detail-tier-label { color: var(--accent); }
+.tier-source {
+  display: inline-block;
+  margin-top: 0.35rem;
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: var(--accent-dim);
+}
+.tier-source:hover { color: var(--accent); }
 .detail-locked-note {
   font-size: 0.82rem;
   font-style: italic;

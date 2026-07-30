@@ -16,6 +16,15 @@ export async function loadCodex(url) {
 
 export function entity(id) { return byId.get(id) || null; }
 
+// Where each tier was earned: entityId -> { tier: { ch, index } }, computed
+// from the chapters at boot. Lets the codex cite its sources.
+let sources = {};
+let chapterTitle = () => '';
+export function setSources(map, titleFn) {
+  sources = map;
+  chapterTitle = titleFn;
+}
+
 // Highest tier definition at or below the reader's unlock level.
 export function visibleTier(id) {
   const e = byId.get(id);
@@ -96,11 +105,18 @@ export function openEntityDetail(id) {
       ${img ? `<img class="detail-portrait${wide}" src="${img}" alt="${displayName(id)}">` : ''}
       <div class="detail-type">${TYPE_LABELS[e.type] || e.type}</div>
       <h2 class="detail-name">${displayName(id)}</h2>
-      ${shown.map((t, i) => `
+      ${shown.map((t, i) => {
+        const src = sources[id]?.[t.tier];
+        const cite = src && chapterTitle(src.ch)
+          ? `<a class="tier-source" href="#/read/${src.ch}/${src.index}">⟶ from ${chapterTitle(src.ch)}</a>`
+          : '';
+        return `
         <div class="detail-tier ${i === shown.length - 1 ? 'latest' : ''}">
           <div class="detail-tier-label">${t.label || 'Recollection ' + t.tier}</div>
           <div class="detail-tier-text">${t.text}</div>
-        </div>`).join('')}
+          ${cite}
+        </div>`;
+      }).join('')}
       ${remaining > 0
         ? `<div class="detail-locked-note">The chronicle holds more on this. Keep reading.</div>`
         : ''}

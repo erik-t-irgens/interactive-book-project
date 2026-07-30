@@ -1,4 +1,4 @@
-import { state, save, unlock, resetAll } from './state.js';
+import { state, save, unlock, resetAll, exportCode, importCode } from './state.js';
 import { parseChapter } from './parser.js';
 import { AudioEngine } from './audio.js';
 import { loadCodex, renderCodexPage, entity, setSources } from './codex.js';
@@ -294,10 +294,64 @@ function renderHome() {
           </li>`;
         }).join('')}
       </ul>
-      <button class="reset-link" id="btn-reset">Reset reading progress</button>
+      <div class="home-footer-links">
+        <button class="reset-link" id="btn-transfer">Transfer progress between devices</button>
+        <button class="reset-link" id="btn-reset">Reset reading progress</button>
+      </div>
     </div>`;
 
   document.getElementById('btn-reset').addEventListener('click', showResetConfirm);
+  document.getElementById('btn-transfer').addEventListener('click', showTransferDialog);
+}
+
+function showTransferDialog() {
+  const root = document.getElementById('overlay-root');
+  root.innerHTML = `
+    <div class="overlay-scrim" data-close></div>
+    <div class="confirm-box" role="dialog" aria-label="Transfer progress">
+      <h2>Carry your place with you</h2>
+      <p>This code holds your reading progress and everything the Anamnesis has gathered on this device.
+      Copy it, then paste it into this same dialog on another device.</p>
+      <textarea class="save-code" id="save-out" readonly spellcheck="false">${exportCode()}</textarea>
+      <div class="confirm-actions">
+        <button class="icon-btn" id="copy-code">Copy code</button>
+      </div>
+      <p>Bringing a code from elsewhere? Paste it below. Loading it replaces everything on this device.</p>
+      <textarea class="save-code" id="save-in" placeholder="Paste a save code…" spellcheck="false"></textarea>
+      <div class="transfer-error" id="transfer-error"></div>
+      <div class="confirm-actions">
+        <button class="icon-btn" data-close>Close</button>
+        <button class="icon-btn danger" id="load-code">Load code</button>
+      </div>
+    </div>`;
+
+  root.querySelectorAll('[data-close]').forEach(el =>
+    el.addEventListener('click', () => { root.innerHTML = ''; }));
+
+  const out = document.getElementById('save-out');
+  const copyBtn = document.getElementById('copy-code');
+  copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(out.value);
+    } catch {
+      out.select();
+      document.execCommand('copy');
+    }
+    copyBtn.textContent = 'Copied';
+    setTimeout(() => { copyBtn.textContent = 'Copy code'; }, 2000);
+  });
+  out.addEventListener('focus', () => out.select());
+
+  document.getElementById('load-code').addEventListener('click', () => {
+    const code = document.getElementById('save-in').value.trim();
+    const err = document.getElementById('transfer-error');
+    if (!code) { err.textContent = 'Paste a code first.'; return; }
+    try {
+      importCode(code);
+    } catch {
+      err.textContent = 'That doesn’t look like a save code. Check that the whole code was copied.';
+    }
+  });
 }
 
 function showResetConfirm() {

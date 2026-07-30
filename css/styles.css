@@ -287,6 +287,41 @@ a { color: var(--accent); text-decoration: none; }
 .icon-btn.danger { color: #c96a5c; border-color: #c96a5c66; }
 .icon-btn.danger:hover { color: #e0776a; border-color: #e0776a; }
 
+/* Save transfer dialog */
+.confirm-box { max-height: calc(100vh - 3rem); overflow-y: auto; }
+.save-code {
+  display: block;
+  width: 100%;
+  height: 4.6rem;
+  margin: 0.8rem 0 0.2rem;
+  padding: 0.5rem 0.6rem;
+  font-family: monospace;
+  font-size: 0.62rem;
+  line-height: 1.35;
+  color: var(--text-dim);
+  background: none;
+  border: 1px dashed var(--rule);
+  border-radius: 8px;
+  resize: none;
+  word-break: break-all;
+}
+.save-code:focus { outline: none; border-color: var(--accent-dim); }
+.confirm-box p + p { margin-top: 1.2rem; }
+.transfer-error {
+  min-height: 1.1em;
+  margin-top: 0.4rem;
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  color: #c96a5c;
+}
+.home-footer-links {
+  margin-top: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.home-footer-links .reset-link { margin: 0 auto; }
+
 /* ============ Reader layout ============ */
 .reader {
   display: grid;

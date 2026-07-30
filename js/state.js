@@ -63,3 +63,29 @@ export function resetAll() {
   localStorage.removeItem(KEY);
   location.reload();
 }
+
+// ---- Save transfer -------------------------------------------------------
+// The whole state as a base64 code the reader can carry to another device.
+
+export function exportCode() {
+  const bytes = new TextEncoder().encode(JSON.stringify(state));
+  let bin = '';
+  for (const b of bytes) bin += String.fromCharCode(b);
+  return btoa(bin);
+}
+
+// Throws on anything that isn't a valid save code; on success overwrites
+// this device's state and reloads.
+export function importCode(code) {
+  const bin = atob(code.replace(/\s+/g, ''));
+  const bytes = Uint8Array.from(bin, c => c.charCodeAt(0));
+  const parsed = JSON.parse(new TextDecoder().decode(bytes));
+  if (!parsed || typeof parsed.progress !== 'object') throw new Error('not a save code');
+  clearTimeout(saveTimer);
+  localStorage.setItem(KEY, JSON.stringify({
+    ...defaults(),
+    ...parsed,
+    settings: { ...defaults().settings, ...parsed.settings },
+  }));
+  location.reload();
+}

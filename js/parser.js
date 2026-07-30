@@ -9,7 +9,7 @@
 //   @[Display Text](entityId) — inline entity reference (drives the sidebar)
 //   *emphasis* / **strong**  — minimal inline styling
 
-const AUDIO_RE = /^@audio:\s*([\w-]+)((?:\s+(?:fade=\d+(?:\.\d+)?|once))*)\s*$/;
+const AUDIO_RE = /^@audio:\s*([\w&-]+)((?:\s+(?:fade=\d+(?:\.\d+)?|once))*)\s*$/;
 const UNLOCK_RE = /^@unlock:\s*([\w-]+)\.(\d+)\s*$/;
 const IMAGE_RE = /^@image:\s*(\S+)(?:\s+(.+))?$/;
 

@@ -111,6 +111,12 @@ export class AudioEngine {
     document.dispatchEvent(new CustomEvent('audio:now', { detail: { id } }));
   }
 
+  // A fresh chapter render is a fresh performance: finished 'once' pieces
+  // may play again.
+  resetOnce() {
+    this.finishedOnce = null;
+  }
+
   _fadeOut(voice, fade) {
     const now = this.ctx.currentTime;
     voice.gain.gain.cancelScheduledValues(now);

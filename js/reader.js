@@ -46,6 +46,16 @@ export class Reader {
     this.active = -1;
     this._visibleEntities = null;
 
+    // Music is one-way within a render: each distinct @audio directive gets
+    // an ordinal, and once one has applied, earlier ones never re-fire until
+    // the chapter is opened fresh. (Scrolling up re-reads text, not the score.)
+    this._audioOrder = new Map();
+    for (const p of chapter.paragraphs) {
+      if (p.audio && !this._audioOrder.has(p.audio)) this._audioOrder.set(p.audio, this._audioOrder.size);
+    }
+    this._audioApplied = -1;
+    this.audio.resetOnce();
+
     const idx = this.book.chapters.findIndex(c => c.id === chapterId);
     const entry = this.book.chapters[idx];
     const readable = c => c && c.status !== 'todo';
@@ -199,7 +209,7 @@ export class Reader {
     this.onProgress?.();
 
     this.active = nextIndex;
-    if (p.audio) this.audio.setTrack(p.audio.track, p.audio.fade, p.audio.once);
+    this._applyAudio(p);
     this._syncFrontier();
 
     // A heading is not a reading beat on its own — bring its first paragraph
@@ -280,9 +290,19 @@ export class Reader {
       const prog = chapterProgress(this.chapterId);
       prog.last = best;
       save();
-      const p = this.chapter.paragraphs[best];
-      if (p.audio) this.audio.setTrack(p.audio.track, p.audio.fade, p.audio.once);
+      this._applyAudio(this.chapter.paragraphs[best]);
     }
+  }
+
+  // Apply a paragraph's effective audio directive, but only ever forward:
+  // once a later directive has taken effect this render, earlier ones stay
+  // spent. Re-opening the chapter resets the score.
+  _applyAudio(p) {
+    if (!p.audio) return;
+    const ord = this._audioOrder.get(p.audio);
+    if (ord <= this._audioApplied) return;
+    this._audioApplied = ord;
+    this.audio.setTrack(p.audio.track, p.audio.fade, p.audio.once);
   }
 
   _applyParagraphUnlocks(p) {

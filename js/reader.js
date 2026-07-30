@@ -122,9 +122,13 @@ export class Reader {
     window.addEventListener('touchstart', this._onTouchStart, { passive: true });
     window.addEventListener('touchmove', this._onTouchMove, { passive: true });
 
+    this._onCodexSeen = () => this._tutorialAdvance('codex-open');
+    document.addEventListener('codex:seen', this._onCodexSeen);
+
     if (this.revealed < 0) {
       // Fresh chapter: reveal the opening paragraph (fires its unlocks/audio).
       this._reveal({ scroll: false });
+      this._tutorialMaybeShow();
     } else {
       this._syncFrontier();
       // A codex source link targets a specific paragraph; otherwise resume
@@ -150,6 +154,8 @@ export class Reader {
     window.removeEventListener('keydown', this._onKey);
     window.removeEventListener('touchstart', this._onTouchStart);
     window.removeEventListener('touchmove', this._onTouchMove);
+    if (this._onCodexSeen) document.removeEventListener('codex:seen', this._onCodexSeen);
+    document.getElementById('coach-fixed')?.remove();
   }
 
   // ---- Progressive reveal ------------------------------------------------
@@ -228,8 +234,67 @@ export class Reader {
         const top = el.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.28;
         window.scrollTo({ top, behavior: 'smooth' });
       }
+      this._tutorialAdvance('reveal');
+      if (p.entities.length) this._tutorialAdvance('reveal-entities');
     }
     this._scheduleUpdate();
+  }
+
+  // ---- First-time tutorial (three diegetic coach marks) -------------------
+
+  _tutorialMaybeShow() {
+    const step = state.tutorialStep || 0;
+    if (step === 0 && !document.getElementById('coach')) {
+      document.getElementById('reveal-ctl')?.insertAdjacentHTML('beforebegin',
+        `<div class="coach" id="coach">The chronicle continues when you do — tap the mark below, or simply scroll on.</div>`);
+    }
+  }
+
+  _tutorialAdvance(event) {
+    const step = state.tutorialStep || 0;
+    if (step >= 4) return;
+
+    if (step === 0 && event === 'reveal') {
+      state.tutorialStep = 1;
+      save();
+      document.getElementById('coach')?.remove();
+      return;
+    }
+    if (step === 1 && event === 'reveal-entities') {
+      // Anchor the second mark after the newest paragraph (it has entity refs).
+      const el = this.paraEls[this.revealed];
+      if (el && !document.getElementById('coach')) {
+        el.insertAdjacentHTML('afterend',
+          `<div class="coach" id="coach">Words set apart like these are kept in the Anamnesis — tap one to read what the chronicle knows so far.</div>`);
+        state.tutorialStep = 2;
+        save();
+      }
+      return;
+    }
+    if (step === 2 && event === 'codex-open') {
+      document.getElementById('coach')?.remove();
+      state.tutorialStep = 3;
+      save();
+      // Show the final mark once the detail panel closes.
+      const wait = setInterval(() => {
+        if (!document.querySelector('.entity-detail')) {
+          clearInterval(wait);
+          this._tutorialAdvance('detail-closed');
+        }
+      }, 400);
+      setTimeout(() => clearInterval(wait), 60000);
+      return;
+    }
+    if (step === 3 && event === 'detail-closed') {
+      const fixed = document.createElement('div');
+      fixed.className = 'coach coach--fixed';
+      fixed.id = 'coach-fixed';
+      fixed.textContent = 'Everything recollected gathers in the Codex above, and deepens as you read.';
+      document.body.appendChild(fixed);
+      state.tutorialStep = 4;
+      save();
+      setTimeout(() => fixed.remove(), 8000);
+    }
   }
 
   _syncFrontier() {

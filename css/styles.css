@@ -605,6 +605,29 @@ a { color: var(--accent); text-decoration: none; }
   padding-top: 1rem;
 }
 
+/* ============ Tutorial coach marks ============ */
+.coach {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--accent-dim);
+  border: 1px dashed var(--accent-dim);
+  border-radius: 10px;
+  padding: 0.55rem 0.9rem;
+  margin: 1.2em 0;
+  animation: fade-in 0.8s ease both;
+}
+.coach--fixed {
+  position: fixed;
+  top: 4.4rem;
+  right: 1rem;
+  z-index: 45;
+  max-width: 260px;
+  margin: 0;
+  background: var(--bg-overlay);
+  box-shadow: var(--shadow);
+}
+
 /* ============ Toasts ============ */
 #toast-root {
   position: fixed;

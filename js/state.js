@@ -6,6 +6,7 @@ const defaults = () => ({
   unlocks: {},         // entityId -> highest unlocked tier (int)
   seen: {},            // entityId -> highest tier the reader has opened in detail
   skipAck: {},         // chapterId -> true, reader confirmed skipping past it unread
+  tutorialStep: 0,     // 0 fresh … 4 done; resets with everything else
   lastChapter: null,
   settings: { audioEnabled: false, volume: 0.6, theme: 'ink' },
 });

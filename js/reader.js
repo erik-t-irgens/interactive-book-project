@@ -311,24 +311,50 @@ export class Reader {
   _applyParagraphUnlocks(p) {
     // First inline mention of an entity discovers it (tier 1).
     for (const id of p.entities) {
-      if (entity(id) && unlock(id, 1)) this._toast(`Recollected: <em>${displayName(id)}</em>`);
+      if (entity(id) && unlock(id, 1)) this._toast(`Recollected: <em>${displayName(id)}</em>`, id);
     }
     // Explicit @unlock directives deepen existing entries.
     for (const u of p.unlocks) {
       if (entity(u.entity) && unlock(u.entity, u.tier)) {
-        this._toast(`The chronicle stirs: <em>${displayName(u.entity)}</em>`);
+        this._toast(`The chronicle stirs: <em>${displayName(u.entity)}</em>`, u.entity);
       }
     }
   }
 
-  _toast(html) {
+  _toast(html, entityId = null) {
     const root = document.getElementById('toast-root');
+
+    // Never stack more than three: retire the oldest early.
+    while (root.children.length >= 3) root.firstElementChild.remove();
+
     const el = document.createElement('div');
     el.className = 'toast';
     el.innerHTML = html;
+    if (entityId) {
+      el.classList.add('toast--link');
+      el.dataset.entity = entityId;
+      // codex.js's global .entity-card/.entity-ref delegation doesn't cover
+      // toasts; open directly.
+      el.addEventListener('click', () => {
+        import('./codex.js').then(m => m.openEntityDetail(entityId));
+        el.remove();
+      });
+    }
     root.appendChild(el);
-    setTimeout(() => el.classList.add('leaving'), 3200);
-    setTimeout(() => el.remove(), 3800);
+
+    // Timed dismissal that pauses while the pointer hovers.
+    let fadeTimer, removeTimer;
+    const arm = (fadeMs, removeMs) => {
+      fadeTimer = setTimeout(() => el.classList.add('leaving'), fadeMs);
+      removeTimer = setTimeout(() => el.remove(), removeMs);
+    };
+    arm(3200, 3800);
+    el.addEventListener('mouseenter', () => {
+      clearTimeout(fadeTimer);
+      clearTimeout(removeTimer);
+      el.classList.remove('leaving');
+    });
+    el.addEventListener('mouseleave', () => arm(1500, 2100));
   }
 
   _updateSidebar(visibleIndexes) {

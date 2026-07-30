@@ -629,6 +629,12 @@ a { color: var(--accent); text-decoration: none; }
   animation: toast-in 0.35s ease both;
 }
 .toast em { color: var(--accent); font-style: normal; }
+.toast--link {
+  pointer-events: auto;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.toast--link:hover { border-color: var(--accent); }
 @keyframes toast-in {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: none; }

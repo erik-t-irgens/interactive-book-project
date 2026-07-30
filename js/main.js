@@ -96,6 +96,12 @@ function initHeader() {
       el.classList.remove('on');
     }
   });
+  document.addEventListener('audio:blocked', () => {
+    const el = document.getElementById('now-playing');
+    if (!el) return;
+    el.textContent = '♪ tap anywhere for sound';
+    el.classList.add('on');
+  });
   document.addEventListener('audio:error', () => {
     const el = document.getElementById('now-playing');
     if (!el) return;

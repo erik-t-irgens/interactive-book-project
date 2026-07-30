@@ -2,6 +2,12 @@
 // Tracks are declared in book.json ("tracks": { id: url }) and referenced from
 // chapters via @audio: directives.
 
+// 20ms of silence. Looping this through an <audio> element while sound is
+// enabled promotes the page to a "playback" audio session on mobile WebKit
+// (Chrome/Safari on iOS), which is the only way Web Audio escapes the
+// hardware ring/silent switch.
+const SILENT_WAV = 'data:audio/wav;base64,UklGRsQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YaAAAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA';
+
 export class AudioEngine {
   constructor(trackMap) {
     this.trackMap = trackMap || {};
@@ -14,6 +20,7 @@ export class AudioEngine {
     this.volume = 0.6;
     this.fadeToken = 0;
     this.finishedOnce = null;     // a 'once' track that already played to its end
+    this._keepAlive = null;       // silent <audio> that claims the media session
   }
 
   _ensureCtx() {
@@ -39,7 +46,13 @@ export class AudioEngine {
   // Call from any user gesture: mobile browsers suspend audio contexts on
   // backgrounding/interruption and only a gesture may revive them.
   kick() {
-    if (this.enabled && this.ctx && this.ctx.state !== 'running') this.ctx.resume();
+    if (!this.enabled || !this.ctx) return;
+    this._claimSession();
+    if (this.ctx.state !== 'running') {
+      this.ctx.resume().then(() => {
+        if (this.ctx.state === 'running' && this.current) this._emitNow(this.current.id);
+      });
+    }
   }
 
   // decodeAudioData: promise form where supported, callback form for old WebKit.
@@ -88,13 +101,31 @@ export class AudioEngine {
     }
   }
 
+  // Claim a "playback" media session so mobile WebKit routes Web Audio past
+  // the silent switch. Must be called from within a user gesture.
+  _claimSession() {
+    if (!this._keepAlive) {
+      const el = document.createElement('audio');
+      el.src = SILENT_WAV;
+      el.loop = true;
+      el.setAttribute('playsinline', '');
+      el.playsInline = true;
+      el.style.display = 'none';
+      document.body.appendChild(el);
+      this._keepAlive = el;
+    }
+    this._keepAlive.play().catch(() => { /* blocked; harmless */ });
+  }
+
   async setEnabled(on) {
     this.enabled = on;
     if (on) {
       this._ensureCtx();
+      this._claimSession();
       if (this.desired) await this._play(this.desired.id, 1.5, this.desired.once);
-    } else if (this.current) {
-      this._fadeOutCurrent(0.8);
+    } else {
+      if (this.current) this._fadeOutCurrent(0.8);
+      this._keepAlive?.pause();
     }
   }
 
@@ -146,6 +177,15 @@ export class AudioEngine {
     if (this.current) this._fadeOut(this.current, fade);
     this.current = { id, source, gain };
     this._emitNow(id);
+
+    // A suspended context accepts all of the above without producing sound.
+    // If it isn't actually running shortly after start, tell the UI so the
+    // reader knows a tap is needed.
+    setTimeout(() => {
+      if (this.enabled && this.current?.id === id && this.ctx.state !== 'running') {
+        document.dispatchEvent(new CustomEvent('audio:blocked'));
+      }
+    }, 600);
   }
 
   _emitNow(id, extra = {}) {

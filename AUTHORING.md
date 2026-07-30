@@ -75,9 +75,10 @@ directive sits on its own line and applies to the **next** paragraph.
 Notes:
 
 - **Audio carries forward.** One `@audio:` directive holds until the next
-  one, across scene breaks. Scrolling *up* also re-triggers the right track —
-  each paragraph knows its effective track, so music always matches what the
-  reader is looking at, in either direction.
+  one, across scene breaks. Within a single chapter visit the score is
+  **one-way**: once a later directive has taken effect (a new song, silence,
+  or a finished `once` piece), scrolling back up never re-triggers earlier
+  music. Re-opening the chapter starts its score fresh.
 - **Fades are per-transition.** `fade=` is seconds; give quiet scene changes
   long fades (5–8s) and stingers short ones (1–2s).
 - **Unlocks are cumulative and ordered.** If a reader jumps ahead, every

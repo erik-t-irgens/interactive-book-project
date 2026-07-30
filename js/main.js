@@ -52,6 +52,12 @@ async function boot() {
 
   window.addEventListener('hashchange', route);
   route();
+
+  // Offline support: relative path keeps the scope right under a
+  // project-pages subpath.
+  if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  }
 }
 
 // ---- Header controls -----------------------------------------------------

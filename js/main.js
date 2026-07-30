@@ -14,6 +14,7 @@ let reader = null;
 
 async function boot() {
   document.documentElement.dataset.theme = state.settings.theme;
+  document.documentElement.dataset.textsize = state.settings.textSize || 'm';
 
   book = await (await fetch('content/book.json')).json();
   document.title = `${book.title} — ${book.subtitle}`;
@@ -78,6 +79,15 @@ function initHeader() {
     save();
     audio.setVolume(state.settings.volume);
   });
+  const btnText = document.getElementById('btn-textsize');
+  const SIZES = ['s', 'm', 'l'];
+  btnText.addEventListener('click', () => {
+    const cur = SIZES.indexOf(state.settings.textSize || 'm');
+    state.settings.textSize = SIZES[(cur + 1) % SIZES.length];
+    save();
+    document.documentElement.dataset.textsize = state.settings.textSize;
+  });
+
   btnTheme.addEventListener('click', () => {
     state.settings.theme = state.settings.theme === 'ink' ? 'parchment' : 'ink';
     save();

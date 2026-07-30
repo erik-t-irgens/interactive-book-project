@@ -409,14 +409,18 @@ a { color: var(--accent); text-decoration: none; }
   color: var(--text-dim);
   margin-bottom: 3rem;
 }
+/* Reader-adjustable prose scale (Aa button in the header). */
+html[data-textsize="s"] { --prose-scale: 0.92; }
+html[data-textsize="l"] { --prose-scale: 1.16; }
+
 .para {
-  font-size: 1.06rem;
+  font-size: calc(1.06rem * var(--prose-scale, 1));
   margin: 0 0 1.4em;
   transition: opacity 0.5s;
 }
 .para.is-active { }
 .section-heading {
-  font-size: 1.3rem;
+  font-size: calc(1.3rem * var(--prose-scale, 1));
   font-weight: 500;
   margin: 2.5em 0 1.2em;
 }

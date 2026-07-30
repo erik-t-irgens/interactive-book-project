@@ -66,15 +66,19 @@ function initHeader() {
     btnTheme.textContent = state.settings.theme === 'ink' ? '☾' : '☀';
   });
 
-  // Browsers require a user gesture before audio can start; if the reader had
-  // sound on last visit, resume it on their first interaction.
-  const resumeOnGesture = () => {
-    if (state.settings.audioEnabled) audio.setEnabled(true);
-    window.removeEventListener('pointerdown', resumeOnGesture);
-    window.removeEventListener('keydown', resumeOnGesture);
+  // Browsers require a user gesture before audio can start — and mobile
+  // browsers re-suspend the context on backgrounding or interruptions. Every
+  // interaction re-arms it: the first one starts persisted audio, later ones
+  // revive a suspended context.
+  const onGesture = () => {
+    if (state.settings.audioEnabled && !audio.enabled) audio.setEnabled(true);
+    else audio.kick();
   };
-  window.addEventListener('pointerdown', resumeOnGesture);
-  window.addEventListener('keydown', resumeOnGesture);
+  window.addEventListener('pointerdown', onGesture);
+  window.addEventListener('keydown', onGesture);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) audio.kick();
+  });
 
   document.addEventListener('codex:seen', () => reader?.refreshSidebar());
 
@@ -82,12 +86,22 @@ function initHeader() {
   document.addEventListener('audio:now', e => {
     const el = document.getElementById('now-playing');
     if (!el) return;
-    if (e.detail.id) {
+    if (e.detail.loading) {
+      el.textContent = '♪ loading…';
+      el.classList.add('on');
+    } else if (e.detail.id) {
       el.textContent = '♪ ' + e.detail.id.replace(/[-_]+/g, ' ');
       el.classList.add('on');
     } else {
       el.classList.remove('on');
     }
+  });
+  document.addEventListener('audio:error', () => {
+    const el = document.getElementById('now-playing');
+    if (!el) return;
+    el.textContent = '♪ track unavailable';
+    el.classList.add('on');
+    setTimeout(() => el.classList.remove('on'), 4000);
   });
 }
 

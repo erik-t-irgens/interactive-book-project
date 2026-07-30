@@ -12,7 +12,7 @@ And second — slowly, and in the right order — it shows you the rest. The far
 There is one more thing woven through all of it, and I will name it here only so that you know to watch for it. You will remember the errands — the small troubles of Triboar and the roads beyond it. A child lost beneath a ruined house. A prisoner from the North. A grief in a forest. A pact, a betrayal, an old accident that would not stay buried. They arrived looking like the ordinary work of adventurers: unrelated, incidental, the sort of thing a party takes on because someone has to. They were none of those things. Each of them had a name on it before you ever heard of it, and the name was one of yours. Not shared among you — assigned. I built a door for each of you and disguised every one of them as a task for everybody. You will see, as you read, the moment each door was meant to open. I will not point at them from up here; half the pleasure is the recognition, and you have earned the right to feel it land on your own. But know that it is there, and that it was there from the first night, and that nothing you did in this world was ever only errand.
 
 ---
-@audio: foreward fade=10
+@audio: Foreword fade=10
 So let me begin the way the world itself begins, which is to say: in the middle, with the ink already dry.
 
 This is Faerûn in the year 1492 by Dalereckoning, twelve years after the Second Sundering tore Toril from its twin and the overgod remade the Tablets of Fate. Magic has returned, unruly and bright. The gods walk close to the world again and choose their champions from among the living. It is, by every reckoning of scholars and kings, an age of renewal — a morning after a long dark.

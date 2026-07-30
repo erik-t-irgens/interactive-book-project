@@ -154,9 +154,18 @@ export function renderCodexPage(container) {
   const discovered = codex.entities.filter(e => unlockedTier(e.id) > 0);
   const hiddenCount = codex.entities.length - discovered.length;
 
-  const groups = GROUP_ORDER
-    .map(type => ({ type, items: discovered.filter(e => e.type === type) }))
-    .filter(g => g.items.length > 0);
+  const groupsHtml = items => {
+    const groups = GROUP_ORDER
+      .map(type => ({ type, items: items.filter(e => e.type === type) }))
+      .filter(g => g.items.length > 0);
+    if (groups.length === 0) {
+      return '<p class="sidebar-empty">Nothing recollected matches that.</p>';
+    }
+    return groups.map(g => `
+      <div class="codex-group-label">${TYPE_LABELS[g.type]}s</div>
+      <div class="codex-grid">${g.items.map(e => cardHtml(e.id)).join('')}</div>
+    `).join('');
+  };
 
   container.innerHTML = `
     <div class="codex-page">
@@ -164,13 +173,35 @@ export function renderCodexPage(container) {
       <p class="codex-intro">Everything the chronicle has yielded so far. Entries deepen as you read; nothing here runs ahead of you.</p>
       ${discovered.length === 0
         ? '<p class="sidebar-empty">Nothing recollected yet. Begin reading, and the chronicle will begin keeping notes alongside you.</p>'
-        : groups.map(g => `
-            <div class="codex-group-label">${TYPE_LABELS[g.type]}s</div>
-            <div class="codex-grid">${g.items.map(e => cardHtml(e.id)).join('')}</div>
-          `).join('')}
-      ${hiddenCount > 0
+        : `<input class="codex-search" id="codex-search" type="search"
+             placeholder="Search what you’ve recollected…" autocomplete="off" spellcheck="false"
+             aria-label="Search the Anamnesis">
+           <div id="codex-groups">${groupsHtml(discovered)}</div>`}
+      <div id="codex-buried">${hiddenCount > 0
         ? `<div class="codex-group-label">Still buried</div>
            <div class="codex-grid">${Array.from({ length: hiddenCount }, () => cardHtml(null, { locked: true })).join('')}</div>`
-        : ''}
+        : ''}</div>
     </div>`;
+
+  const input = document.getElementById('codex-search');
+  if (!input) return;
+
+  // Search only what the reader has already unlocked — locked tier names and
+  // labels must never surface through the filter.
+  const haystacks = new Map(discovered.map(e => {
+    const level = unlockedTier(e.id);
+    const parts = [TYPE_LABELS[e.type] || e.type];
+    for (const t of e.tiers) if (t.tier <= level) {
+      if (t.name) parts.push(t.name);
+      if (t.label) parts.push(t.label);
+    }
+    return [e.id, parts.join(' ').toLowerCase()];
+  }));
+
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    document.getElementById('codex-groups').innerHTML =
+      groupsHtml(q ? discovered.filter(e => haystacks.get(e.id).includes(q)) : discovered);
+    document.getElementById('codex-buried').style.display = q ? 'none' : '';
+  });
 }

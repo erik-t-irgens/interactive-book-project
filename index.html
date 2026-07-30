@@ -6,6 +6,9 @@
   <title>Anamnesis — The Chronicle of Fundament</title>
   <meta name="description" content="An interactive reading experience with ambient scoring and a living appendix.">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#14151a">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🔔</text></svg>">
 </head>
 <body>
@@ -19,6 +22,7 @@
           <div id="now-playing" aria-hidden="true"></div>
         </div>
         <input type="range" id="vol" min="0" max="100" value="60" title="Volume" aria-label="Volume">
+        <button class="icon-btn" id="btn-textsize" title="Text size" aria-label="Cycle text size">Aa</button>
         <button class="icon-btn" id="btn-theme" title="Toggle theme">☾</button>
       </div>
     </div>

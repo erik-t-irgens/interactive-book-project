@@ -287,6 +287,104 @@ a { color: var(--accent); text-decoration: none; }
 .icon-btn.danger { color: #c96a5c; border-color: #c96a5c66; }
 .icon-btn.danger:hover { color: #e0776a; border-color: #e0776a; }
 
+/* Save transfer dialog */
+.confirm-box { max-height: calc(100vh - 3rem); overflow-y: auto; }
+.save-code {
+  display: block;
+  width: 100%;
+  height: 4.6rem;
+  margin: 0.8rem 0 0.2rem;
+  padding: 0.5rem 0.6rem;
+  font-family: monospace;
+  font-size: 0.62rem;
+  line-height: 1.35;
+  color: var(--text-dim);
+  background: none;
+  border: 1px dashed var(--rule);
+  border-radius: 8px;
+  resize: none;
+  word-break: break-all;
+}
+.save-code:focus { outline: none; border-color: var(--accent-dim); }
+.confirm-box p + p { margin-top: 1.2rem; }
+.transfer-error {
+  min-height: 1.1em;
+  margin-top: 0.4rem;
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  color: #c96a5c;
+}
+.home-footer-links {
+  margin-top: 3.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.home-footer-links .reset-link { margin: 0 auto; }
+
+/* Codex search */
+.codex-search {
+  display: block;
+  width: 100%;
+  max-width: 24rem;
+  margin: 0 0 1.8rem;
+  padding: 0.45rem 1rem;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  color: var(--text);
+  background: none;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  transition: border-color 0.2s;
+}
+.codex-search:focus { outline: none; border-color: var(--accent-dim); }
+.codex-search::placeholder { color: var(--text-dim); opacity: 0.7; }
+
+/* Chapter-end recollections recap */
+.chapter-recollections {
+  margin-top: 4rem;
+  padding-top: 1.8rem;
+  border-top: 1px solid var(--rule);
+  animation: fade-in 0.8s ease both;
+}
+.recollect-heading {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--text-dim);
+  margin-bottom: 0.4rem;
+}
+.recollect-label {
+  font-family: var(--sans);
+  font-size: 0.66rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin: 1.4rem 0 0.7rem;
+}
+.recollect-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.8rem;
+}
+.recollect-grid .entity-card { margin-bottom: 0; animation: none; }
+
+/* "You left off here" marker after a long absence */
+.resume-marker {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin: 1.8rem 0;
+  font-family: var(--sans);
+  font-size: 0.64rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-dim);
+  animation: fade-in 1s ease both;
+}
+.resume-marker::before,
+.resume-marker::after { content: ''; flex: 1; border-top: 1px dashed var(--rule); }
+
 /* ============ Reader layout ============ */
 .reader {
   display: grid;
@@ -311,14 +409,18 @@ a { color: var(--accent); text-decoration: none; }
   color: var(--text-dim);
   margin-bottom: 3rem;
 }
+/* Reader-adjustable prose scale (Aa button in the header). */
+html[data-textsize="s"] { --prose-scale: 0.92; }
+html[data-textsize="l"] { --prose-scale: 1.16; }
+
 .para {
-  font-size: 1.06rem;
+  font-size: calc(1.06rem * var(--prose-scale, 1));
   margin: 0 0 1.4em;
   transition: opacity 0.5s;
 }
 .para.is-active { }
 .section-heading {
-  font-size: 1.3rem;
+  font-size: calc(1.3rem * var(--prose-scale, 1));
   font-weight: 500;
   margin: 2.5em 0 1.2em;
 }
@@ -588,12 +690,44 @@ a { color: var(--accent); text-decoration: none; }
 }
 .detail-tier-text { font-size: 0.95rem; }
 .detail-tier.latest .detail-tier-label { color: var(--accent); }
+.tier-source {
+  display: inline-block;
+  margin-top: 0.35rem;
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  color: var(--accent-dim);
+}
+.tier-source:hover { color: var(--accent); }
 .detail-locked-note {
   font-size: 0.82rem;
   font-style: italic;
   color: var(--text-dim);
   border-top: 1px dashed var(--rule);
   padding-top: 1rem;
+}
+
+/* ============ Tutorial coach marks ============ */
+.coach {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--accent-dim);
+  border: 1px dashed var(--accent-dim);
+  border-radius: 10px;
+  padding: 0.55rem 0.9rem;
+  margin: 1.2em 0;
+  animation: fade-in 0.8s ease both;
+}
+.coach--fixed {
+  position: fixed;
+  top: 4.4rem;
+  right: 1rem;
+  z-index: 45;
+  max-width: 260px;
+  margin: 0;
+  background: var(--bg-overlay);
+  box-shadow: var(--shadow);
 }
 
 /* ============ Toasts ============ */
@@ -620,6 +754,12 @@ a { color: var(--accent); text-decoration: none; }
   animation: toast-in 0.35s ease both;
 }
 .toast em { color: var(--accent); font-style: normal; }
+.toast--link {
+  pointer-events: auto;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.toast--link:hover { border-color: var(--accent); }
 @keyframes toast-in {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: none; }

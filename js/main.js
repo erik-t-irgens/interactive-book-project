@@ -1,7 +1,7 @@
-import { state, save, unlock, resetAll } from './state.js';
+import { state, save, unlock, resetAll, exportCode, importCode } from './state.js';
 import { parseChapter } from './parser.js';
 import { AudioEngine } from './audio.js';
-import { loadCodex, renderCodexPage, entity } from './codex.js';
+import { loadCodex, renderCodexPage, entity, setSources } from './codex.js';
 import { Reader } from './reader.js';
 
 const view = document.getElementById('view');
@@ -14,6 +14,7 @@ let reader = null;
 
 async function boot() {
   document.documentElement.dataset.theme = state.settings.theme;
+  document.documentElement.dataset.textsize = state.settings.textSize || 'm';
 
   book = await (await fetch('content/book.json')).json();
   document.title = `${book.title} — ${book.subtitle}`;
@@ -26,12 +27,37 @@ async function boot() {
     }),
   ]);
 
+  // The codex cites its sources: first mention earns tier 1, @unlock
+  // directives earn the rest. Hidden chapters are excluded so links never
+  // lead to a forthcoming page.
+  const sources = {};
+  for (const c of book.chapters) {
+    if (c.status === 'todo') continue;
+    const parsed = chapters.get(c.id);
+    if (!parsed) continue;
+    for (const p of parsed.paragraphs) {
+      for (const id of p.entities) {
+        (sources[id] ??= {})[1] ??= { ch: c.id, index: p.index };
+      }
+      for (const u of p.unlocks) {
+        (sources[u.entity] ??= {})[u.tier] ??= { ch: c.id, index: p.index };
+      }
+    }
+  }
+  setSources(sources, id => book.chapters.find(c => c.id === id)?.title || '');
+
   audio = new AudioEngine(book.tracks);
   audio.volume = state.settings.volume;
   initHeader();
 
   window.addEventListener('hashchange', route);
   route();
+
+  // Offline support: relative path keeps the scope right under a
+  // project-pages subpath.
+  if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  }
 }
 
 // ---- Header controls -----------------------------------------------------
@@ -59,6 +85,15 @@ function initHeader() {
     save();
     audio.setVolume(state.settings.volume);
   });
+  const btnText = document.getElementById('btn-textsize');
+  const SIZES = ['s', 'm', 'l'];
+  btnText.addEventListener('click', () => {
+    const cur = SIZES.indexOf(state.settings.textSize || 'm');
+    state.settings.textSize = SIZES[(cur + 1) % SIZES.length];
+    save();
+    document.documentElement.dataset.textsize = state.settings.textSize;
+  });
+
   btnTheme.addEventListener('click', () => {
     state.settings.theme = state.settings.theme === 'ink' ? 'parchment' : 'ink';
     save();
@@ -178,7 +213,7 @@ function route() {
   reader = null;
   document.getElementById('overlay-root').innerHTML = '';
   const hash = location.hash || '#/';
-  const readMatch = hash.match(/^#\/read\/([\w-]+)/);
+  const readMatch = hash.match(/^#\/read\/([\w-]+)(?:\/(\d+))?/);
   const partMatch = hash.match(/^#\/part\/([\w-]+)/);
 
   window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
@@ -190,7 +225,7 @@ function route() {
     } else if (entry && pendingSkips(entry.id).length > 0) {
       renderSkipConfirm(entry);
     } else {
-      openChapter(readMatch[1]);
+      openChapter(readMatch[1], readMatch[2] != null ? parseInt(readMatch[2], 10) : null);
     }
   } else if (partMatch) {
     renderPartPage(book.parts?.find(p => p.id === partMatch[1]));
@@ -204,10 +239,10 @@ function route() {
   paintProgress();
 }
 
-function openChapter(chapterId) {
+function openChapter(chapterId, targetPara = null) {
   catchUpBefore(chapterId);
   reader = new Reader({ book, chapters, audio, onProgress: paintProgress });
-  reader.render(view, chapterId);
+  reader.render(view, chapterId, targetPara);
   paintProgress();
 }
 
@@ -275,10 +310,64 @@ function renderHome() {
           </li>`;
         }).join('')}
       </ul>
-      <button class="reset-link" id="btn-reset">Reset reading progress</button>
+      <div class="home-footer-links">
+        <button class="reset-link" id="btn-transfer">Transfer progress between devices</button>
+        <button class="reset-link" id="btn-reset">Reset reading progress</button>
+      </div>
     </div>`;
 
   document.getElementById('btn-reset').addEventListener('click', showResetConfirm);
+  document.getElementById('btn-transfer').addEventListener('click', showTransferDialog);
+}
+
+function showTransferDialog() {
+  const root = document.getElementById('overlay-root');
+  root.innerHTML = `
+    <div class="overlay-scrim" data-close></div>
+    <div class="confirm-box" role="dialog" aria-label="Transfer progress">
+      <h2>Carry your place with you</h2>
+      <p>This code holds your reading progress and everything the Anamnesis has gathered on this device.
+      Copy it, then paste it into this same dialog on another device.</p>
+      <textarea class="save-code" id="save-out" readonly spellcheck="false">${exportCode()}</textarea>
+      <div class="confirm-actions">
+        <button class="icon-btn" id="copy-code">Copy code</button>
+      </div>
+      <p>Bringing a code from elsewhere? Paste it below. Loading it replaces everything on this device.</p>
+      <textarea class="save-code" id="save-in" placeholder="Paste a save code…" spellcheck="false"></textarea>
+      <div class="transfer-error" id="transfer-error"></div>
+      <div class="confirm-actions">
+        <button class="icon-btn" data-close>Close</button>
+        <button class="icon-btn danger" id="load-code">Load code</button>
+      </div>
+    </div>`;
+
+  root.querySelectorAll('[data-close]').forEach(el =>
+    el.addEventListener('click', () => { root.innerHTML = ''; }));
+
+  const out = document.getElementById('save-out');
+  const copyBtn = document.getElementById('copy-code');
+  copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(out.value);
+    } catch {
+      out.select();
+      document.execCommand('copy');
+    }
+    copyBtn.textContent = 'Copied';
+    setTimeout(() => { copyBtn.textContent = 'Copy code'; }, 2000);
+  });
+  out.addEventListener('focus', () => out.select());
+
+  document.getElementById('load-code').addEventListener('click', () => {
+    const code = document.getElementById('save-in').value.trim();
+    const err = document.getElementById('transfer-error');
+    if (!code) { err.textContent = 'Paste a code first.'; return; }
+    try {
+      importCode(code);
+    } catch {
+      err.textContent = 'That doesn’t look like a save code. Check that the whole code was copied.';
+    }
+  });
 }
 
 function showResetConfirm() {

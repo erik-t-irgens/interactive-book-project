@@ -16,6 +16,15 @@ export async function loadCodex(url) {
 
 export function entity(id) { return byId.get(id) || null; }
 
+// Where each tier was earned: entityId -> { tier: { ch, index } }, computed
+// from the chapters at boot. Lets the codex cite its sources.
+let sources = {};
+let chapterTitle = () => '';
+export function setSources(map, titleFn) {
+  sources = map;
+  chapterTitle = titleFn;
+}
+
 // Highest tier definition at or below the reader's unlock level.
 export function visibleTier(id) {
   const e = byId.get(id);
@@ -96,11 +105,18 @@ export function openEntityDetail(id) {
       ${img ? `<img class="detail-portrait${wide}" src="${img}" alt="${displayName(id)}">` : ''}
       <div class="detail-type">${TYPE_LABELS[e.type] || e.type}</div>
       <h2 class="detail-name">${displayName(id)}</h2>
-      ${shown.map((t, i) => `
+      ${shown.map((t, i) => {
+        const src = sources[id]?.[t.tier];
+        const cite = src && chapterTitle(src.ch)
+          ? `<a class="tier-source" href="#/read/${src.ch}/${src.index}">⟶ from ${chapterTitle(src.ch)}</a>`
+          : '';
+        return `
         <div class="detail-tier ${i === shown.length - 1 ? 'latest' : ''}">
           <div class="detail-tier-label">${t.label || 'Recollection ' + t.tier}</div>
           <div class="detail-tier-text">${t.text}</div>
-        </div>`).join('')}
+          ${cite}
+        </div>`;
+      }).join('')}
       ${remaining > 0
         ? `<div class="detail-locked-note">The chronicle holds more on this. Keep reading.</div>`
         : ''}
@@ -138,9 +154,18 @@ export function renderCodexPage(container) {
   const discovered = codex.entities.filter(e => unlockedTier(e.id) > 0);
   const hiddenCount = codex.entities.length - discovered.length;
 
-  const groups = GROUP_ORDER
-    .map(type => ({ type, items: discovered.filter(e => e.type === type) }))
-    .filter(g => g.items.length > 0);
+  const groupsHtml = items => {
+    const groups = GROUP_ORDER
+      .map(type => ({ type, items: items.filter(e => e.type === type) }))
+      .filter(g => g.items.length > 0);
+    if (groups.length === 0) {
+      return '<p class="sidebar-empty">Nothing recollected matches that.</p>';
+    }
+    return groups.map(g => `
+      <div class="codex-group-label">${TYPE_LABELS[g.type]}s</div>
+      <div class="codex-grid">${g.items.map(e => cardHtml(e.id)).join('')}</div>
+    `).join('');
+  };
 
   container.innerHTML = `
     <div class="codex-page">
@@ -148,13 +173,35 @@ export function renderCodexPage(container) {
       <p class="codex-intro">Everything the chronicle has yielded so far. Entries deepen as you read; nothing here runs ahead of you.</p>
       ${discovered.length === 0
         ? '<p class="sidebar-empty">Nothing recollected yet. Begin reading, and the chronicle will begin keeping notes alongside you.</p>'
-        : groups.map(g => `
-            <div class="codex-group-label">${TYPE_LABELS[g.type]}s</div>
-            <div class="codex-grid">${g.items.map(e => cardHtml(e.id)).join('')}</div>
-          `).join('')}
-      ${hiddenCount > 0
+        : `<input class="codex-search" id="codex-search" type="search"
+             placeholder="Search what you’ve recollected…" autocomplete="off" spellcheck="false"
+             aria-label="Search the Anamnesis">
+           <div id="codex-groups">${groupsHtml(discovered)}</div>`}
+      <div id="codex-buried">${hiddenCount > 0
         ? `<div class="codex-group-label">Still buried</div>
            <div class="codex-grid">${Array.from({ length: hiddenCount }, () => cardHtml(null, { locked: true })).join('')}</div>`
-        : ''}
+        : ''}</div>
     </div>`;
+
+  const input = document.getElementById('codex-search');
+  if (!input) return;
+
+  // Search only what the reader has already unlocked — locked tier names and
+  // labels must never surface through the filter.
+  const haystacks = new Map(discovered.map(e => {
+    const level = unlockedTier(e.id);
+    const parts = [TYPE_LABELS[e.type] || e.type];
+    for (const t of e.tiers) if (t.tier <= level) {
+      if (t.name) parts.push(t.name);
+      if (t.label) parts.push(t.label);
+    }
+    return [e.id, parts.join(' ').toLowerCase()];
+  }));
+
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    document.getElementById('codex-groups').innerHTML =
+      groupsHtml(q ? discovered.filter(e => haystacks.get(e.id).includes(q)) : discovered);
+    document.getElementById('codex-buried').style.display = q ? 'none' : '';
+  });
 }

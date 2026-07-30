@@ -38,13 +38,14 @@ export class Reader {
     };
   }
 
-  render(container, chapterId) {
+  render(container, chapterId, targetPara = null) {
     const chapter = this.chapters.get(chapterId);
     if (!chapter) { container.innerHTML = '<p class="sidebar-empty">Chapter not found.</p>'; return; }
     this.chapter = chapter;
     this.chapterId = chapterId;
     this.active = -1;
     this._visibleEntities = null;
+    this._recollections = new Map();   // entityId -> 'discovered' | 'deepened', this sitting only
 
     // Music is one-way within a render: each distinct @audio directive gets
     // an ordinal, and once one has applied, earlier ones never re-fire until
@@ -122,13 +123,35 @@ export class Reader {
     window.addEventListener('touchstart', this._onTouchStart, { passive: true });
     window.addEventListener('touchmove', this._onTouchMove, { passive: true });
 
+    this._onCodexSeen = () => this._tutorialAdvance('codex-open');
+    document.addEventListener('codex:seen', this._onCodexSeen);
+
     if (this.revealed < 0) {
       // Fresh chapter: reveal the opening paragraph (fires its unlocks/audio).
       this._reveal({ scroll: false });
+      this._tutorialMaybeShow();
     } else {
       this._syncFrontier();
-      // Resume where the reader left off.
-      const target = Math.min(prog.last ?? this.revealed, this.revealed);
+      // A codex source link targets a specific paragraph; otherwise resume
+      // where the reader left off. Deep links clamp to what's been revealed.
+      let target = targetPara != null
+        ? Math.max(0, Math.min(targetPara, this.revealed))
+        : Math.min(prog.last ?? this.revealed, this.revealed);
+
+      // Previously, in the chronicle: after a long absence, land a few
+      // paragraphs upstream of where the reader stopped, with a marker at
+      // the spot itself, so the thread picks back up with some run-up.
+      const AWAY_MS = 36 * 3600 * 1000;
+      if (targetPara == null && target > 0 && state.lastReadAt
+          && Date.now() - state.lastReadAt > AWAY_MS) {
+        const backed = Math.max(0, target - 3);
+        if (backed < target && this.paraEls[target]) {
+          this.paraEls[target].insertAdjacentHTML('beforebegin',
+            '<div class="resume-marker" id="resume-marker"><span>you left off here</span></div>');
+        }
+        target = backed;
+      }
+
       if (target > 0 && this.paraEls[target]) {
         requestAnimationFrame(() => {
           this.paraEls[target].scrollIntoView({ block: 'center', behavior: 'instant' });
@@ -147,6 +170,8 @@ export class Reader {
     window.removeEventListener('keydown', this._onKey);
     window.removeEventListener('touchstart', this._onTouchStart);
     window.removeEventListener('touchmove', this._onTouchMove);
+    if (this._onCodexSeen) document.removeEventListener('codex:seen', this._onCodexSeen);
+    document.getElementById('coach-fixed')?.remove();
   }
 
   // ---- Progressive reveal ------------------------------------------------
@@ -205,6 +230,7 @@ export class Reader {
       prog.furthest = nextIndex;
     }
     prog.last = nextIndex;
+    state.lastReadAt = Date.now();
     save();
     this.onProgress?.();
 
@@ -225,8 +251,67 @@ export class Reader {
         const top = el.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.28;
         window.scrollTo({ top, behavior: 'smooth' });
       }
+      this._tutorialAdvance('reveal');
+      if (p.entities.length) this._tutorialAdvance('reveal-entities');
     }
     this._scheduleUpdate();
+  }
+
+  // ---- First-time tutorial (three diegetic coach marks) -------------------
+
+  _tutorialMaybeShow() {
+    const step = state.tutorialStep || 0;
+    if (step === 0 && !document.getElementById('coach')) {
+      document.getElementById('reveal-ctl')?.insertAdjacentHTML('beforebegin',
+        `<div class="coach" id="coach">The chronicle continues when you do — tap the mark below, or simply scroll on.</div>`);
+    }
+  }
+
+  _tutorialAdvance(event) {
+    const step = state.tutorialStep || 0;
+    if (step >= 4) return;
+
+    if (step === 0 && event === 'reveal') {
+      state.tutorialStep = 1;
+      save();
+      document.getElementById('coach')?.remove();
+      return;
+    }
+    if (step === 1 && event === 'reveal-entities') {
+      // Anchor the second mark after the newest paragraph (it has entity refs).
+      const el = this.paraEls[this.revealed];
+      if (el && !document.getElementById('coach')) {
+        el.insertAdjacentHTML('afterend',
+          `<div class="coach" id="coach">Words set apart like these are kept in the Anamnesis — tap one to read what the chronicle knows so far.</div>`);
+        state.tutorialStep = 2;
+        save();
+      }
+      return;
+    }
+    if (step === 2 && event === 'codex-open') {
+      document.getElementById('coach')?.remove();
+      state.tutorialStep = 3;
+      save();
+      // Show the final mark once the detail panel closes.
+      const wait = setInterval(() => {
+        if (!document.querySelector('.entity-detail')) {
+          clearInterval(wait);
+          this._tutorialAdvance('detail-closed');
+        }
+      }, 400);
+      setTimeout(() => clearInterval(wait), 60000);
+      return;
+    }
+    if (step === 3 && event === 'detail-closed') {
+      const fixed = document.createElement('div');
+      fixed.className = 'coach coach--fixed';
+      fixed.id = 'coach-fixed';
+      fixed.textContent = 'Everything recollected gathers in the Codex above, and deepens as you read.';
+      document.body.appendChild(fixed);
+      state.tutorialStep = 4;
+      save();
+      setTimeout(() => fixed.remove(), 8000);
+    }
   }
 
   _syncFrontier() {
@@ -235,6 +320,7 @@ export class Reader {
     const nav = document.getElementById('chapter-nav');
     if (ctl) ctl.hidden = done;
     if (nav) nav.hidden = !done;
+    if (done) this._renderRecollections();
   }
 
   _handleKey(e) {
@@ -289,6 +375,7 @@ export class Reader {
       // Unlocks only ever fire from _reveal().
       const prog = chapterProgress(this.chapterId);
       prog.last = best;
+      state.lastReadAt = Date.now();
       save();
       this._applyAudio(this.chapter.paragraphs[best]);
     }
@@ -308,24 +395,74 @@ export class Reader {
   _applyParagraphUnlocks(p) {
     // First inline mention of an entity discovers it (tier 1).
     for (const id of p.entities) {
-      if (entity(id) && unlock(id, 1)) this._toast(`Recollected: <em>${displayName(id)}</em>`);
+      if (entity(id) && unlock(id, 1)) {
+        this._recollections.set(id, 'discovered');
+        this._toast(`Recollected: <em>${displayName(id)}</em>`, id);
+      }
     }
     // Explicit @unlock directives deepen existing entries.
     for (const u of p.unlocks) {
       if (entity(u.entity) && unlock(u.entity, u.tier)) {
-        this._toast(`The chronicle stirs: <em>${displayName(u.entity)}</em>`);
+        if (!this._recollections.has(u.entity)) this._recollections.set(u.entity, 'deepened');
+        this._toast(`The chronicle stirs: <em>${displayName(u.entity)}</em>`, u.entity);
       }
     }
   }
 
-  _toast(html) {
+  // At the end of a sitting that earned something, recap it above the
+  // chapter nav. Cards use the global codex delegation, so they're clickable.
+  _renderRecollections() {
+    if (!this._recollections?.size || document.getElementById('chapter-recollections')) return;
+    const nav = document.getElementById('chapter-nav');
+    if (!nav) return;
+    const items = [...this._recollections.entries()];
+    const discovered = items.filter(([, kind]) => kind === 'discovered').map(([id]) => id);
+    const deepened = items.filter(([, kind]) => kind === 'deepened').map(([id]) => id);
+    const section = (label, ids) => ids.length ? `
+      <div class="recollect-label">${label}</div>
+      <div class="recollect-grid">${ids.map(id => cardHtml(id)).join('')}</div>` : '';
+    nav.insertAdjacentHTML('beforebegin', `
+      <div class="chapter-recollections" id="chapter-recollections">
+        <div class="recollect-heading">The Anamnesis, on this chapter</div>
+        ${section('New to the chronicle', discovered)}
+        ${section('Entries deepened', deepened)}
+      </div>`);
+  }
+
+  _toast(html, entityId = null) {
     const root = document.getElementById('toast-root');
+
+    // Never stack more than three: retire the oldest early.
+    while (root.children.length >= 3) root.firstElementChild.remove();
+
     const el = document.createElement('div');
     el.className = 'toast';
     el.innerHTML = html;
+    if (entityId) {
+      el.classList.add('toast--link');
+      el.dataset.entity = entityId;
+      // codex.js's global .entity-card/.entity-ref delegation doesn't cover
+      // toasts; open directly.
+      el.addEventListener('click', () => {
+        import('./codex.js').then(m => m.openEntityDetail(entityId));
+        el.remove();
+      });
+    }
     root.appendChild(el);
-    setTimeout(() => el.classList.add('leaving'), 3200);
-    setTimeout(() => el.remove(), 3800);
+
+    // Timed dismissal that pauses while the pointer hovers.
+    let fadeTimer, removeTimer;
+    const arm = (fadeMs, removeMs) => {
+      fadeTimer = setTimeout(() => el.classList.add('leaving'), fadeMs);
+      removeTimer = setTimeout(() => el.remove(), removeMs);
+    };
+    arm(3200, 3800);
+    el.addEventListener('mouseenter', () => {
+      clearTimeout(fadeTimer);
+      clearTimeout(removeTimer);
+      el.classList.remove('leaving');
+    });
+    el.addEventListener('mouseleave', () => arm(1500, 2100));
   }
 
   _updateSidebar(visibleIndexes) {

@@ -134,9 +134,24 @@ export class Reader {
       this._syncFrontier();
       // A codex source link targets a specific paragraph; otherwise resume
       // where the reader left off. Deep links clamp to what's been revealed.
-      const target = targetPara != null
+      let target = targetPara != null
         ? Math.max(0, Math.min(targetPara, this.revealed))
         : Math.min(prog.last ?? this.revealed, this.revealed);
+
+      // Previously, in the chronicle: after a long absence, land a few
+      // paragraphs upstream of where the reader stopped, with a marker at
+      // the spot itself, so the thread picks back up with some run-up.
+      const AWAY_MS = 36 * 3600 * 1000;
+      if (targetPara == null && target > 0 && state.lastReadAt
+          && Date.now() - state.lastReadAt > AWAY_MS) {
+        const backed = Math.max(0, target - 3);
+        if (backed < target && this.paraEls[target]) {
+          this.paraEls[target].insertAdjacentHTML('beforebegin',
+            '<div class="resume-marker" id="resume-marker"><span>you left off here</span></div>');
+        }
+        target = backed;
+      }
+
       if (target > 0 && this.paraEls[target]) {
         requestAnimationFrame(() => {
           this.paraEls[target].scrollIntoView({ block: 'center', behavior: 'instant' });
@@ -215,6 +230,7 @@ export class Reader {
       prog.furthest = nextIndex;
     }
     prog.last = nextIndex;
+    state.lastReadAt = Date.now();
     save();
     this.onProgress?.();
 
@@ -359,6 +375,7 @@ export class Reader {
       // Unlocks only ever fire from _reveal().
       const prog = chapterProgress(this.chapterId);
       prog.last = best;
+      state.lastReadAt = Date.now();
       save();
       this._applyAudio(this.chapter.paragraphs[best]);
     }

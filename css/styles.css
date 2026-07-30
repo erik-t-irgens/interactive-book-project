@@ -369,6 +369,22 @@ a { color: var(--accent); text-decoration: none; }
 }
 .recollect-grid .entity-card { margin-bottom: 0; animation: none; }
 
+/* "You left off here" marker after a long absence */
+.resume-marker {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin: 1.8rem 0;
+  font-family: var(--sans);
+  font-size: 0.64rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-dim);
+  animation: fade-in 1s ease both;
+}
+.resume-marker::before,
+.resume-marker::after { content: ''; flex: 1; border-top: 1px dashed var(--rule); }
+
 /* ============ Reader layout ============ */
 .reader {
   display: grid;

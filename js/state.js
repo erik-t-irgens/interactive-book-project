@@ -8,6 +8,7 @@ const defaults = () => ({
   skipAck: {},         // chapterId -> true, reader confirmed skipping past it unread
   tutorialStep: 0,     // 0 fresh … 4 done; resets with everything else
   lastChapter: null,
+  lastReadAt: 0,       // ms timestamp of the last reading beat
   settings: { audioEnabled: false, volume: 0.6, theme: 'ink' },
 });
 

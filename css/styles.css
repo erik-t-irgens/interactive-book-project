@@ -340,6 +340,35 @@ a { color: var(--accent); text-decoration: none; }
 .codex-search:focus { outline: none; border-color: var(--accent-dim); }
 .codex-search::placeholder { color: var(--text-dim); opacity: 0.7; }
 
+/* Chapter-end recollections recap */
+.chapter-recollections {
+  margin-top: 4rem;
+  padding-top: 1.8rem;
+  border-top: 1px solid var(--rule);
+  animation: fade-in 0.8s ease both;
+}
+.recollect-heading {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--text-dim);
+  margin-bottom: 0.4rem;
+}
+.recollect-label {
+  font-family: var(--sans);
+  font-size: 0.66rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin: 1.4rem 0 0.7rem;
+}
+.recollect-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.8rem;
+}
+.recollect-grid .entity-card { margin-bottom: 0; animation: none; }
+
 /* ============ Reader layout ============ */
 .reader {
   display: grid;

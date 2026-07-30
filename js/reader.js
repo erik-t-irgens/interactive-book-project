@@ -45,6 +45,7 @@ export class Reader {
     this.chapterId = chapterId;
     this.active = -1;
     this._visibleEntities = null;
+    this._recollections = new Map();   // entityId -> 'discovered' | 'deepened', this sitting only
 
     // Music is one-way within a render: each distinct @audio directive gets
     // an ordinal, and once one has applied, earlier ones never re-fire until
@@ -303,6 +304,7 @@ export class Reader {
     const nav = document.getElementById('chapter-nav');
     if (ctl) ctl.hidden = done;
     if (nav) nav.hidden = !done;
+    if (done) this._renderRecollections();
   }
 
   _handleKey(e) {
@@ -376,14 +378,38 @@ export class Reader {
   _applyParagraphUnlocks(p) {
     // First inline mention of an entity discovers it (tier 1).
     for (const id of p.entities) {
-      if (entity(id) && unlock(id, 1)) this._toast(`Recollected: <em>${displayName(id)}</em>`, id);
+      if (entity(id) && unlock(id, 1)) {
+        this._recollections.set(id, 'discovered');
+        this._toast(`Recollected: <em>${displayName(id)}</em>`, id);
+      }
     }
     // Explicit @unlock directives deepen existing entries.
     for (const u of p.unlocks) {
       if (entity(u.entity) && unlock(u.entity, u.tier)) {
+        if (!this._recollections.has(u.entity)) this._recollections.set(u.entity, 'deepened');
         this._toast(`The chronicle stirs: <em>${displayName(u.entity)}</em>`, u.entity);
       }
     }
+  }
+
+  // At the end of a sitting that earned something, recap it above the
+  // chapter nav. Cards use the global codex delegation, so they're clickable.
+  _renderRecollections() {
+    if (!this._recollections?.size || document.getElementById('chapter-recollections')) return;
+    const nav = document.getElementById('chapter-nav');
+    if (!nav) return;
+    const items = [...this._recollections.entries()];
+    const discovered = items.filter(([, kind]) => kind === 'discovered').map(([id]) => id);
+    const deepened = items.filter(([, kind]) => kind === 'deepened').map(([id]) => id);
+    const section = (label, ids) => ids.length ? `
+      <div class="recollect-label">${label}</div>
+      <div class="recollect-grid">${ids.map(id => cardHtml(id)).join('')}</div>` : '';
+    nav.insertAdjacentHTML('beforebegin', `
+      <div class="chapter-recollections" id="chapter-recollections">
+        <div class="recollect-heading">The Anamnesis, on this chapter</div>
+        ${section('New to the chronicle', discovered)}
+        ${section('Entries deepened', deepened)}
+      </div>`);
   }
 
   _toast(html, entityId = null) {

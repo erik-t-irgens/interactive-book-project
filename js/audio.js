@@ -23,21 +23,62 @@ export class AudioEngine {
       this.master = this.ctx.createGain();
       this.master.gain.value = this.volume;
       this.master.connect(this.ctx.destination);
+      // Mobile-webkit unlock: play a one-sample silent buffer inside the
+      // enabling gesture so the context counts as user-started.
+      try {
+        const b = this.ctx.createBuffer(1, 1, 22050);
+        const s = this.ctx.createBufferSource();
+        s.buffer = b;
+        s.connect(this.ctx.destination);
+        s.start(0);
+      } catch { /* cosmetic */ }
     }
-    if (this.ctx.state === 'suspended') this.ctx.resume();
+    if (this.ctx.state !== 'running') this.ctx.resume();
+  }
+
+  // Call from any user gesture: mobile browsers suspend audio contexts on
+  // backgrounding/interruption and only a gesture may revive them.
+  kick() {
+    if (this.enabled && this.ctx && this.ctx.state !== 'running') this.ctx.resume();
+  }
+
+  // decodeAudioData: promise form where supported, callback form for old WebKit.
+  _decode(ab) {
+    return new Promise((resolve, reject) => {
+      const p = this.ctx.decodeAudioData(ab, resolve, reject);
+      if (p && typeof p.then === 'function') p.then(resolve, reject);
+    });
   }
 
   async _buffer(id) {
     if (this.buffers.has(id)) return this.buffers.get(id);
     const url = this.trackMap[id];
     if (!url) { console.warn(`[audio] unknown track "${id}"`); return null; }
+    if (!this.current) this._emitNow(id, { loading: true });
     const promise = fetch(url)
       .then(r => { if (!r.ok) throw new Error(`${r.status} ${url}`); return r.arrayBuffer(); })
-      .then(ab => this.ctx.decodeAudioData(ab))
-      .then(buf => { this.buffers.set(id, buf); return buf; })
-      .catch(err => { console.warn('[audio] failed to load', id, err); this.buffers.delete(id); return null; });
+      .then(ab => this._decode(ab))
+      .then(buf => { this.buffers.set(id, buf); this._evict(id); return buf; })
+      .catch(err => {
+        console.warn('[audio] failed to load', id, err);
+        this.buffers.delete(id);
+        document.dispatchEvent(new CustomEvent('audio:error', { detail: { id } }));
+        return null;
+      });
     this.buffers.set(id, promise);
     return promise;
+  }
+
+  // Decoded songs are big (tens of MB of PCM); keep only a few in memory so
+  // long reading sessions don't crash mobile tabs.
+  _evict(keep) {
+    const MAX = 4;
+    for (const [k, v] of this.buffers) {
+      if (this.buffers.size <= MAX) break;
+      if (k === keep || k === this.current?.id || k === this.desired?.id) continue;
+      if (typeof v?.then === 'function') continue;
+      this.buffers.delete(k);
+    }
   }
 
   setVolume(v) {
@@ -107,8 +148,8 @@ export class AudioEngine {
     this._emitNow(id);
   }
 
-  _emitNow(id) {
-    document.dispatchEvent(new CustomEvent('audio:now', { detail: { id } }));
+  _emitNow(id, extra = {}) {
+    document.dispatchEvent(new CustomEvent('audio:now', { detail: { id, ...extra } }));
   }
 
   // A fresh chapter render is a fresh performance: finished 'once' pieces

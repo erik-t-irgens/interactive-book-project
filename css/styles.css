@@ -368,6 +368,43 @@ a { color: var(--accent); text-decoration: none; }
   gap: 0.8rem;
 }
 .recollect-grid .entity-card { margin-bottom: 0; animation: none; }
+.recollect-summary {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--text-dim);
+  transition: color 0.2s;
+}
+.recollect-summary:hover { color: var(--accent); }
+.recollect-stack { display: flex; flex-shrink: 0; }
+.recollect-disc {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top center;
+  border: 2px solid var(--bg);
+  background: var(--bg-raised);
+  margin-left: -13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.recollect-disc:first-child { margin-left: 0; }
+.recollect-disc--letter {
+  font-family: var(--serif);
+  font-style: normal;
+  font-size: 1.05rem;
+  color: var(--accent-dim);
+}
 
 /* "You left off here" marker after a long absence */
 .resume-marker {

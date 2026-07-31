@@ -5,7 +5,7 @@
 // scrolling works normally and the active paragraph drives audio + sidebar.
 
 import { state, save, chapterProgress, unlock, unlockedTier } from './state.js';
-import { cardHtml, entity, displayName } from './codex.js';
+import { cardHtml, entity, displayName, displayImage } from './codex.js';
 
 const REVEAL_THROTTLE_MS = 400;
 
@@ -411,6 +411,8 @@ export class Reader {
 
   // At the end of a sitting that earned something, recap it above the
   // chapter nav. Cards use the global codex delegation, so they're clickable.
+  // Big hauls start collapsed — an overlapping stack and a count — so the
+  // chapter nav never gets pushed out of reach.
   _renderRecollections() {
     if (!this._recollections?.size || document.getElementById('chapter-recollections')) return;
     const nav = document.getElementById('chapter-nav');
@@ -421,12 +423,34 @@ export class Reader {
     const section = (label, ids) => ids.length ? `
       <div class="recollect-label">${label}</div>
       <div class="recollect-grid">${ids.map(id => cardHtml(id)).join('')}</div>` : '';
+    const full = `
+      <div class="recollect-heading">The Anamnesis, on this chapter</div>
+      ${section('New to the chronicle', discovered)}
+      ${section('Entries deepened', deepened)}`;
+
+    const ids = items.map(([id]) => id);
+    if (ids.length <= 4) {
+      nav.insertAdjacentHTML('beforebegin',
+        `<div class="chapter-recollections" id="chapter-recollections">${full}</div>`);
+      return;
+    }
+
+    const discs = ids.slice(0, 5).map(id => {
+      const img = displayImage(id);
+      return img
+        ? `<img class="recollect-disc" src="${img}" alt="">`
+        : `<span class="recollect-disc recollect-disc--letter">${displayName(id).charAt(0)}</span>`;
+    }).join('');
     nav.insertAdjacentHTML('beforebegin', `
       <div class="chapter-recollections" id="chapter-recollections">
-        <div class="recollect-heading">The Anamnesis, on this chapter</div>
-        ${section('New to the chronicle', discovered)}
-        ${section('Entries deepened', deepened)}
+        <button class="recollect-summary" id="recollect-expand" aria-expanded="false">
+          <span class="recollect-stack">${discs}</span>
+          <span class="recollect-count">The Anamnesis gathered ${ids.length} recollections this chapter — show them</span>
+        </button>
       </div>`);
+    document.getElementById('recollect-expand').addEventListener('click', () => {
+      document.getElementById('chapter-recollections').innerHTML = full;
+    });
   }
 
   _toast(html, entityId = null) {

@@ -88,11 +88,17 @@
         {
           "tier": 3,
           "name": "Corvyn",
-          "label": "who hums at old doors",
-          "text": "He carries three wrong notes the way other men carry keys, and no page yet says what answers them. A bottle bought back from a collector rides in his pack, wrapped, unopened, shining."
+          "label": "surety at the frost-slates",
+          "text": "At a Winter Court's pricing he answered a schedule with the one thing it had no column for, ransomed his instrument back under a silver ferrule, and signed himself surety for the fairy who bought his life. The violin is a half-ounce heavier. He swears it plays the truer for it."
         },
         {
           "tier": 4,
+          "name": "Corvyn",
+          "label": "who hums at old doors",
+          "text": "The purchase burned; the calling did not. The bought, frictionless ease left his hands mid-hall in the Hells, and what remains is his alone — every song, every room read and held, and practice, taken up like a first stone cut with his own arm. He keeps three wrong notes the way other men carry keys, and a bottle bought back from a collector rides in his pack, wrapped, unopened, shining."
+        },
+        {
+          "tier": 5,
           "name": "Corvyn",
           "label": "who read the butcher's diagram",
           "text": "In the workroom under Fundament he read the tune taken apart — every phrase inverted, every resolution refused — and named it for the company: somebody took the kindest thing he knows and arranged it to cut."
@@ -167,19 +173,25 @@
           "text": "Over a captured page of methods and schedules for a prepared town he went very still, reading it the way a man reads a rhyme he learned young — and folded it into his robes, and explained nothing."
         },
         {
+          "tier": 3,
+          "name": "Saeron Redcord",
+          "label": "thirteen knots, and empty pockets",
+          "text": "At Moongleam and after, the same dawn ritual: the crimson cords drawn once through his hands and re-tied, thirteen knots, no more, no fewer. And every wage he touches is gone within a day — the infirmary by the south gate knows him by name, and so does the almshouse. He has been in each city seven days."
+        },
+        {
           "name": "Saeron Redcord",
           "label": "the Iriaebor survivor",
           "text": "The folded page, unfolded at last against a prepared town, matched it like a stencil. He has seen this play before: Iriaebor — the quarter he grew up in, emptied on a festival night nine years ago, and the world agreed to call it a plague. He knows the curtain is not yet up.",
-          "tier": 3
+          "tier": 4
         },
         {
-          "tier": 4,
+          "tier": 5,
           "name": "Saeron Redcord",
           "label": "keeper of the cord",
           "text": "His trial was the Feast of the Moon: an empathy thrown wide open by its own kin, wanting him to carry every need in the room until he died of being needed. He did the opposite of everything — he delegated, name by name, round by round, spending his friends like a man who has finally accepted the truth he once gave a dying warden: the rope holds because it is a rope, and not because one knot carries the line."
         },
         {
-          "tier": 5,
+          "tier": 6,
           "name": "Saeron Redcord",
           "label": "who empties the column",
           "text": "He carries an iron key over his heart and a mason's name in his ledger — Bettany's husband, nine years in transit, recoverable pending capacity. He has stated his intention plainly: we are emptying that column."
@@ -230,11 +242,17 @@
         {
           "tier": 7,
           "name": "Sov Thimron",
+          "label": "the seam, refused treatment",
+          "text": "A Fundament physician closed his case at the sight of the pale seam and took no payment: we do not treat that; that is not ours to treat — the plural of a man who knows exactly whose it is. And in the city where the company's dream went dark, he alone still dreamed: wheat, in a wind, in the sun, and somebody sleeping out in the middle of it, in no hurry at all."
+        },
+        {
+          "tier": 8,
+          "name": "Sov Thimron",
           "label": "half of the gray country",
           "text": "The uncanny in his face has a name now: Shadar-kai blood, unknown to him his whole life. His father serves at a table the company has stood before, and knew him on sight."
         },
         {
-          "tier": 8,
+          "tier": 9,
           "name": "Sov Thimron",
           "label": "the consideration clause",
           "text": "On a rampart of Fundament his father gave him the terms: his mother was Lenore of Ormath; the bargain that made him has a clause, and he is it. His father has kept a dead woman's bargain for thirty years and invites him to read the terms himself."
@@ -342,21 +360,27 @@
         {
           "tier": 2,
           "name": "The Archivist",
+          "label": "who looks up on the bridge",
+          "text": "She has never once been late for anything, completes kindness from memory like a form often filed — and at every crossing of the high bridge she stops, and looks up, past the view, to where the two lights fail to meet, the way one keeps an appointment."
+        },
+        {
+          "tier": 3,
+          "name": "The Archivist",
           "label": "who runs the floor",
           "text": "At intake she spends kindness at scale — rehearsed love, love drilled like a fire brigade — checking blanket-weight against crossing-chill with her own cheek. Whatever else is true in that hall, her tenderness is not a performance. That is going to be the problem."
         },
         {
-          "tier": 3,
+          "tier": 4,
           "name": "The Archivist",
           "label": "the suspicion",
           "text": "Whether she is the woman he cannot name, or someone that woman kept, or both, or neither — nobody has said aloud."
         },
         {
-          "tier": 4,
+          "tier": 5,
           "name": "The Archivist",
           "label": "who did not ask one question",
           "text": "When a boy arrived awake — the one thing her apparatus exists to prevent — something older looked out through the gray for three heartbeats, and then she filed him under the household of the seven without a single question. A Lord Protector stepped bodily into that look, and would do it again.",
-          "todo": "Tiers 5–6 (who she is; what she was to the ring; what she does with the song) unlock at door07 and unwritten chapters XLIII+."
+          "todo": "Tiers 6–7 (who she is; what she was to the ring; what she does with the song) unlock at door07 and unwritten chapters XLIII+."
         }
       ]
     },
@@ -408,25 +432,31 @@
           "text": "The soldier who runs Triboar: musters honest, ledgers square, door oiled. Forty years of close things and a shield-wall behind her; her town trusts her the way a roof is trusted."
         },
         {
+          "tier": 2,
+          "name": "Darathra Shendrel",
+          "label": "betrayed at her own table",
+          "text": "The fire in her records office was set from inside; the sluice was opened with her own Twelve's keys. She stood in the smoke and took the whole of it standing — a Lord Protector learning that trust was the first thing harvested."
+        },
+        {
           "name": "Darathra Shendrel",
           "label": "who went where her town went",
           "text": "On the night of the Harvest she marshaled the stair and counted the rescued through the arch in tens; wrote on her own forearm at the arch's head, unhurried as a woman labeling a crate; said A Lord Protector goes where her town goes; and went down her own stair into the rising glass, like a woman going down to answer her own door.",
-          "tier": 2
+          "tier": 3
         },
         {
-          "tier": 3,
+          "tier": 4,
           "name": "Darathra Shendrel",
           "label": "ward-captain of Fundament",
           "text": "Alive — recorded among the saved, remembering no fall. She runs a ward of the enemy's city exactly as she ran Triboar: beds counted, cisterns honest, a shortage of nails pursued up the table like a border dispute. Passing seven ghosts in a gallery, she gave the old watch-sign: hold your post; I will come to you."
         },
         {
-          "tier": 4,
+          "tier": 5,
           "name": "Darathra Shendrel",
           "label": "who read her own hand",
           "text": "A transcription of her forearm was recited back to her by seven witnesses: her private death-rite, written only when death stands certain in the doorway. Either the page lies — and it is her hand — or everything this city told her about that night is a lie built exactly the size of her death. They stole her consent. That is the crime. Not the taking. The forgetting."
         },
         {
-          "tier": 5,
+          "tier": 6,
           "name": "Darathra Shendrel",
           "label": "who fills in the blanks",
           "text": "She pulled the advance lists, found the undated names, and stood in the intake hall writing the hour in the margin — filling in the one blank the enemy's paperwork left her. She kept her promise. She intends to remember keeping it."
@@ -482,6 +512,12 @@
         {
           "tier": 3,
           "name": "Veyran",
+          "label": "who stopped pretending",
+          "text": "As the masks came off at Boar's Rest, the shadowless bartender declared himself, unhurried as a man closing a ledger: you've made an enemy this day. Whatever he is, he is no longer content to pour and watch."
+        },
+        {
+          "tier": 4,
+          "name": "Veyran",
           "label": "the tithe of joy",
           "text": "Behind the gift-clause, a standing skim: a tithe of every joy the gnome's music ever causes, conveyed to something the papers call only the appetite."
         },
@@ -489,10 +525,10 @@
           "name": "Veyran",
           "label": "the efficient devil",
           "text": "He declared himself, smiling, an enemy on the night the masks came off. A devil, named at blade-length by the man he emptied. He engineered a false massacre fifteen years deep — a warlock escort buying its freedom with a stolen soul in a lead box, a family spent as tinder — and he staffs his web with brokers and pleasant men at parties, people who owe him, paid in exactly the coin they dream in. Never a generous devil. An efficient one.",
-          "tier": 4
+          "tier": 5
         },
         {
-          "tier": 5,
+          "tier": 6,
           "name": "The Gentleman",
           "label": "the collector, at home",
           "text": "In the Hells he keeps an estate kept as carefully as a self, a wine-wall of vintages that are not wine, and a table at which he dines alone before his assets. Waste, he says, is the only sin he recognizes."
@@ -501,14 +537,14 @@
           "name": "Xantraxis",
           "label": "the patron",
           "text": "The gentleman's true name, and the fiend behind two bindings the company has met: a warlock's paper and a squire's geas. He engineers debts the way masons lay courses, and declares his enmities politely.",
-          "tier": 6
+          "tier": 7
         },
         {
-          "tier": 7,
+          "tier": 8,
           "name": "Xantraxis",
           "label": "the yielding",
           "text": "His conversion of a claim was ruled appetite before nine witnesses and his own display; the pact burned entire on a very particular fire, and notice of its destruction will be served wherever appetite winters now. He yielded to a clerk, not to a sword, and he loves that about the world exactly as much as he says.",
-          "todo": "Tier 7 (the Avernus party at the Ascension) unlocks in unwritten chapter XLIII."
+          "todo": "Tier 8 (the Avernus party at the Ascension) unlocks in unwritten chapter XLIII."
         }
       ]
     },
@@ -632,25 +668,37 @@
           "tier": 1
         },
         {
+          "tier": 2,
           "name": "Gorvach",
-          "label": "keeper of the mouth",
-          "text": "Free now, in furs instead of chains, he keeps the breathing cave of the Veilmark — for the ones who kept him. He stands in its cold exhalation as other men stand in sunlight, gives the mouth's one law — inside, do not take; it counts — and bows to the crystal, not its bearer.",
-          "tier": 2
+          "label": "the minute above the ice",
+          "text": "Reached by rhythm and by the truce his people bled for, he surfaced from beneath the geas for the space of a minute: sent south to find a thing no longer in the North — a thing now in mortal hands — from a white forest under two skies. The frost sealed his lips before the why."
         },
         {
           "tier": 3,
+          "name": "Gorvach",
+          "label": "sent north by a hidden door",
+          "text": "Released on the night the Tower was breached — the truce would not survive his being found — and sent through the Lord Protector's keyed arch into quiet keeping and the long road north. His last act on the Triboar side was two fingers to the brow, where the frost had lived."
+        },
+        {
+          "name": "Gorvach",
+          "label": "keeper of the mouth",
+          "text": "Free now, in furs instead of chains, he keeps the breathing cave of the Veilmark — for the ones who kept him. He stands in its cold exhalation as other men stand in sunlight, gives the mouth's one law — inside, do not take; it counts — and bows to the crystal, not its bearer.",
+          "tier": 4
+        },
+        {
+          "tier": 5,
           "name": "Gorvach",
           "label": "the keeper's arithmetic",
           "text": "At the Veilmark mouth he stepped into a thrown spear's line without hurry and without doubt, because the gatekeeper's arithmetic has one column: the door is worth more than the keeper."
         },
         {
-          "tier": 4,
+          "tier": 6,
           "name": "Gorvach",
           "label": "the second word",
           "text": "At the wool-house stair, in the full morning light, in the letters a monk taught him on a shield-face, the word he had been keeping stands carved for Nesmé to puzzle over for a generation: KEEP."
         },
         {
-          "tier": 5,
+          "tier": 7,
           "name": "Gorvach",
           "label": "keeper of the Nesmé door",
           "text": "Given the black key on the last morning, because he keeps things. He asked, in return, only one question — which word do I carve — and was given one: WAIT."
@@ -742,6 +790,12 @@
         {
           "tier": 3,
           "name": "Darz Helgar",
+          "label": "walked in and not out",
+          "text": "He walked into Gwaeron's Rest before the end — walked in and not out, as far as any list ran, west-wagon or arch. The wood keeps its own census, and said nothing."
+        },
+        {
+          "tier": 4,
+          "name": "Darz Helgar",
           "label": "winter's arrangement",
           "text": "He walked north through the autumn and came changed: bare hands unremarked in the sleet, a gray cast at the rim of each iris, a steadiness one degree off level. Winter and I came to an arrangement is every answer anyone got. And an ache in his teeth now maps what the quiet towns are curing — worst of all along one blind brick wall in Nesmé."
         }
@@ -821,11 +875,17 @@
         {
           "tier": 1,
           "name": "Verity",
+          "label": "a signature on an order",
+          "text": "A name that arrives only in ink: firm, unhurried, and signed in full at the foot of orders other people die carrying out. Prepare for Harvest. Who holds the pen, no one in the North can say."
+        },
+        {
+          "tier": 2,
+          "name": "Verity",
           "label": "the firm, unhurried hand",
           "text": "Prepare for Harvest. The field is gathered. There you are. At a council table in a doubled-light city, the Enforcer reports defeats the way defeats ought to be reported: dates, numbers, no adjectives."
         },
         {
-          "tier": 2,
+          "tier": 3,
           "name": "Verity",
           "label": "the one who does not believe it",
           "text": "The hand that laid Nesmé's tables and wrote There you are — Saeron knows his squared corners by candlelight. And when a clerk let slip a certain reversal in a certain demesne, his eyes came up from his papers to the gallery for half a second, and nothing in his face moved at all. At least one person at that table does not believe the story."
@@ -1120,6 +1180,12 @@
           "name": "Nesmé",
           "label": "the town that stood",
           "text": "The first one. The mirror in shards, the working dead ahead of its hour, and twenty-five hundred people waking unharvested into a day they would never know had been scheduled otherwise. Saved outright — and nobody has said the word victory since."
+        },
+        {
+          "tier": 3,
+          "name": "Nesmé",
+          "label": "the other ending",
+          "text": "On the far side of the cellar door, the town's shadow keeps the ending it was spared: walls breached where nobody breached them, streets roofless under a shut-eyelid sky. Everything casts a shadow — towns, moors, endings — and the gray kept the one Nesmé paid to refuse."
         }
       ]
     },
@@ -1384,6 +1450,12 @@
         },
         {
           "tier": 3,
+          "name": "Volcaris",
+          "label": "the promise through the door",
+          "text": "The hairline breathes coal-light, and its bearer has stopped speaking to it as a sword. One sentence survives to the record, said low through the crack as through a locked door: If you can hear me in there — I am going to get you out."
+        },
+        {
+          "tier": 4,
           "name": "Volcaris",
           "label": "that resisted",
           "text": "When the sword-arm was seized, every compelled stroke arrived a half-inch merciful — the twelfth asset paying out its whole hoarded self against its own compulsion. The fire attended the burning of the papers. The fire is particular."
@@ -2125,6 +2197,12 @@
           "name": "Lady Mariel Heartsilver",
           "label": "patroness",
           "text": "Lady Mariel Heartsilver of Silverymoon, patroness of music and empress of an empire made entirely of other people's regard. She considers very little an adequate excuse for a cancelled performance, and pays defiance well."
+        },
+        {
+          "tier": 2,
+          "name": "Lady Mariel Heartsilver",
+          "label": "the open guest wing",
+          "text": "The interrupted engagement collected at last, she opened the Heartsilver guest wing to the company — beds, board, a rehearsal room nobody dared decline — and entered the cost invisibly in the great account of what the world owes her. Her hospitality is a fortress, and she audits her own wine."
         }
       ]
     },
@@ -2173,6 +2251,12 @@
           "name": "Neth",
           "label": "of the warden circles",
           "text": "The youngest of Amyl's warden escort, who staked her standing on an accused heretic, uninvited, to volunteer his watch — every hour of it, her name on his conduct."
+        },
+        {
+          "tier": 2,
+          "name": "Neth",
+          "label": "the warden's second",
+          "text": "Released from a minder's duty at the trial's end, she spent her first free breath requesting, formally, assignment as his second — to her seniors' faces, daring them. Someone must carry the cuttings."
         }
       ]
     },
@@ -2185,6 +2269,12 @@
           "name": "Berra",
           "label": "custodian of the grove",
           "text": "Custodian of the master's grove beneath the Grandfather Tree, keeper of two winters of nightly ledgers, who testified with shaking hands and stayed to learn what her tidy columns had been counting toward."
+        },
+        {
+          "tier": 2,
+          "name": "Berra",
+          "label": "who held the gate",
+          "text": "She checked the wards three times that evening. When the dark came for the master's grove she answered it knot by knot, ledger-satchel wound twice to her wrist, and held the gap in the hurdles one minute — enough. She had kept the master two years; she kept him one minute more. Both facts belong to the same sentence now, and this codex declines to separate them."
         }
       ]
     },
@@ -2197,6 +2287,12 @@
           "name": "The Hooded Watcher",
           "label": "of lanes and doorways",
           "text": "One of the two who watch: a still, soldierly figure of lanes and doorways, deep-hooded, waiting where no one was standing a lamppost ago."
+        },
+        {
+          "tier": 2,
+          "name": "The Hooded Watcher",
+          "label": "who bled at his shoulder",
+          "text": "He folded into the crypt-fight at Sov's shoulder as if the position had been held for him — a man who has spent a whole life defending things and none of it attacking them. He sent no note; he denied it in one syllable. Asked who he was, he answered only: someone who has worn his office so long he no longer knows whether he chose it."
         }
       ]
     },
@@ -2233,6 +2329,12 @@
           "name": "The Fairy",
           "label": "keeper of the hollow tree",
           "text": "Small, moth-winged, faded the way a beloved dress fades — keeper of a hollow tree furnished with one gnome's whole career. She followed it the way tides follow the moon."
+        },
+        {
+          "tier": 2,
+          "name": "The Fairy",
+          "label": "answered for",
+          "text": "Guarantor of the old bargain, and liable under Court arithmetic for the whole of the smuggled tithe — priced for seizure into winter, until the boy she bought stood up and put his name where hers was written. The oldest debt in his life, reversed in one signature. She is answered for now."
         }
       ]
     },
@@ -2293,6 +2395,12 @@
           "name": "The Hollow Tusks",
           "label": "the hollow brand",
           "text": "Raiders once — an enemy you could face — their mark overlaid now on older totems: a tusk, hollow at the core, branded at eye height."
+        },
+        {
+          "tier": 2,
+          "name": "The Hollow Tusks",
+          "label": "the tax, collecting",
+          "text": "Forty came up the valley to the Veilmark under a captain with a writ-case at his belt. Not a raid — an instrument: the dominion's paperwork reaching, at last, the one gate it had never reached, and the unlicensed who gathered there."
         }
       ]
     },
@@ -2305,6 +2413,18 @@
           "name": "The Second Hand",
           "label": "gray as good ink",
           "text": "A second hand in the enemy's orders — small, even, gray as good ink — that corrects the planner's work, apologizes for the intrusion, and is right."
+        },
+        {
+          "tier": 2,
+          "name": "The Second Hand",
+          "label": "the mourning-knot",
+          "text": "At the foot of the enemy's orders, a line that corrected nothing: They are being delivered, not taken. (Say it until it is true.) And caught in the satchel's seam, a cord of gray silk tied in the North's own grief-knot — whoever edits the liturgy of taking ties the knots of mourning, and ties them correctly."
+        },
+        {
+          "tier": 3,
+          "name": "The Second Hand",
+          "label": "who keeps the minutes",
+          "text": "The corrections have a voice now. It keeps the Consensus's minute-book from the seat everyone forgets, drafted the welcome the Enforcer signed in full, and says the sentence aloud to the empty council room each night — they are being delivered, not taken — tapping the joint to hear whether it rings. Lately, at the candle's edge, the gray has taken to answering."
         }
       ]
     },

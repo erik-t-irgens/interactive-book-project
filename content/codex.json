@@ -556,7 +556,7 @@
           "tier": 1,
           "name": "The Gray Lady",
           "label": "of the gray country",
-          "text": "The power that keeps the Shadowfell's roads and the dead's crossings: unnamed in the field prayers that fear her, present in every doctrine that will not say so, described by no reliable witness. Her servants wear sorrow like livery."
+          "text": "The power that keeps the gray country's roads and the dead's crossings: unnamed in the field prayers that fear her, present in every doctrine that will not say so, described by no reliable witness. Her servants wear sorrow like livery."
         },
         {
           "tier": 2,
@@ -2721,6 +2721,54 @@
           "name": "The Shard-Room",
           "label": "where broken workings answer",
           "text": "A room below the council's long hall where the pieces of every broken working stand in their velvet like relics — because glass remembers being one glass, and a message given to any of it arrives at all of it."
+        }
+      ]
+    },
+    {
+      "id": "the-feathers",
+      "type": "concept",
+      "tiers": [
+        {
+          "tier": 1,
+          "name": "The Feathers",
+          "label": "laid straight on a sill",
+          "text": "A black feather on a Moongleam windowsill where no bird had been seen to land — laid straight as a compass needle. He pocketed it before the others woke and told no one, which was itself a kind of telling."
+        },
+        {
+          "tier": 2,
+          "name": "The Feathers",
+          "label": "left inside a book",
+          "text": "A second, pressed flat inside a treatise on mourning-knots pulled half at random from a shelf — old as the binding, laid straight even there, marking the diagram of a common grief-knot. The catalogs, asked directly, offered nothing. He has begun, privately, to read the arrivals as lessons."
+        },
+        {
+          "tier": 3,
+          "name": "The Queen of Ravens",
+          "label": "a rumor scholars argue about",
+          "text": "The feathers keep school beside deaths kept well, and the libraries, pressed for their owner, yield scraps: a folio that mentions a Queen of ravens whom scholars cannot agree exists; sky-burials where black feathers mark the accepted dead; and a monograph on psychopomps whose one essay on the raven cults ends mid-page — the concluding leaves torn out long ago, and never recopied."
+        },
+        {
+          "tier": 4,
+          "name": "The Queen of Ravens",
+          "label": "her courier",
+          "text": "The feathers have an owner, and the owner has staff. A hooded thing with a forger's hand and a reader's lash came collecting — the Lady who keeps what is lost has questions about what you keep — and withdrew holding whatever a reading of Sov Thimron is worth to its mistress."
+        },
+        {
+          "tier": 5,
+          "name": "The Queen of Ravens",
+          "label": "the words that keep",
+          "text": "Offered a closing rite that ends what it seals, he said instead the words of the ravens' Queen — because hers keeps what it holds, and he was a man made entirely of unclosed doors. The seep silvered over like ice taking a black pond, and held."
+        },
+        {
+          "tier": 6,
+          "name": "The Queen of Ravens",
+          "label": "one given back",
+          "text": "The collection traveled — one waiting at a high valley's mouth, straight as a drawn line, pointing the way they were already going. And at a Feywild toll-path he laid one down himself, straight, the way they had always been laid for him. The distances stopped lying after that. It counted."
+        },
+        {
+          "tier": 7,
+          "name": "The Queen of Ravens",
+          "label": "the collection, complete",
+          "text": "On the Feast of the Moon the feathers came down all at once, unhurried, impossibly many — and when they finished falling, the stones held Bayne, laid straight, and no Sov. The collection, complete. The courtship, answered — or claimed."
         }
       ]
     }

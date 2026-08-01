@@ -2477,6 +2477,252 @@
           "text": "A city on the Chionthar, far south of this record's roads. Its name has waited nine years to be said at the right fire."
         }
       ]
+    },
+    {
+      "id": "tovric-hale",
+      "type": "character",
+      "tiers": [
+        {
+          "tier": 1,
+          "name": "Tovric Hale",
+          "label": "the silenced guard",
+          "text": "A guard of Triboar jailed for treason and silenced in the oldest way there is — his tongue cut out by somebody who wanted him alive, and mute, and instructive. He has been carving into the soft wood of his bunk all this time."
+        },
+        {
+          "tier": 2,
+          "name": "Tovric Hale",
+          "label": "the testimony in splinters",
+          "text": "Letter by pressed letter: M.T. He saw interrogations no one had sanctioned — the orc, and Sera, in the days before she died — and the last thing his voice ever did was try to report it."
+        },
+        {
+          "tier": 3,
+          "name": "Tovric Hale",
+          "label": "alive at Moongleam",
+          "text": "Out with the retreat when somebody opened the cells, and alive at Moongleam — the working on his tongue outlived its worker. He gave the Harpers his testimony by splinter and tabletop, and the initials went into ink, where workings do not reach."
+        }
+      ]
+    },
+    {
+      "id": "ransors-open-road",
+      "type": "location",
+      "tiers": [
+        {
+          "tier": 1,
+          "name": "Ransor's Open Road",
+          "label": "a ruin with a wound in its floor",
+          "text": "A hall that died the day a boulder came through its roof: three standing faces, hanging floors, and a hole in its heart that opens into a dark going down further than light."
+        },
+        {
+          "tier": 2,
+          "name": "Ransor's Open Road",
+          "label": "the old wound theory",
+          "text": "A scholar's guess with weight to it: not a new hole at all, but the uncovered leavings of an illithid colony that once burrowed beneath this land — an ancient excavation, disturbed from above."
+        }
+      ]
+    },
+    {
+      "id": "boren-barasque",
+      "type": "character",
+      "tiers": [
+        {
+          "tier": 1,
+          "name": "Boren Barasque",
+          "label": "caravan master of the Long Road",
+          "text": "A caravan master in high, careless spirits, shopping for armed men in the strangest of markets — hauling ingots, he lets slip, and needing guards he cannot seem to buy anywhere honest. When asked why here, his gaze drifts to a pewter mask, and stops."
+        }
+      ]
+    },
+    {
+      "id": "irska-and-fenn",
+      "type": "character",
+      "tiers": [
+        {
+          "tier": 1,
+          "name": "Irska & Fenn",
+          "label": "the unfolding wagon",
+          "text": "Twin elven caravanners whose wagon unfolds into a shop like the inside of a jewel box: silks that change their minds about their color, prices that assume you would rather not discuss prices, and each sentence begun by one and finished by the other. Gracious, immaculate — and weighed, one feels, by the pelt."
+        },
+        {
+          "tier": 2,
+          "name": "Irska & Fenn",
+          "label": "who invoice the estate",
+          "text": "Of Silverymoon, as such creatures inevitably are, wintering among the salons. A town's fall figures in their cosmology chiefly as a billing obstruction: sorrow for the length of exactly one completed sentence, and then the invoice."
+        }
+      ]
+    },
+    {
+      "id": "the-gray-circle",
+      "type": "concept",
+      "tiers": [
+        {
+          "tier": 1,
+          "name": "The Gray",
+          "label": "a heartbeat of colorless country",
+          "text": "For a heartbeat the world drains — fire, murmur, color, gone — and only they remain, rendered in silhouette across an impossible distance, as if they alone were real. It releases as swiftly as it takes, and leaves the same question in every mouth."
+        },
+        {
+          "tier": 2,
+          "name": "The Gray",
+          "label": "a circle that was always larger",
+          "text": "The circle is not fixed. It was waiting, all along, to include others — and it counts more heads than stand inside it."
+        }
+      ]
+    },
+    {
+      "id": "lethis-dorne",
+      "type": "character",
+      "tiers": [
+        {
+          "tier": 1,
+          "name": "Lethis Dorne",
+          "label": "the scryer in the cells",
+          "text": "A thin young scryer jailed on a charge he still denies, who dreams, he says, of a mirror that screamed back. The party, who had stood before such a mirror, let the claim sit unanswered."
+        }
+      ]
+    },
+    {
+      "id": "the-eldest-warden",
+      "type": "character",
+      "tiers": [
+        {
+          "tier": 1,
+          "name": "The Eldest Warden",
+          "label": "a voice trained under trees",
+          "text": "Senior of the assembled circles, who serves a summons in a ballroom barefoot and explains circle law to lords' stewards the way one explains weather. Weathered past surprise; what replaces it, in her, is interest, which is more dangerous."
+        },
+        {
+          "tier": 2,
+          "name": "The Eldest Warden",
+          "label": "who would not lead the second court",
+          "text": "She let a defendant answer his charge by committing it before the assembled circles, because the forest judges truths, not appearances — the court will feel this, or the court will sentence in ignorance, and I will not lead the second court."
+        },
+        {
+          "tier": 3,
+          "name": "The Eldest Warden",
+          "label": "the offered chair",
+          "text": "At the bowl's rim she took the accused heretic's hand in both of hers and left the matter open the only way that matters: the chair waits; consent when you are ready — and Berra's ledgers went with him, strap wound twice."
+        }
+      ]
+    },
+    {
+      "id": "the-vault-of-the-sages",
+      "type": "location",
+      "tiers": [
+        {
+          "tier": 1,
+          "name": "The Vault of the Sages",
+          "label": "the great library of the North",
+          "text": "A domed palace of shelves and lamplight on Silverymoon's western rise, where Harpers, scholars, and half the continent's questions eventually wash up. The North buries more than it philosophizes; the Vault files both."
+        },
+        {
+          "tier": 2,
+          "name": "The Vault of the Sages",
+          "label": "the kept silences",
+          "text": "A library is also a record of what is missing: an era's shelf where a bard's name simply ceases to occur, and a monograph on psychopomps whose concluding leaves were torn out long ago and never recopied. The absences have begun to share a shape."
+        }
+      ]
+    },
+    {
+      "id": "the-veilmark",
+      "type": "location",
+      "tiers": [
+        {
+          "tier": 1,
+          "name": "The Veilmark",
+          "label": "the mouth that exhales",
+          "text": "A camp of hide and stacked stone at the throat of a high valley under the Spine, and in its cliff a cave mouth that breathes outward — one long exhalation of cold that never once inhales. Beside it, older than any hand in the camp, the mark the place is named for: a long line, broken at its center by a gap the width of a palm."
+        },
+        {
+          "tier": 2,
+          "name": "The Veilmark",
+          "label": "the reversed breath",
+          "text": "Raided under writ, its people scattered up the high paths, its keeper carried through his own gate — and the mouth, for the first time in the camp's memory, inhaled, and did not give the company back where it had taken them in."
+        }
+      ]
+    },
+    {
+      "id": "corvyns-violin",
+      "type": "artifact",
+      "tiers": [
+        {
+          "tier": 1,
+          "name": "Corvyn's Violin",
+          "label": "the constant instrument",
+          "text": "The instrument his hands have known since he was eight, carried cased through every mile of this record — the whole shape of a career, slung across one small back."
+        },
+        {
+          "tier": 2,
+          "name": "Corvyn's Violin",
+          "label": "the ferrule",
+          "text": "Contraband, one, stringed — ransomed back at a Winter pricing and marked with a slim silver band at the neck: paid for, and on the books. It is a half-ounce heavier, and its owner swears it plays the truer."
+        }
+      ]
+    },
+    {
+      "id": "the-census-taker",
+      "type": "concept",
+      "tiers": [
+        {
+          "tier": 1,
+          "name": "The Census-Taker",
+          "label": "at the torches, counting",
+          "text": "The tall thing that walks the border's far side every night, unhurried, pausing at each torch as though taking a census. The watches stopped saying 'counting' aloud after the third night, and never stopped thinking it."
+        },
+        {
+          "tier": 2,
+          "name": "The Census-Taker",
+          "label": "counted",
+          "text": "It crossed the wall at last on the night of the surge, and where it walked, the green ramparts died of nothing at all. At the fallen thorn-line it met the silver and was, for the first time in its patient existence, counted — and did not survive the counting."
+        }
+      ]
+    },
+    {
+      "id": "the-gift-contract",
+      "type": "artifact",
+      "tiers": [
+        {
+          "tier": 1,
+          "name": "The Paper",
+          "label": "folded impossibly small",
+          "text": "The paper from the night in the stonemason's yard, kept folded in an acorn case by a keeper who never read it. Reading, she says, is for the suspicious."
+        },
+        {
+          "tier": 2,
+          "name": "The Paper",
+          "label": "toward a very particular fire",
+          "text": "Folded along its old creases and carried against a future fire — an appointment made in a glade that has since counted its parties again and come up larger. More names on the kindling now."
+        }
+      ]
+    },
+    {
+      "id": "the-clerk-of-record",
+      "type": "character",
+      "tiers": [
+        {
+          "tier": 1,
+          "name": "The Clerk",
+          "label": "a floor of record",
+          "text": "A gaunt notarial presence, disclosed rather than summoned — the way a fossil is in the stone before the stone is split — robed in something with the texture of ledger-paper, carrying a seal and a book. Where a true name is spoken on its owner's floor, a hearing convenes, and the floor becomes a floor of record."
+        },
+        {
+          "tier": 2,
+          "name": "The Clerk",
+          "label": "the nib",
+          "text": "Its hearings are short and its mildness terrible: origination, conversion, identity — claims entered from where the claimants lie or lean or kneel, instruments voided at the obligor's election. Even a yield is an instrument. The nib writes it, and the writing binds."
+        }
+      ]
+    },
+    {
+      "id": "the-shard-room",
+      "type": "location",
+      "tiers": [
+        {
+          "tier": 1,
+          "name": "The Shard-Room",
+          "label": "where broken workings answer",
+          "text": "A room below the council's long hall where the pieces of every broken working stand in their velvet like relics — because glass remembers being one glass, and a message given to any of it arrives at all of it."
+        }
+      ]
     }
   ]
 }

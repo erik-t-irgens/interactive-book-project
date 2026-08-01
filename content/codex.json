@@ -57,7 +57,7 @@
           "tier": 4,
           "name": "Tirig",
           "label": "whom the crystal sings to",
-          "text": "The amulet called the Heart of Winter's Veil answers her as an instrument answers its player. At the Mooring of Ascore, needles swung when she passed. She has begun wondering a thing she does not say aloud."
+          "text": "At the Mooring of Ascore, needles swung after her when she passed, and settled only when she had left the basin. The kin of her cold inheritance sings to something in her, and she has begun wondering a thing she does not say aloud."
         },
         {
           "tier": 5,
@@ -114,7 +114,7 @@
           "tier": 2,
           "name": "Iratius",
           "label": "the name Volcaris",
-          "text": "A shadowless bartender remembers assurances Iratius made in a desperation Iratius cannot remember making, and supplies the name of the man who betrayed him: Volcaris. There were others in that bargain. The bartender kept the list."
+          "text": "A shadowless bartender remembers assurances Iratius made in a desperation Iratius cannot remember making, and supplies the name of the man who betrayed him: Volcaris. There were others in that bargain. More than one target still remains."
         },
         {
           "tier": 3,
@@ -126,7 +126,7 @@
           "tier": 4,
           "name": "Iratius",
           "label": "the enforcer",
-          "text": "The order was never a paladin's. His strength was a gift, poured year over year, his service engineered, and the patron who holds his paper has a name the company first heard smiling at a masquerade."
+          "text": "The order was never a paladin's, his service engineered, and the patron who holds his paper has a name the company first heard smiling at a masquerade."
         },
         {
           "tier": 5,
@@ -138,7 +138,7 @@
           "tier": 6,
           "name": "Iratius",
           "label": "who took his own mouth back",
-          "text": "In the fire of an estate that is its owner, he tore a letter free, understood the way a falling man understands the ground, and said the name syllable by syllable. The compulsion cracked. The purchase burned. The calling — the oath, the tent-and-rain words — was never for sale."
+          "text": "In the fire of an estate that is its owner, he tore a letter free, understood the way a falling man understands the ground, and said the name syllable by syllable. The compulsion cracked. The purchase burned."
         },
         {
           "tier": 7,
@@ -250,7 +250,7 @@
           "tier": 1,
           "name": "Aelendir Springwhisper",
           "label": "of the company",
-          "text": "One of the company, though he came to the circle last of it — an ancient Eladrin bard, courteous and evasive in equal measure, whose instrument is a bowl of resonant metal. His centuries do not add up, and he does not yet know it."
+          "text": "One of the company, though he came to the circle last of it — an ancient Eladrin bard, courteous and evasive in equal measure, whose instrument is a bowl of resonant metal."
         },
         {
           "tier": 2,
@@ -289,7 +289,7 @@
           "tier": 1,
           "name": "Gregory",
           "label": "a boy of Triboar",
-          "text": "A tiefling boy new to Triboar, carried alive and impossibly cold out of the dark beneath Ransor's Open Road. Small, watchful, and quicker to recover than anyone had a right to expect."
+          "text": "A tiefling boy of Triboar's refugee tents, found small and terribly still in the dark beneath Ransor's Open Road, where his sister's trembling hand had pointed."
         },
         {
           "tier": 2,
@@ -367,7 +367,7 @@
         {
           "name": "The Girl in the Gray",
           "label": "a figure in the dream's color",
-          "text": "A girl glimpsed in the dream's impossible color, grieving at a grave beneath a great tree. Words do not reach her and hands pass through her; whatever she is, the mourning is real, and the dream is patient with her, as though she matters more than the dreamers.",
+          "text": "A girl glimpsed in the dream's impossible color, grieving at a grave beneath a great tree, in a rite whose voices do not carry. Whatever she is, the mourning is real, and the dream is patient with her, as though she matters more than the dreamers.",
           "tier": 1
         },
         {
@@ -483,7 +483,7 @@
           "tier": 3,
           "name": "Veyran",
           "label": "the tithe of joy",
-          "text": "Behind the gift-clause, a standing skim: a tithe of every joy the gnome's music ever causes, conveyed to something the papers call only the appetite. A Winter court has now priced that trade — and banned it in its country. That is not mercy. It will do."
+          "text": "Behind the gift-clause, a standing skim: a tithe of every joy the gnome's music ever causes, conveyed to something the papers call only the appetite."
         },
         {
           "name": "Veyran",
@@ -556,7 +556,7 @@
         {
           "name": "Hyuth Kolstaag",
           "label": "seller of assurances",
-          "text": "A wealthy, difficult man of Triboar — host of the Boar's Rest masquerade, seller of 'assurances' to the rich and the frightened, guarded by better arms than the town can field.",
+          "text": "A wealthy, difficult man of Triboar — host of the Boar's Rest masquerade, seller of 'assurances' to the rich and the frightened.",
           "tier": 1
         },
         {
@@ -653,7 +653,7 @@
           "tier": 5,
           "name": "Gorvach",
           "label": "keeper of the Nesmé door",
-          "text": "Given the black key on the last morning, because he keeps things — sitting down to a visible wait, with a shield-face ready for carving, and all the patience the word requires."
+          "text": "Given the black key on the last morning, because he keeps things. He asked, in return, only one question — which word do I carve — and was given one: WAIT."
         }
       ]
     },
@@ -755,7 +755,7 @@
           "tier": 1,
           "name": "Bettany & Osric",
           "label": "the monk and the witness",
-          "text": "Osric — Saeron's kin in the stern, kind way of their order, six winters tracing a pattern of festival-night disappearances up the river-roads with prayers and paperwork. And Bettany — a witness of the night Iriaebor's quarter burned, who has spent nine years trying to decide what she saw a man do on the barracks stair."
+          "text": "Osric — Saeron's kin in the stern, kind way of their order, six winters tracing a pattern of festival-night disappearances up the river-roads with prayers and paperwork. And Bettany — a moor-dressed witness who has carried one question about one night for nine years."
         },
         {
           "tier": 2,
@@ -822,7 +822,7 @@
           "tier": 1,
           "name": "Verity",
           "label": "the firm, unhurried hand",
-          "text": "Prepare for Harvest. The field is gathered. There you are. Signed always in full — a title is a promise; an initial is an escape hatch. At a council table in a doubled-light city, the Enforcer reports defeats the way defeats ought to be reported: dates, numbers, no adjectives."
+          "text": "Prepare for Harvest. The field is gathered. There you are. At a council table in a doubled-light city, the Enforcer reports defeats the way defeats ought to be reported: dates, numbers, no adjectives."
         },
         {
           "tier": 2,
@@ -839,7 +839,7 @@
         {
           "name": "Clarity",
           "label": "of the legation",
-          "text": "Of the Fundament legation in Silverymoon — a tiefling woman of middle years, horns ringed in plain silver, dressed with the restraint that costs the most, making councilors taller by laughing. The party had seen her word once before, at the bottom of nothing; it is one thing to know your enemy has signatures, and another to watch one stand up, smooth her coat, and walk.",
+          "text": "Of the Fundament legation in Silverymoon — a tiefling woman of middle years, horns ringed in plain silver, dressed with the restraint that costs the most, making councilors taller by laughing.",
           "tier": 1
         },
         {
@@ -864,7 +864,7 @@
           "tier": 2,
           "name": "Certitude",
           "label": "who bows to an empty chair",
-          "text": "Believing himself unwatched, he bows to the seventh chair at the table's head. His questions have a single answer. He touches the Session table the way one touches a reliquary, and bows, each morning, to a chair no one has ever been seen to fill."
+          "text": "Believing himself unwatched, he bows to the seventh chair at the table's head. His questions have a single answer. He touches the Session table the way one touches a reliquary, and bows to a chair no one has ever been seen to fill."
         }
       ]
     },
@@ -924,8 +924,8 @@
         {
           "tier": 1,
           "name": "The Sleeper",
-          "label": "kept, with his arm around an absence",
-          "text": "A young man asleep behind glass: wheat-and-copper hair, a fair face freckled by outdoor summers, mason's linen wraps gone soft with washing, a leather apron still on — sleep taken between one task and the next, a small round medal polished by a thumb's worrying. One arm lies curved on the empty air beside him, holding its shape around an absence exactly the size of someone."
+          "label": "a young man asleep behind glass",
+          "text": "A young man asleep behind glass: wheat-and-copper hair, a fair face freckled by outdoor summers, mason's linen wraps gone soft with washing, a leather apron still on — sleep taken between one task and the next, a small round medal polished by a thumb's worrying."
         },
         {
           "tier": 2,
@@ -944,13 +944,13 @@
           "tier": 1,
           "name": "The Presence Below",
           "label": "a fear beneath the town",
-          "text": "Something vast lies under Triboar — old enough to frighten vermin into carpets, near enough to feel like a heartbeat under the floor. It is not hunting. It is afraid, and it noticed the two who could hear it."
+          "text": "Something vast lies under Triboar — old enough to frighten vermin into carpets, near enough to feel like a heartbeat under the floor. It is not hunting. It is afraid."
         },
         {
           "tier": 2,
           "name": "The Presence Below",
           "label": "readied",
-          "text": "Whatever it is, it is being readied — down there, beneath the festival, by hands that keep a calendar. Its dread has a direction now, and the direction is up."
+          "text": "Whatever it is, it is being readied — down there, beneath the festival, by hands that keep a schedule of their own. Its dread has a direction now, and the direction is up."
         },
         {
           "name": "The Gravemind",
@@ -961,7 +961,7 @@
         {
           "name": "The Quiet Thing",
           "label": "the big quiet thing",
-          "text": "A boy gives it its gentler name: the quiet thing. It holds him gently, and he alone can hear it; when it was moved, he would not be kept, and followed.",
+          "text": "A boy gives it its gentler name: the quiet thing. It holds him gently, and he alone can hear it.",
           "tier": 4
         },
         {
@@ -1010,7 +1010,7 @@
         {
           "name": "The Boar's Rest",
           "label": "Hyuth Kolstaag's manor",
-          "text": "Hyuth Kolstaag's manor outside Triboar — a great hall fit for a masquerade, private guards better armed than anything the town can field, and a cellar the invitations do not mention.",
+          "text": "Hyuth Kolstaag's manor outside Triboar — a great hall fit for a masquerade.",
           "tier": 1
         },
         {
@@ -1065,7 +1065,7 @@
           "tier": 1,
           "name": "Silverymoon",
           "label": "the Gem of the North",
-          "text": "The North's city of bridges and colleges, silver-lit, where the company is received at a level they did not ask for."
+          "text": "The North's city of bridges and colleges, silver-lit, two days up the Rauvin."
         },
         {
           "tier": 2,
@@ -1095,13 +1095,13 @@
           "tier": 3,
           "name": "The Grandfather Tree",
           "label": "dying in battle",
-          "text": "Not being murdered — dying in battle. The pins only listen; the wound was not made but happened; and every black vein is the Tree spending its own body, year over year, to grip shut a door that grew where no door should."
+          "text": "Not being murdered — dying in battle. The wound was not made but happened; and every black vein is the Tree spending its own body, year over year, to grip shut a door that grew where no door should."
         },
         {
           "tier": 4,
           "name": "The Grandfather Tree",
           "label": "healed at the root",
-          "text": "The rot's cause was bought and paid for elsewhere; its cure cost the company a trial under the boughs and ended in Silver Fire and two restored memories."
+          "text": "The rot's cause was bought and paid for elsewhere; its cure cost the company a trial under the boughs and ended in Silver Fire."
         }
       ]
     },
@@ -1130,14 +1130,14 @@
         {
           "tier": 1,
           "name": "The Gray Country",
-          "label": "the Shadowfell's roads",
+          "label": "the far side of the doors",
           "text": "The world's own shadow — the gray twin of everything, where lost light settles and grief pools like groundwater. Every door they cut, and every door that opens worn, opens there. The cold with a country behind it."
         },
         {
           "tier": 2,
           "name": "The Gray Country",
           "label": "walked",
-          "text": "The world's shadow is a place, and towns and endings cast shadows too. It does not hate — hatred is warmth, and warmth is what it lacks and wants. It leans on the heart the way winter leans on a door; feeling is fuel there, and mourning is the richest fuel of all. Remember everything. Feel nothing you cannot afford."
+          "text": "The world's shadow is a place. It does not hate — hatred is warmth, and warmth is what it lacks and wants. It leans on the heart the way winter leans on a door; feeling is fuel there, and mourning is the richest fuel of all. Remember everything. Feel nothing you cannot afford."
         },
         {
           "tier": 3,
@@ -1228,7 +1228,7 @@
           "tier": 3,
           "name": "Ascore",
           "label": "the city that holds by giving",
-          "text": "Its heart is a Mooring — kin to a crystal someone in the company carries — overworked, fed once by a rite of honest music, and holding the tune it was given. What is given, it keeps."
+          "text": "Its heart is a Mooring — kin to a crystal someone in the company once carried — overworked, fed once by a rite of honest music, and holding the tune it was given. What is given, it keeps."
         }
       ]
     },
@@ -1361,7 +1361,7 @@
           "tier": 5,
           "name": "The Heart of Winter's Veil",
           "label": "the kin stone",
-          "text": "At Ascore the Mooring knew it — grown great, or hers grown small, but the same stone. It sings to her now, and she has begun to suspect what a husk is for.",
+          "text": "At Ascore the Mooring knew it — grown great, or hers grown small, but the same stone.",
           "todo": "Tier 6 (what became of the Heart) unlocks in unwritten chapters XLIII+."
         }
       ]
@@ -1398,7 +1398,7 @@
           "tier": 1,
           "name": "Bayne",
           "label": "a debt in a sack",
-          "text": "A blade of pale metal Sov owns and never wears, carried through every mile of this book bundled like a debt — out of a Kelemvorite reliquary in Ormath, in a sack, at night, in these very hands. The Doomguides' priests study it the way an archivist studies a book missing from his own shelves."
+          "text": "A blade of pale metal Sov owns and never wears, carried through every mile of this book bundled like a debt. The Doomguides' priests study such blades the way an archivist studies his own shelves."
         },
         {
           "tier": 2,
@@ -1476,8 +1476,8 @@
         },
         {
           "name": "The Obsidian Knife",
-          "label": "the key to the kept",
-          "text": "One of a pair, it turns out — and its edge does to standing glass what edges should not do. What it opens is not doors but keepings; it has been measured by more than one pair of eyes that understood it instantly.",
+          "label": "the opening edge",
+          "text": "An edge that does to standing glass what edges should not do — the halves do not fall apart; they open. It has been measured by more than one pair of eyes that understood it instantly.",
           "todo": "Tier 3 (handed back; the belt at morning) unlocks in unwritten chapters XLIV+.",
           "tier": 2
         }
@@ -1600,7 +1600,7 @@
           "tier": 1,
           "name": "The Doors",
           "label": "trials that open inward",
-          "text": "Each of the seven carries a burden that is also a threshold. When a burden heightens past bearing, its door opens — a thin place, a trial, and kin that come calling."
+          "text": "Each of the seven carries a burden that is also a threshold."
         },
         {
           "name": "The Doors",
@@ -1661,7 +1661,7 @@
           "tier": 2,
           "name": "The Sorrowsworn",
           "label": "what feeds it",
-          "text": "A feral feeds on the feeling it is. Steel, fury, spending — all of it banks into the thing; it cannot be fought, because fighting is food. It starves only on what it cannot digest: arrival, awe, coldness, a load carried together."
+          "text": "A feral feeds on the feeling it is. Steel, fury, spending — all of it banks into the thing; it cannot be fought, because fighting is food."
         },
         {
           "tier": 3,
@@ -1703,7 +1703,7 @@
         {
           "name": "The Harvest",
           "label": "an order in a dead woman's hand",
-          "text": "Four words in a firm, unhurried script, recovered from a severed grip in a ransacked camp: Prepare for Harvest. Signed with a virtue for a name. What is being harvested, and by whom, and why a murder was its preparation, the order does not say.",
+          "text": "Four words in a firm, unhurried script, recovered from a severed grip in a ransacked camp: Prepare for Harvest. Signed Verity — a name no one in Triboar knows. What is being harvested, and by whom, and why a murder was its preparation, the order does not say.",
           "tier": 1
         },
         {
@@ -1721,7 +1721,7 @@
         {
           "name": "The Harvest",
           "label": "one step of many",
-          "text": "Triboar was neither first nor last: there are intake lists, seasons deep, and the taken arrive elsewhere whole — minus each carrier's memory of the carrying.",
+          "text": "Triboar was neither first nor last: there are intake lists, seasons deep, and the taken arrive elsewhere whole.",
           "tier": 4
         }
       ]
@@ -1831,7 +1831,7 @@
           "tier": 1,
           "name": "The Glass",
           "label": "what rises",
-          "text": "Black, slow, and certain: a substance that rises along seams and takes what it touches — takes, not kills. Where it has been, places are quieter than empty."
+          "text": "Black, slow, and certain: a substance that rises along seams and closes over what it touches. Where it has been, places are quieter than empty."
         },
         {
           "tier": 2,
@@ -1860,7 +1860,7 @@
         {
           "name": "The Black Stones",
           "label": "anchors of wrongness",
-          "text": "Black stones worked with etched runes, found where the world wears thinnest — levitating, light-bending, sound-muffling, wrong. Around such stones things go wrong the way milk goes wrong, and the dead are not permitted to stay finished.",
+          "text": "Black stones worked with etched runes, found where the world wears thinnest — levitating, light-bending, sound-muffling, wrong. Around such stones things go wrong the way milk goes wrong.",
           "tier": 1
         },
         {
@@ -1879,7 +1879,7 @@
           "tier": 4,
           "name": "The Moorings",
           "label": "what holds by giving",
-          "text": "The originals are emotion-crystals: they hold feeling, hold the planes riding apart, and have been drawing on their own reserves for ten thousand years — because everyone takes and nobody has ever put anything back in. Except once. What is given, they keep."
+          "text": "The originals are emotion-crystals: they hold feeling, hold the planes riding apart, and have been drawing on their own reserves for ten thousand years — because everyone takes and nobody has ever put anything back in. What is given, they keep."
         }
       ],
       "image": "images/mooring-stone.jpg"
@@ -1890,9 +1890,9 @@
       "tiers": [
         {
           "tier": 1,
-          "name": "Three Wrong Notes",
+          "name": "A Tune from Nowhere",
           "label": "a tune nobody taught them",
-          "text": "A melody Corvyn played in a crowded inn and called his own, though it felt older than he is — and around the room, three strangers stilled, because every one of them somehow knew how it went."
+          "text": "A melody Corvyn played in a crowded inn and called his own, though it felt older than he is — less written than remembered."
         },
         {
           "tier": 2,
@@ -1904,7 +1904,7 @@
           "tier": 3,
           "name": "The Tune",
           "label": "the fellowship's song",
-          "text": "It is old — older than any of their lives should reach — and it belongs to a fellowship glimpsed in the Remembrances: a rope-line, a wall, a ring of hands. It is the kindest thing one of them knows."
+          "text": "It is old — older than any of their lives should reach — and it belongs to a fellowship glimpsed in the Remembrances: a rope-line, a wall, a channel-worn story. It is the kindest thing one of them knows."
         },
         {
           "tier": 4,
@@ -1954,7 +1954,7 @@
           "tier": 1,
           "name": "Silver Fire",
           "label": "the North's clean burn",
-          "text": "A radiance in the Silverhand blood that burns corruption out of what it touches. It is one of the only ways anyone has ever closed a shadow crossing."
+          "text": "A silver radiance that burns corruption out of what it touches — one of the only ways anyone has ever closed a shadow crossing."
         },
         {
           "tier": 2,
@@ -1991,7 +1991,7 @@
           "tier": 1,
           "name": "Shar",
           "label": "the Lady of Loss",
-          "text": "The Lady of Loss, goddess of the dark behind the stars — her mark torn from a throat in a dead woman's hand. What her faithful are preparing in the North, even her faithful do not seem wholly to know."
+          "text": "The Lady of Loss, goddess of the dark behind the stars — her mark torn from a throat in a dead woman's hand. What her faithful are preparing in the North, the record cannot yet say."
         }
       ]
     },
@@ -2002,8 +2002,8 @@
         {
           "tier": 1,
           "name": "The Black Mirror",
-          "label": "a mouth in the deep",
-          "text": "A massive dark glass in an ancient hall beneath the wood, fed through black tendrils by three of the living dead. Not a reflection — a mouth: deathly cold, hungry, and given to showing each gazer a truth they were not ready to keep."
+          "label": "a hunger in the deep",
+          "text": "A massive dark glass in an ancient hall beneath the wood, fed through black tendrils by three of the living dead — deathly cold, hungry, and given to showing each gazer a truth they were not ready to keep."
         }
       ]
     },
@@ -2051,7 +2051,7 @@
           "tier": 1,
           "name": "Kirsten's Family",
           "label": "not from here",
-          "text": "A daughter pulled from the dark under Ransor's Open Road, a small brother pressed close at his mother's side, and a mother watchful in the way of someone with a great deal to lose. They are not from Triboar, and they do not say what they are from."
+          "text": "A small tiefling girl found hiding in the wreck of Ransor's Open Road, with a brother somewhere in the dark below. New to Triboar, and not, by their own account, fleeing anything."
         }
       ]
     },
@@ -2063,7 +2063,7 @@
           "tier": 1,
           "name": "The Maimed Cultist",
           "label": "gladness, one-handed",
-          "text": "A Sharran who took her own hand for the Lady's favor and called it gladness, and confessed to a murder as one confesses a prayer. It was the name Verity, on the wrong lips, that broke her — and she fled deeper into the dark rather than face what it meant."
+          "text": "A Sharran found deep in the sick wood, one-handed, the wound of her own making — a price paid to the Lady of Loss for something she plainly believes was worth it."
         },
         {
           "tier": 2,
@@ -2082,7 +2082,7 @@
           "tier": 1,
           "name": "Grey Thimble",
           "label": "the pewter mask",
-          "text": "A discreet patron-merchant behind a mask of plain, unadorned pewter — a blank where a face should be. He takes neither food nor drink the whole evening, and his calm is the most dangerous thing in the room."
+          "text": "A discreet patron-merchant behind a mask of plain, unadorned pewter — a blank where a face should be. His calm is the most dangerous thing in the room."
         }
       ]
     },
@@ -2094,7 +2094,7 @@
           "tier": 1,
           "name": "The Far Figure",
           "label": "at the edge of the circle",
-          "text": "A shape at the edge of the gray circle — gaunt, distant, turned away — present since the dream first came. The circle has grown, and the figure has not come closer, and the two facts sit side by side and do not explain each other."
+          "text": "A shape at the edge of the gray circle — gaunt, distant, turned away — present since the dream first came. The circle changes; the figure does not — neither nearer, nor speaking, one more shape in the fog."
         }
       ]
     },
@@ -2124,7 +2124,7 @@
           "tier": 1,
           "name": "Lady Mariel Heartsilver",
           "label": "patroness",
-          "text": "Lady Mariel Heartsilver of Silverymoon, patroness of music and empress of an empire made entirely of other people's regard. She considers the end of a town an inadequate excuse for a cancelled performance, and pays defiance well."
+          "text": "Lady Mariel Heartsilver of Silverymoon, patroness of music and empress of an empire made entirely of other people's regard. She considers very little an adequate excuse for a cancelled performance, and pays defiance well."
         }
       ]
     },
@@ -2148,7 +2148,7 @@
           "tier": 1,
           "name": "Lenore",
           "label": "who kept her side",
-          "text": "A courtesan of Ormath who died, was mourned, and walked back into her own wake with river-mud on her hem and one sentence: she had made an arrangement, and kept it. She named her son Thimron — raven, in the old elvish — and touched the name like a debt."
+          "text": "A courtesan of Ormath who died, was mourned, and walked back into her own wake with one sentence: she had made an arrangement, and kept it."
         }
       ]
     },
@@ -2172,7 +2172,7 @@
           "tier": 1,
           "name": "Neth",
           "label": "of the warden circles",
-          "text": "The youngest of Amyl's warden escort, who staked her standing on an accused heretic and won the argument three times over. She audits packs by the pound, plants cuttings like tolls, and once decided to see where a man who apologizes to moss was going."
+          "text": "The youngest of Amyl's warden escort, who staked her standing on an accused heretic, uninvited, to volunteer his watch — every hour of it, her name on his conduct."
         }
       ]
     },
@@ -2196,7 +2196,7 @@
           "tier": 1,
           "name": "The Hooded Watcher",
           "label": "of lanes and doorways",
-          "text": "One of the two who watch: a still, soldierly figure of lanes and doorways, deep-hooded, waiting where no one was standing a lamppost ago. It speaks in sentences that seem to have crossed a distance much longer than the lane."
+          "text": "One of the two who watch: a still, soldierly figure of lanes and doorways, deep-hooded, waiting where no one was standing a lamppost ago."
         }
       ]
     },
@@ -2208,7 +2208,7 @@
           "tier": 1,
           "name": "The Lady of Winter",
           "label": "who is the ice",
-          "text": "The one who keeps the ice of the white forest under two skies — not beneath it; she is it. She prices what is taken and what is given back, and writes her rulings in frost, for one reader at a time."
+          "text": "The one who keeps the ice of the white forest under two skies — not beneath it; she is it."
         }
       ]
     },
@@ -2219,8 +2219,8 @@
         {
           "tier": 1,
           "name": "The Winter Court",
-          "label": "what prices",
-          "text": "What the Feywild has instead of laws of nature: a Court that does not judge and does not punish — it prices. It has not adjourned in ten thousand years."
+          "label": "the standing court",
+          "text": "What the Feywild has instead of laws of nature: a Court, and the Court is always in session."
         }
       ]
     },
@@ -2232,7 +2232,7 @@
           "tier": 1,
           "name": "The Fairy",
           "label": "keeper of the hollow tree",
-          "text": "Small, moth-winged, faded the way a beloved dress fades — keeper of a hollow tree furnished with one gnome's whole career. She bought a boy his music, never read the paper, and her glade has been paying ever since."
+          "text": "Small, moth-winged, faded the way a beloved dress fades — keeper of a hollow tree furnished with one gnome's whole career. She followed it the way tides follow the moon."
         }
       ]
     },
@@ -2244,7 +2244,7 @@
           "tier": 1,
           "name": "The Brother",
           "label": "fey-kept",
-          "text": "A boy who followed impossible music out of a stonemason's yard and has been walking toward the fiddle ever since. The country kept his name along the way; he answers to brother, and does not seem to miss it, which is the worst part."
+          "text": "A boy with an eighth-size fiddle and an unaged face, walking toward a sound."
         }
       ]
     },
@@ -2256,7 +2256,7 @@
           "tier": 1,
           "name": "The Mark",
           "label": "the fifteen-year quarry",
-          "text": "A gray-faced tinker on the barrows with nothing left that steel can reach: the man whose soul went north in a lead box fifteen years ago, while a county buried its dead and blamed him. A man with no soul has nowhere particular to be, and goes there slowly."
+          "text": "A gray-faced tinker on the barrows with nothing left that steel can reach."
         }
       ]
     },
@@ -2268,7 +2268,7 @@
           "tier": 1,
           "name": "The Feywild",
           "label": "the bright country's home",
-          "text": "Emotion made into country — a land built of the very currency the company carries, where nothing is owned and everything is owed, and being interesting is a form of shouting."
+          "text": "Emotion made into country — a land built of the very currency the company carries."
         }
       ]
     },
@@ -2291,8 +2291,8 @@
         {
           "tier": 1,
           "name": "The Hollow Tusks",
-          "label": "the owned North's tax",
-          "text": "Raiders once — an enemy you could face — promoted now into the owned North's tax: a tusk, hollow at the core, branded at eye height over older totems."
+          "label": "the hollow brand",
+          "text": "Raiders once — an enemy you could face — their mark overlaid now on older totems: a tusk, hollow at the core, branded at eye height."
         }
       ]
     },
@@ -2304,7 +2304,7 @@
           "tier": 1,
           "name": "The Second Hand",
           "label": "gray as good ink",
-          "text": "A second hand in the enemy's orders — small, even, gray as good ink — that corrects the planner's work, apologizes for the intrusion, and is right. It once wrote a line to itself: They are being delivered, not taken. (Say it until it is true.)"
+          "text": "A second hand in the enemy's orders — small, even, gray as good ink — that corrects the planner's work, apologizes for the intrusion, and is right."
         }
       ]
     },
@@ -2329,8 +2329,8 @@
         {
           "tier": 1,
           "name": "The Thaalud",
-          "label": "the unpaid shift",
-          "text": "A headless stone colossus of drowned Netheril, built to smell out magic through solid rock and mine it home to masters seventeen centuries dead. Nobody told it. It works its shift beneath Ascore still — rising to sound and to shine — waiting to be paid."
+          "label": "what swims in stone",
+          "text": "A headless stone colossus with a mouth in its belly, swimming through solid masonry as through water — rising, beneath dead Ascore, to sound and to shine."
         }
       ]
     },
@@ -2354,7 +2354,7 @@
           "tier": 1,
           "name": "Iriaebor",
           "label": "the agreed-upon plague",
-          "text": "A city on the Chionthar whose river-quarter emptied on a festival night nine years ago. The world agreed to call it a plague; at least two people never did."
+          "text": "A city on the Chionthar, far south of this record's roads. Its name has waited nine years to be said at the right fire."
         }
       ]
     }

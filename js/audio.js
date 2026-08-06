@@ -28,7 +28,7 @@ export class AudioEngine {
       const Ctx = window.AudioContext || window.webkitAudioContext;
       this.ctx = new Ctx();
       this.master = this.ctx.createGain();
-      this.master.gain.value = this.volume;
+      this.master.gain.value = this.volume * (this.duckFactor ?? 1);
       this.master.connect(this.ctx.destination);
       // Mobile-webkit unlock: play a one-sample silent buffer inside the
       // enabling gesture so the context counts as user-started.
@@ -96,8 +96,20 @@ export class AudioEngine {
 
   setVolume(v) {
     this.volume = v;
+    this._applyGain();
+  }
+
+  // Narration ducking: scale the music under a speaking voice without
+  // touching the reader's chosen volume.
+  setDuck(factor) {
+    this.duckFactor = factor;
+    this._applyGain(0.4);
+  }
+
+  _applyGain(smooth = 0.05) {
     if (this.master) {
-      this.master.gain.setTargetAtTime(v, this.ctx.currentTime, 0.05);
+      this.master.gain.setTargetAtTime(
+        this.volume * (this.duckFactor ?? 1), this.ctx.currentTime, smooth);
     }
   }
 

@@ -10,10 +10,11 @@ import { cardHtml, entity, displayName, displayImage } from './codex.js';
 const REVEAL_THROTTLE_MS = 400;
 
 export class Reader {
-  constructor({ book, chapters, audio, onProgress }) {
+  constructor({ book, chapters, audio, narration = null, onProgress }) {
     this.book = book;
     this.chapters = chapters;   // Map chapterId -> parsed chapter
     this.audio = audio;
+    this.narration = narration;
     this.onProgress = onProgress;
     this.active = -1;
     this.revealed = -1;         // index of last rendered paragraph
@@ -236,6 +237,7 @@ export class Reader {
 
     this.active = nextIndex;
     this._applyAudio(p);
+    this.narration?.onReveal(nextIndex);
     this._syncFrontier();
 
     // A heading is not a reading beat on its own — bring its first paragraph
@@ -312,6 +314,12 @@ export class Reader {
       save();
       setTimeout(() => fixed.remove(), 8000);
     }
+  }
+
+  // Audiobook mode turns the page: same path as a manual reveal, but driven
+  // by the narration crossing a paragraph boundary.
+  autoReveal() {
+    if (!this._done()) this._reveal();
   }
 
   _syncFrontier() {

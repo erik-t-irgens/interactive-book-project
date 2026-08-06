@@ -296,6 +296,7 @@
     }
   ],
   "codex": "content/codex.json",
+  "narration": { "base": "https://erik-t-irgens.github.io/anamnesis-audio/narration" },
   "tracks": {
     "A-Dreamer": "audio/A Dreamer.mp3",
     "Foreword": "audio/Foreward.mp3",

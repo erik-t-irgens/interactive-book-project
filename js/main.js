@@ -1,6 +1,7 @@
 import { state, save, unlock, resetAll, exportCode, importCode } from './state.js';
 import { parseChapter } from './parser.js';
 import { AudioEngine } from './audio.js';
+import { NarrationPlayer } from './narration.js';
 import { loadCodex, renderCodexPage, entity, setSources } from './codex.js';
 import { Reader } from './reader.js';
 
@@ -8,6 +9,7 @@ const view = document.getElementById('view');
 let book = null;
 const chapters = new Map();
 let audio = null;
+let narration = null;
 let reader = null;
 
 // ---- Boot ----------------------------------------------------------------
@@ -48,10 +50,18 @@ async function boot() {
 
   audio = new AudioEngine(book.tracks);
   audio.volume = state.settings.volume;
+  narration = new NarrationPlayer({
+    base: book.narration?.base,
+    onDuck: f => audio.setDuck(f),
+  });
+  narration.setMode(state.settings.narration || 'off');
   initHeader();
 
   window.addEventListener('hashchange', route);
   route();
+
+  // Console/testing handle; not part of the public surface.
+  window.__anamnesis = { audio, narration, get reader() { return reader; } };
 
   // Offline support: relative path keeps the scope right under a
   // project-pages subpath.
@@ -85,6 +95,52 @@ function initHeader() {
     save();
     audio.setVolume(state.settings.volume);
   });
+  // Narration: a three-way mode cycle plus a transport button.
+  const btnVoice = document.getElementById('btn-voice');
+  const btnVoicePlay = document.getElementById('btn-voice-play');
+  const VOICE_MODES = ['off', 'along', 'book'];
+  const VOICE_LABELS = { off: 'Voice Off', along: 'Read-along', book: 'Audiobook' };
+  const paintVoice = () => { btnVoice.textContent = VOICE_LABELS[state.settings.narration] || 'Voice Off'; };
+  paintVoice();
+
+  btnVoice.addEventListener('click', () => {
+    const cur = VOICE_MODES.indexOf(state.settings.narration || 'off');
+    state.settings.narration = VOICE_MODES[(cur + 1) % VOICE_MODES.length];
+    save();
+    paintVoice();
+    narration.setMode(state.settings.narration);
+    // Entering a voiced mode mid-chapter: fetch this chapter's narration now.
+    if (state.settings.narration !== 'off' && reader && narration.chapterId !== reader.chapterId) {
+      const title = book.chapters.find(c => c.id === reader.chapterId)?.title || '';
+      narration.loadChapter(reader.chapterId, title);
+    }
+  });
+
+  btnVoicePlay.addEventListener('click', () => {
+    narration.toggle(Math.max(0, reader?.active ?? 0));
+  });
+
+  document.addEventListener('narration:state', e => {
+    const d = e.detail;
+    btnVoicePlay.hidden = d.mode === 'off' || !d.available;
+    btnVoicePlay.textContent = d.playing ? '⏸' : '▶';
+    if (d.mode !== 'off' && !d.available && reader) {
+      const el = document.getElementById('now-playing');
+      if (el) {
+        el.textContent = '𝄞 no narration for this chapter yet';
+        el.classList.add('on');
+        setTimeout(() => { if (el.textContent.includes('narration')) el.classList.remove('on'); }, 4000);
+      }
+    }
+  });
+
+  // Audiobook mode drives the reveal: each boundary asks the reader to turn
+  // the page, so unlocks and progress stay honest.
+  document.addEventListener('narration:paragraph', e => {
+    if (!reader) return;
+    if (e.detail.index === reader.revealed + 1) reader.autoReveal();
+  });
+
   const btnText = document.getElementById('btn-textsize');
   const SIZES = ['s', 'm', 'l'];
   btnText.addEventListener('click', () => {
@@ -217,6 +273,7 @@ function route() {
   const partMatch = hash.match(/^#\/part\/([\w-]+)/);
 
   window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  if (!readMatch) narration?.stop();
   if (readMatch) {
     const entry = book.chapters.find(c => c.id === readMatch[1]);
     if (entry?.status === 'todo') {
@@ -241,8 +298,12 @@ function route() {
 
 function openChapter(chapterId, targetPara = null) {
   catchUpBefore(chapterId);
-  reader = new Reader({ book, chapters, audio, onProgress: paintProgress });
+  reader = new Reader({ book, chapters, audio, narration, onProgress: paintProgress });
   reader.render(view, chapterId, targetPara);
+  if (state.settings.narration !== 'off') {
+    const title = book.chapters.find(c => c.id === chapterId)?.title || '';
+    narration.loadChapter(chapterId, title);
+  }
   paintProgress();
 }
 

@@ -422,6 +422,41 @@ a { color: var(--accent); text-decoration: none; }
 .resume-marker::before,
 .resume-marker::after { content: ''; flex: 1; border-top: 1px dashed var(--rule); }
 
+/* Narration voice bar */
+#voice-bar {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 0.9rem;
+  background: var(--bg-overlay);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+  max-width: min(92vw, 30rem);
+}
+#voice-bar[hidden] { display: none; }
+#voice-scrub {
+  width: 10rem;
+  max-width: 30vw;
+  accent-color: var(--accent);
+}
+#voice-time {
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+/* Read-along: the voice follows your reveals — no free seeking. */
+.voice-bar--along #voice-scrub,
+.voice-bar--along #voice-time,
+.voice-bar--along #btn-voice-back,
+.voice-bar--along #btn-voice-fwd { display: none; }
+
 /* ============ Reader layout ============ */
 .reader {
   display: grid;

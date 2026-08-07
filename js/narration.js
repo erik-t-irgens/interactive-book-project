@@ -219,14 +219,29 @@ export class NarrationPlayer {
   pause() { this.el.pause(); }
 
   toggle(fallbackIndex = 0) {
-    if (this.playing) this.pause();
-    else if (this.mode === 'book' && this.el.currentTime === 0) this.playFrom(fallbackIndex);
-    else this.resume();
+    if (this.playing) { this.pause(); return; }
+    if (this.mode === 'book' && (this.el.currentTime === 0 || this.el.ended)) {
+      this.playFrom(fallbackIndex);
+    } else if (this.mode === 'along' && this.playingIdx == null && this.queue.length === 0) {
+      // A fully-read chapter reveals nothing new; play means "speak the
+      // paragraph I'm on".
+      this.queue.push(fallbackIndex);
+      this._pump();
+    } else {
+      this.resume();
+    }
   }
 
   nudge(seconds) {
     if (!this.active || this.mode !== 'book') return;
-    this.el.currentTime = Math.min(this.duration, Math.max(0, this.el.currentTime + seconds));
+    this.seek(this.el.currentTime + seconds);
+  }
+
+  // Absolute seek (scrubber / rewind). Book mode only — read-along's playhead
+  // belongs to the reveal queue.
+  seek(t) {
+    if (!this.active || this.mode !== 'book') return;
+    this.el.currentTime = Math.min(this.duration, Math.max(0, t));
     this._lastEmitted = this._indexAt(this.el.currentTime);
   }
 

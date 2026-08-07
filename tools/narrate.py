@@ -60,11 +60,32 @@ def parse_chapter(text):
     flush()
     return paras
 
+# Spoken-only substitutions for names TTS mangles; page text is untouched.
+# Extend freely — keys are whole words, case-sensitive.
+PRONUNCIATIONS = {
+    'Nesmé': 'Nezmay',
+    'geas': 'gesh', 'Geas': 'Gesh', 'geased': 'geshed',
+    'Shadar-kai': 'Shaddar kye',
+    'Iriaebor': 'Irry ay bore',
+    'Anauroch': 'Anore ock',
+    'Uthgardt': 'Uthgart',
+    'Xantraxis': 'Zantraxiss',
+    'Aelendir': 'Ayelendeer',
+    'Alustriel': 'Aloostriel',
+    'Veyran': 'Vayran',
+    'Gwaeron': 'Gwairon',
+    'Thaalud': 'Thahlood', 'thaalud': 'thahlood',
+    'Kelemvor': 'Kellemvor',
+    'Shendrel': 'Shendrell',
+}
+_PRON_RE = re.compile(r'\b(' + '|'.join(map(re.escape, sorted(PRONUNCIATIONS, key=len, reverse=True))) + r')\b')
+
 def clean_for_speech(raw):
     s = re.sub(r'@\[([^\]]+)\]\([\w-]+\)', r'\1', raw)
     s = re.sub(r'\*\*([^*]+)\*\*', r'\1', s)
     s = re.sub(r'\*([^*]+)\*', r'\1', s)
     s = s.replace('—', ', ').replace('…', '...')
+    s = _PRON_RE.sub(lambda m: PRONUNCIATIONS[m.group(1)], s)
     return s.strip()
 
 def synth_paragraphs(voice, paras):
@@ -74,7 +95,7 @@ def synth_paragraphs(voice, paras):
         if p['kind'] == 'image' or not clean_for_speech(p['text']):
             yield i, b''
             continue
-        chunks = voice.synthesize(clean_for_speech(p['text']))
+        chunks = voice.synthesize(clean_for_speech(p['text']), syn_config=SYN_CONFIG)
         pcm = b''.join(c.audio_int16_bytes for c in chunks)
         yield i, pcm
 
@@ -86,8 +107,14 @@ def main():
     ap.add_argument('--voice', required=True)
     ap.add_argument('--out', required=True)
     ap.add_argument('--all', action='store_true')
+    ap.add_argument('--length-scale', type=float, default=1.05,
+                    help='speech pace; >1 is slower, narration reads well at 1.05')
     ap.add_argument('chapters', nargs='*')
     args = ap.parse_args()
+
+    global SYN_CONFIG
+    from piper.config import SynthesisConfig
+    SYN_CONFIG = SynthesisConfig(length_scale=args.length_scale)
 
     book = json.loads((ROOT / 'content/book.json').read_text())
     ids = [c['id'] for c in book['chapters'] if c.get('status') != 'todo']

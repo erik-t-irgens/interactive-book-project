@@ -116,14 +116,43 @@ function initHeader() {
     }
   });
 
+  // The voice bar: transport + (in audiobook mode) a scrubber.
+  const voiceBar = document.getElementById('voice-bar');
+  const scrub = document.getElementById('voice-scrub');
+  const timeEl = document.getElementById('voice-time');
+  const fmt = s => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`;
+  let scrubbing = false;
+
   btnVoicePlay.addEventListener('click', () => {
     narration.toggle(Math.max(0, reader?.active ?? 0));
   });
+  document.getElementById('btn-voice-back').addEventListener('click', () => narration.nudge(-10));
+  document.getElementById('btn-voice-fwd').addEventListener('click', () => narration.nudge(10));
+  scrub.addEventListener('input', () => {
+    scrubbing = true;
+    timeEl.textContent = `${fmt(scrub.value / 1000 * narration.duration)} / ${fmt(narration.duration)}`;
+  });
+  scrub.addEventListener('change', () => {
+    narration.seek(scrub.value / 1000 * narration.duration);
+    scrubbing = false;
+  });
+
+  const paintBar = () => {
+    if (voiceBar.hidden || scrubbing) return;
+    const t = narration.el.currentTime || 0;
+    scrub.value = narration.duration ? Math.round(t / narration.duration * 1000) : 0;
+    timeEl.textContent = `${fmt(t)} / ${fmt(narration.duration)}`;
+  };
+  setInterval(paintBar, 500);
 
   document.addEventListener('narration:state', e => {
     const d = e.detail;
-    btnVoicePlay.hidden = d.mode === 'off' || !d.available;
+    voiceBar.hidden = d.mode === 'off' || !d.available;
+    // Read-along's playhead belongs to the reveal queue; only the audiobook
+    // exposes free seeking.
+    voiceBar.classList.toggle('voice-bar--along', d.mode === 'along');
     btnVoicePlay.textContent = d.playing ? '⏸' : '▶';
+    paintBar();
     if (d.mode !== 'off' && !d.available && reader) {
       const el = document.getElementById('now-playing');
       if (el) {
@@ -135,10 +164,15 @@ function initHeader() {
   });
 
   // Audiobook mode drives the reveal: each boundary asks the reader to turn
-  // the page, so unlocks and progress stay honest.
+  // the page, so unlocks and progress stay honest. Re-listening to already
+  // revealed text (after a rewind) brings the page along to the voice.
   document.addEventListener('narration:paragraph', e => {
     if (!reader) return;
-    if (e.detail.index === reader.revealed + 1) reader.autoReveal();
+    const i = e.detail.index;
+    if (i === reader.revealed + 1) reader.autoReveal();
+    else if (i <= reader.revealed && narration.playing) {
+      reader.paraEls[i]?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    }
   });
 
   const btnText = document.getElementById('btn-textsize');

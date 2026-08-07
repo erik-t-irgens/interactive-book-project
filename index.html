@@ -23,7 +23,6 @@
         </div>
         <input type="range" id="vol" min="0" max="100" value="60" title="Volume" aria-label="Volume">
         <button class="icon-btn" id="btn-voice" title="Narration: off, read-along, or audiobook" aria-label="Cycle narration mode">Voice Off</button>
-        <button class="icon-btn" id="btn-voice-play" title="Play or pause narration" aria-label="Play or pause narration" hidden>▶</button>
         <button class="icon-btn" id="btn-textsize" title="Text size" aria-label="Cycle text size">Aa</button>
         <button class="icon-btn" id="btn-theme" title="Toggle theme">☾</button>
       </div>
@@ -35,6 +34,14 @@
 
   <div id="toast-root" aria-live="polite"></div>
   <div id="overlay-root"></div>
+
+  <div id="voice-bar" hidden>
+    <button class="icon-btn" id="btn-voice-back" title="Back 10 seconds" aria-label="Back 10 seconds">↺</button>
+    <button class="icon-btn" id="btn-voice-play" title="Play or pause narration" aria-label="Play or pause narration">▶</button>
+    <button class="icon-btn" id="btn-voice-fwd" title="Forward 10 seconds" aria-label="Forward 10 seconds">↻</button>
+    <input type="range" id="voice-scrub" min="0" max="1000" value="0" aria-label="Narration position">
+    <span id="voice-time">0:00</span>
+  </div>
 
   <script type="module" src="js/main.js"></script>
 </body>
